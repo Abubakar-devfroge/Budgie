@@ -10,38 +10,10 @@ defmodule FirstWeb.UserLive.LoginTest do
 
       assert html =~ "Log in"
       assert html =~ "Register"
-      assert html =~ "Log in with email"
+      # assert html =~ "Log in with email"
     end
   end
 
-  describe "user login - magic link" do
-    test "sends magic link email when user exists", %{conn: conn} do
-      user = user_fixture()
-
-      {:ok, lv, _html} = live(conn, ~p"/users/log-in")
-
-      {:ok, _lv, html} =
-        form(lv, "#login_form_magic", user: %{email: user.email})
-        |> render_submit()
-        |> follow_redirect(conn, ~p"/users/log-in")
-
-      assert html =~ "If your email is in our system"
-
-      assert First.Repo.get_by!(First.Accounts.UserToken, user_id: user.id).context ==
-               "login"
-    end
-
-    test "does not disclose if user is registered", %{conn: conn} do
-      {:ok, lv, _html} = live(conn, ~p"/users/log-in")
-
-      {:ok, _lv, html} =
-        form(lv, "#login_form_magic", user: %{email: "idonotexist@example.com"})
-        |> render_submit()
-        |> follow_redirect(conn, ~p"/users/log-in")
-
-      assert html =~ "If your email is in our system"
-    end
-  end
 
   describe "user login - password" do
     test "redirects if user logs in with valid credentials", %{conn: conn} do
@@ -56,7 +28,7 @@ defmodule FirstWeb.UserLive.LoginTest do
 
       conn = submit_form(form, conn)
 
-      assert redirected_to(conn) == ~p"/"
+      assert redirected_to(conn) == ~p"/expenses"
     end
 
     test "redirects to login page with a flash error if credentials are invalid", %{
@@ -100,10 +72,10 @@ defmodule FirstWeb.UserLive.LoginTest do
 
       assert html =~ "You need to reauthenticate"
       refute html =~ "Register"
-      assert html =~ "Log in with email"
+      # assert html =~ "Log in with email"
 
-      assert html =~
-               ~s(<input type="email" name="user[email]" id="login_form_magic_email" value="#{user.email}")
+      # assert html =~
+      #          ~s(<input type="email" name="user[email]" id="login_form_magic_email" value="#{user.email}")
     end
   end
 end

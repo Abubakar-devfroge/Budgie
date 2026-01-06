@@ -26,11 +26,11 @@ defmodule FirstWeb.UserLive.Confirmation do
             name={@form[:remember_me].name}
             value="true"
             phx-disable-with="Confirming..."
-            class="btn btn-primary w-full"
+            variant="primary"
           >
             Confirm and stay logged in
           </.button>
-          <.button phx-disable-with="Confirming..." class="btn btn-primary btn-soft w-full mt-2">
+          <.button phx-disable-with="Confirming..." >
             Confirm and log in only this time
           </.button>
         </.form>
@@ -50,17 +50,24 @@ defmodule FirstWeb.UserLive.Confirmation do
               Log in
             </.button>
           <% else %>
-            <.button
-              name={@form[:remember_me].name}
-              value="true"
-              phx-disable-with="Logging in..."
-              class="btn btn-primary w-full"
-            >
-              Keep me logged in on this device
-            </.button>
-            <.button phx-disable-with="Logging in..." class="btn btn-primary btn-soft w-full mt-2">
-              Log me in only this time
-            </.button>
+                 <div class="flex flex-col gap-4 w-full">
+          <.button
+            name={@form[:remember_me].name}
+            value="true"
+            phx-disable-with="Logging in..."
+            class="font-medium bg-black text-white m-0 rounded-md px-4 py-2 hover:bg-gray-800 transition flex-1 w-full text-center"
+          >
+            Keep me logged in on this device
+          </.button>
+
+          <.button
+            phx-disable-with="Logging in..."
+            class="font-medium bg-white text-black border border-gray-300 m-0 rounded-md px-4 py-2 hover:bg-gray-100 transition flex-1 w-full text-center"
+          >
+            Log me in only this time
+          </.button>
+        </div>
+
           <% end %>
         </.form>
 

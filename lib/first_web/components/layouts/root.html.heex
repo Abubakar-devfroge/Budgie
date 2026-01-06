@@ -31,26 +31,80 @@
     </script>
   </head>
   <body>
-    <%!-- <ul class="menu menu-horizontal w-full relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end bg-white">
+  <header class="navbar px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-200 flex items-center h-22">
+  <!-- Left: Brand -->
+  <div class="flex-1">
+    <a href="/" class="flex w-fit items-center gap-2">
+      <span class="text-2xl font-extrabold">Budgie</span>
+    </a>
+  </div>
+
+  <!-- Right: Navigation -->
+  <div class="flex-none">
+    <ul class="flex items-center space-x-4 px-1">
       <%= if @current_scope do %>
-        <li>
+        <li class="text-sm text-gray-600 font-medium">
           {@current_scope.user.email}
         </li>
+
         <li>
-          <.link href={~p"/users/settings"}>Settings</.link>
+          <.link
+            href={~p"/expenses"}
+            class="text-sm font-medium text-gray-700 hover:text-black"
+          >
+            Expenses
+          </.link>
+          <.link
+            href={~p"/users/settings"}
+            class="text-sm font-medium text-gray-700 hover:text-black"
+          >
+            Settings
+          </.link>
+
         </li>
+
         <li>
-          <.link href={~p"/users/log-out"} method="delete">Log out</.link>
+          <.link
+            href={~p"/users/log-out"}
+            method="delete"
+            class="font-medium bg-black text-white rounded-md px-4 py-2 hover:bg-gray-800 transition"
+          >
+            Log out
+          </.link>
         </li>
       <% else %>
-        <li>
-          <.link href={~p"/users/register"}>Register</.link>
+        <div class="flex-none">
+        <ul class="flex flex-column px-1 space-x-4 items-center">
+
+          <li>
+        <.link href={~p"/users/register"} class="font-medium bg-black text-white rounded-md px-4 py-2 hover:bg-gray-800">Register <span aria-hidden="true">&rarr;</span>
+        </.link>
+          </li>
+          
+        </ul>
+      </div>
+        <%!-- <li>
+          <.link
+            href={~p"/users/register"}
+            class="text-sm font-medium text-gray-700 hover:text-black"
+          >
+            Register
+          </.link>
         </li>
+
         <li>
-          <.link href={~p"/users/log-in"}>Log in</.link>
-        </li>
+          <.link
+            href={~p"/users/log-in"}
+            class="font-medium bg-black text-white rounded-md px-4 py-2 hover:bg-gray-800 transition"
+          >
+            Log in <span aria-hidden="true">&rarr;</span>
+          </.link>
+        </li> --%>
       <% end %>
-    </ul> --%>
+    </ul>
+  </div>
+</header>
+
     {@inner_content}
   </body>
 </html>

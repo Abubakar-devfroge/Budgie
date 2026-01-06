@@ -262,7 +262,7 @@ defmodule FirstWeb.UserAuth do
     ~p"/users/settings"
   end
 
-  def signed_in_path(_), do: ~p"/"
+  def signed_in_path(_), do: ~p"/expenses"
 
   @doc """
   Plug for routes that require the user to be authenticated.

@@ -35,30 +35,6 @@ defmodule FirstWeb.Layouts do
 
   def app(assigns) do
     ~H"""
-    <header class="navbar px-4 sm:px-6 lg:px-8 bg-white">
-      <div class="flex-1">
-        <a href="/" class="flex-1 flex w-fit items-center gap-2">
-          <img src={~p"/images/logo.svg"} width="36" />
-          <span class="text-sm font-semibold">v{Application.spec(:phoenix, :vsn)}</span>
-        </a>
-      </div>
-      <div class="flex-none">
-        <ul class="flex flex-column px-1 space-x-4 items-center">
-          <li>
-           <.link href={~p"/"}>Home</.link>
-          </li>
-          <li>
-
-          </li>
-          <li>
-
-
-                   <.link href={~p"/users/register"} class="font-medium bg-black text-white rounded-md px-4 py-2 hover:bg-gray-800">Register <span aria-hidden="true">&rarr;</span>
-        </.link>
-          </li>
-        </ul>
-      </div>
-    </header>
 
           <main class="bg-white min-h-screen flex flex-col px-4 py-8 sm:px-6 sm:py-12 lg:px-12 lg:py-16">
         <div class="mx-auto w-full max-w-md sm:max-w-2xl lg:max-w-4xl xl:max-w-6xl space-y-4 sm:space-y-6">

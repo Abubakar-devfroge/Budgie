@@ -35,7 +35,7 @@ defmodule FirstWeb.UserLive.Login do
           </div>
         </div>
 
-        <.form
+        <%!-- <.form
           :let={f}
           for={@form}
           id="login_form_magic"
@@ -54,9 +54,9 @@ defmodule FirstWeb.UserLive.Login do
           <.button  class="py-2 rounded-md bg-gray-900 text-white w-full">
             Log in with email <span aria-hidden="true">→</span>
           </.button>
-        </.form>
+        </.form> --%>
 
-        <div class="divider">or</div>
+        <%!-- <div class="divider">or</div> --%>
 
         <.form
           :let={f}
@@ -80,10 +80,11 @@ defmodule FirstWeb.UserLive.Login do
             label="Password"
             autocomplete="current-password"
           />
-          <.button class="py-2 rounded-md bg-gray-900 text-white w-full" name={@form[:remember_me].name} value="true">
+
+          <.button  class="font-medium bg-black text-white m-4 rounded-md px-4 py-2 hover:bg-gray-800 transition flex-1 w-full text-center" name={@form[:remember_me].name} value="true">
             Log in and stay logged in <span aria-hidden="true">→</span>
           </.button>
-          <.button class="btn btn-primary btn-soft w-full mt-2">
+          <.button class="font-medium bg-white text-black border border-gray-300 m-4 rounded-md px-4 py-2 hover:bg-gray-100 transition flex-1 w-full text-center">
             Log in only this time
           </.button>
         </.form>
