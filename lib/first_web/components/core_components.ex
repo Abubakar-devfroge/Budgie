@@ -51,7 +51,7 @@ defmodule FirstWeb.CoreComponents do
     assigns = assign_new(assigns, :id, fn -> "flash-#{assigns.kind}" end)
 
     ~H"""
-    <div
+      <div
       :if={msg = render_slot(@inner_block) || Phoenix.Flash.get(@flash, @kind)}
       id={@id}
       phx-click={JS.push("lv:clear-flash", value: %{key: @kind}) |> hide("##{@id}")}
@@ -60,22 +60,30 @@ defmodule FirstWeb.CoreComponents do
       {@rest}
     >
       <div class={[
-        "alert w-80 sm:w-96 max-w-80 sm:max-w-96 text-wrap",
-        @kind == :info && "alert-info",
-        @kind == :error && "alert-error"
+        "alert w-80 sm:w-96 max-w-80 sm:max-w-96 text-wrap flex items-start gap-4 p-4 rounded-md   transition-all",
+        @kind == :info && "bg-green-100 text-green-800",
+        @kind == :error && "bg-red-600 text-white"
       ]}>
-        <.icon :if={@kind == :info} name="hero-information-circle" class="size-5 shrink-0 rounded-2xl" />
-        <.icon :if={@kind == :error} name="hero-exclamation-circle" class="size-5 shrink-0" />
-        <div>
-          <p :if={@title} class="font-semibold">{@title}</p>
-          <p>{msg}</p>
+        <.icon
+          :if={@kind == :info}
+          name="hero-information-circle"
+          class="size-5 shrink-0 rounded-md text-black"
+        />
+        <.icon
+          :if={@kind == :error}
+          name="hero-exclamation-circle"
+          class="size-5 shrink-0 text-white"
+        />
+        <div class="flex-1">
+          <p :if={@title} class="font-semibold text-lg">{@title}</p>
+          <p class="text-sm">{msg}</p>
         </div>
-        <div class="flex-1" />
-        <button type="button" class="group self-start cursor-pointer" aria-label={gettext("close")}>
-          <.icon name="hero-x-mark" class="size-5 opacity-40 group-hover:opacity-70" />
+        <button type="button" class="group self-start cursor-pointer ml-2 p-1 rounded hover:bg-gray-300 dark:hover:bg-gray-700 transition" aria-label={gettext("close")}>
+          <.icon name="hero-x-mark" class="size-5 opacity-60 group-hover:opacity-90" />
         </button>
       </div>
     </div>
+
     """
   end
 

@@ -18,7 +18,7 @@ defmodule FirstWeb.ExpenseLive.Index do
           <p>Total Expenses: <%= Enum.count(@streams.expenses) %></p>
         <:actions>
           <.button variant="primary" navigate={~p"/expenses/new"}>
-            <.icon name="hero-plus" /> New Expense
+            <.icon name="hero-plus" /> New Transaction
           </.button>
 
         </:actions>

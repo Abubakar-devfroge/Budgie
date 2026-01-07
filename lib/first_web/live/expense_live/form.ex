@@ -29,7 +29,7 @@ defmodule FirstWeb.ExpenseLive.Form do
     />
         <.input field={@form[:date]} type="date" label="Date" />
         <footer>
-          <.button phx-disable-with="Saving..." variant="primary">Save Expense</.button>
+          <.button phx-disable-with="Saving..." variant="primary">Save Transaction</.button>
           <.button navigate={return_path(@current_scope, @return_to, @expense)}>Cancel</.button>
         </footer>
       </.form>
