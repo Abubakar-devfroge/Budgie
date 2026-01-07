@@ -70,14 +70,14 @@ defmodule FirstWeb.UserLive.Login do
             readonly={!!@current_scope}
             field={f[:email]}
             type="email"
-            label="Email"
+            label="Email*"
             autocomplete="email"
             required
           />
           <.input
             field={@form[:password]}
             type="password"
-            label="Password"
+            label="Password*"
             autocomplete="current-password"
           />
 
