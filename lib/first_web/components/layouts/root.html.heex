@@ -48,7 +48,7 @@
       <%= if @current_scope do %>
         <li class="flex items-center space-x-4">
           <.link href={~p"/expenses"} class="text-sm font-medium text-gray-700 hover:text-black">
-            Expenses
+            Transactions
           </.link>
 
           <.link href={~p"/users/settings"} class="text-sm font-medium text-gray-700 hover:text-black">
@@ -58,7 +58,7 @@
           <.link
             href={~p"/users/log-out"}
             method="delete"
-            class="font-medium bg-black text-white rounded-md px-4 py-2 hover:bg-gray-800 transition"
+            class="font-medium bg-black text-white rounded-full px-6 py-2 hover:bg-gray-800 transition"
           >
             Log out
           </.link>
@@ -67,7 +67,7 @@
         <li>
           <.link
             href={~p"/users/log-in"}
-            class="font-medium bg-black text-white rounded-md px-4 py-2 hover:bg-gray-800"
+            class="font-medium bg-black text-white rounded-full px-6 py-2 hover:bg-gray-800"
           >
             Sign in →
           </.link>
@@ -105,13 +105,7 @@
             Settings
           </.link>
 
-          <.link
-            href={~p"/users/log-out"}
-            method="delete"
-            class="mt-6 font-medium bg-black text-white rounded-md px-4 py-3 text-center"
-          >
-            Log out
-          </.link>
+          
         <% else %>
           <.link
             href={~p"/users/log-in"}

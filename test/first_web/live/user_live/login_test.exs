@@ -28,7 +28,7 @@ defmodule FirstWeb.UserLive.LoginTest do
 
       conn = submit_form(form, conn)
 
-      assert redirected_to(conn) == ~p"/expenses"
+      assert redirected_to(conn) == ~p"/home"
     end
 
     test "redirects to login page with a flash error if credentials are invalid", %{
@@ -67,7 +67,7 @@ defmodule FirstWeb.UserLive.LoginTest do
       %{user: user, conn: log_in_user(conn, user)}
     end
 
-    test "shows login page with email filled in", %{conn: conn, user: user} do
+    test "shows login page with email filled in", %{conn: conn, user: _user} do
       {:ok, _lv, html} = live(conn, ~p"/users/log-in")
 
       assert html =~ "You need to reauthenticate"

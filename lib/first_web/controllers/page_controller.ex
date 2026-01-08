@@ -4,4 +4,8 @@ defmodule FirstWeb.PageController do
   def home(conn, _params) do
     render(conn, :home)
   end
+
+    def dash(conn, _params) do
+    render(conn, :dash)
+  end
 end

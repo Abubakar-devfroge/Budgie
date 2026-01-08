@@ -102,7 +102,7 @@ defmodule FirstWeb.CoreComponents do
   slot :inner_block, required: true
 
   def button(%{rest: rest} = assigns) do
-    variants = %{"primary" => "font-medium bg-black text-white rounded-md px-4 py-2 hover:bg-gray-800 transition", nil => "font-medium bg-white text-black border border-gray-300 rounded-md px-4 py-2 hover:bg-gray-100 transition"}
+    variants = %{"primary" => "font-medium bg-black text-white rounded-full px-4 py-2 hover:bg-gray-800 transition", nil => "font-medium bg-white text-black border border-gray-300 rounded-full px-4 py-2 hover:bg-gray-100 transition"}
 
     assigns =
       assign_new(assigns, :class, fn ->

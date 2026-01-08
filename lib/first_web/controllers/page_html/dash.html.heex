@@ -1,0 +1,78 @@
+    <Layouts.app flash={@flash} current_scope={@current_scope}>
+
+        
+
+
+
+
+<div class="px-4 sm:px-0">
+  <!-- Header -->
+  <h3 class="text-2xl font-semibold text-gray-900">
+    Welcome Back {@current_scope.user.email}
+  </h3>
+  <p class="mt-1 max-w-2xl text-sm text-gray-500">
+    Your available services
+  </p>
+</div>
+
+<div class="mt-6 border-t border-gray-300 pt-6">
+  <!-- Services wrapper -->
+  <div class="flex flex-col max-h-[70vh]">
+    
+    <!-- Services title -->
+    <div class="flex-shrink mb-4">
+      <h2 class="uppercase text-sm font-medium text-gray-600 tracking-wide">
+        Services
+      </h2>
+    </div>
+
+    <!-- Service listing -->
+    <div class="flex-grow overflow-y-auto pr-1">
+      <div class="space-y-3">
+
+        <!-- Service item -->
+          <.link navigate={~p"/expenses"} class="block">
+          <div class="flex justify-between items-center border border-gray-300 rounded-full px-6 py-3 bg-white hover:bg-gray-50 transition">
+            <span class="text-xl font-medium text-gray-600">
+              Transactions
+            </span>
+
+            <span class="text-2xl font-medium text-gray-600 ">
+               →
+            </span>
+          </div>
+        </.link>
+
+
+        <.link navigate={~p"/expenses"} class="block">
+          <div class="flex justify-between items-center border border-gray-300 rounded-full px-6 py-3 bg-white hover:bg-gray-50 transition">
+            <span class="text-xl font-medium text-gray-600">
+              Transactions
+            </span>
+
+            <span class="text-2xl font-medium text-gray-600 ">
+               →
+            </span>
+          </div>
+        </.link>
+
+        <.link navigate={~p"/expenses"} class="block">
+          <div class="flex justify-between items-center border border-gray-300 rounded-full px-6 py-3 bg-white hover:bg-gray-50 transition">
+            <span class="text-xl font-medium text-gray-600">
+              Transactions
+            </span>
+
+            <span class="text-2xl font-medium text-gray-600 ">
+               →
+            </span>
+          </div>
+        </.link>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    </Layouts.app>
