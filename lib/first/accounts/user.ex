@@ -3,7 +3,6 @@ defmodule First.Accounts.User do
   import Ecto.Changeset
   alias Bcrypt
 
-
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true, redact: true

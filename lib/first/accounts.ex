@@ -294,11 +294,4 @@ defmodule First.Accounts do
       end
     end)
   end
-
-
-
-
-
-
-
 end

@@ -4,8 +4,20 @@ defmodule FirstWeb.ExpenseLiveTest do
   import Phoenix.LiveViewTest
   import First.FinanceFixtures
 
-  @create_attrs %{date: "2026-01-04", description: "some description", category: "some category", quantity: "120.5", total: "120.5"}
-  @update_attrs %{date: "2026-01-05", description: "some updated description", category: "some updated category", quantity: "456.7", total: "456.7"}
+  @create_attrs %{
+    date: "2026-01-04",
+    description: "some description",
+    category: "some category",
+    quantity: "120.5",
+    total: "120.5"
+  }
+  @update_attrs %{
+    date: "2026-01-05",
+    description: "some updated description",
+    category: "some updated category",
+    quantity: "456.7",
+    total: "456.7"
+  }
   @invalid_attrs %{date: nil, description: nil, category: nil, quantity: nil}
 
   setup :register_and_log_in_user

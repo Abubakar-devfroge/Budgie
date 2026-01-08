@@ -21,9 +21,6 @@ defmodule FirstWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-
-
-
   end
 
   # Other scopes may use custom stacks.
@@ -55,21 +52,15 @@ defmodule FirstWeb.Router do
 
     live_session :require_authenticated_user,
       on_mount: [{FirstWeb.UserAuth, :require_authenticated}] do
-
       get "/home", PageController, :dash
 
       live "/users/settings", UserLive.Settings, :edit
       live "/users/settings/confirm-email/:token", UserLive.Settings, :confirm_email
 
-
       live "/expenses", ExpenseLive.Index, :index
       live "/expenses/new", ExpenseLive.Form, :new
       live "/expenses/:id", ExpenseLive.Show, :show
       live "/expenses/:id/edit", ExpenseLive.Form, :edit
-
-
-
-
     end
 
     post "/users/update-password", UserSessionController, :update_password

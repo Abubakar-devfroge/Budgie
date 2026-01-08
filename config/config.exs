@@ -7,11 +7,8 @@
 # General application configuration
 import Config
 
-
 # Configure password hashing for Accounts
-config :first, First.Accounts,
-  password_hash_module: Bcrypt
-
+config :first, First.Accounts, password_hash_module: Bcrypt
 
 config :first, :scopes,
   user: [

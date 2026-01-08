@@ -6,34 +6,28 @@ defmodule FirstWeb.ExpenseLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-
-
     <Layouts.app flash={@flash} current_scope={@current_scope}>
-
-
       <.header>
-          <%!-- <p>Total Expenses: <%= Enum.count(@streams.expenses) %></p> --%>
+        <%!-- <p>Total Expenses: <%= Enum.count(@streams.expenses) %></p> --%>
         <:actions>
           <.button variant="primary" navigate={~p"/expenses/new"}>
             <.icon name="hero-plus" /> New Transaction
           </.button>
-
         </:actions>
       </.header>
-
 
       <.table
         id="expenses"
         rows={@streams.expenses}
         row_click={fn {_id, expense} -> JS.navigate(~p"/expenses/#{expense}") end}
       >
-       <:col :let={{_id, expense}} label="Date">{expense.date}</:col>
+        <:col :let={{_id, expense}} label="Date">{expense.date}</:col>
         <:col :let={{_id, expense}} label="Total">KES {expense.total}</:col>
         <%!-- <:col :let={{_id, expense}} label="Quantity">{expense.quantity}</:col> --%>
         <:col :let={{_id, expense}} label="Description">{expense.description}</:col>
         <:col :let={{_id, expense}} label="Category">{expense.category}</:col>
 
-        <:action :let={{_id, expense}} >
+        <:action :let={{_id, expense}}>
           <div class="sr-only">
             <.link navigate={~p"/expenses/#{expense}"}>Show</.link>
           </div>
@@ -48,7 +42,6 @@ defmodule FirstWeb.ExpenseLive.Index do
           </.link>
         </:action>
       </.table>
-
     </Layouts.app>
     """
   end
@@ -76,7 +69,8 @@ defmodule FirstWeb.ExpenseLive.Index do
   @impl true
   def handle_info({type, %First.Finance.Expense{}}, socket)
       when type in [:created, :updated, :deleted] do
-    {:noreply, stream(socket, :expenses, list_expenses(socket.assigns.current_scope), reset: true)}
+    {:noreply,
+     stream(socket, :expenses, list_expenses(socket.assigns.current_scope), reset: true)}
   end
 
   defp list_expenses(current_scope) do

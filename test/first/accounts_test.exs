@@ -394,6 +394,4 @@ defmodule First.AccountsTest do
       refute inspect(%User{password: "123456"}) =~ "password: \"123456\""
     end
   end
-
-
 end

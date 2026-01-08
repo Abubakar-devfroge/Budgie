@@ -86,6 +86,4 @@ defmodule First.AccountsFixtures do
       set: [inserted_at: dt, authenticated_at: dt]
     )
   end
-
-
 end

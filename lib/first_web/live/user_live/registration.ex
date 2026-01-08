@@ -32,7 +32,10 @@ defmodule FirstWeb.UserLive.Registration do
             phx-mounted={JS.focus()}
           />
 
-          <.button phx-disable-with="Creating account..."  class="px-6 py-2 rounded-full bg-gray-900 text-white w-full">
+          <.button
+            phx-disable-with="Creating account..."
+            class="px-6 py-2 rounded-full bg-gray-900 text-white w-full"
+          >
             Create an account
           </.button>
         </.form>

@@ -81,22 +81,21 @@ defmodule FirstWeb.UserLive.Login do
             autocomplete="current-password"
           />
 
-                  <div class="flex flex-col gap-4 w-full">
-          <.button
-            class="font-medium bg-black text-white rounded-full px-6 py-2 hover:bg-gray-800 transition w-full sm:w-auto flex-1 text-center"
-            name={@form[:remember_me].name}
-            value="true"
-          >
-            Log in  <span aria-hidden="true">→</span>
-          </.button>
+          <div class="flex flex-col gap-4 w-full">
+            <.button
+              class="font-medium bg-black text-white rounded-full px-6 py-2 hover:bg-gray-800 transition w-full sm:w-auto flex-1 text-center"
+              name={@form[:remember_me].name}
+              value="true"
+            >
+              Log in <span aria-hidden="true">→</span>
+            </.button>
 
-          <%!-- <.button
+            <%!-- <.button
             class="font-medium bg-white text-black border border-gray-300 rounded-md px-4 py-2 hover:bg-gray-100 transition w-full sm:w-auto flex-1 text-center"
           >
             Log in only this time
           </.button> --%>
-        </div>
-
+          </div>
         </.form>
       </div>
     </Layouts.app>

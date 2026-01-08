@@ -51,7 +51,7 @@ defmodule FirstWeb.CoreComponents do
     assigns = assign_new(assigns, :id, fn -> "flash-#{assigns.kind}" end)
 
     ~H"""
-      <div
+    <div
       :if={msg = render_slot(@inner_block) || Phoenix.Flash.get(@flash, @kind)}
       id={@id}
       phx-click={JS.push("lv:clear-flash", value: %{key: @kind}) |> hide("##{@id}")}
@@ -78,12 +78,15 @@ defmodule FirstWeb.CoreComponents do
           <p :if={@title} class="font-semibold text-lg">{@title}</p>
           <p class="text-sm">{msg}</p>
         </div>
-        <button type="button" class="group self-start cursor-pointer ml-2 p-1 rounded hover:bg-gray-300 dark:hover:bg-gray-700 transition" aria-label={gettext("close")}>
+        <button
+          type="button"
+          class="group self-start cursor-pointer ml-2 p-1 rounded hover:bg-gray-300 dark:hover:bg-gray-700 transition"
+          aria-label={gettext("close")}
+        >
           <.icon name="hero-x-mark" class="size-5 opacity-60 group-hover:opacity-90" />
         </button>
       </div>
     </div>
-
     """
   end
 
@@ -102,7 +105,12 @@ defmodule FirstWeb.CoreComponents do
   slot :inner_block, required: true
 
   def button(%{rest: rest} = assigns) do
-    variants = %{"primary" => "font-medium bg-black text-white rounded-full px-4 py-2 hover:bg-gray-800 transition", nil => "font-medium bg-white text-black border border-gray-300 rounded-full px-4 py-2 hover:bg-gray-100 transition"}
+    variants = %{
+      "primary" =>
+        "font-medium bg-black text-white rounded-full px-4 py-2 hover:bg-gray-800 transition",
+      nil =>
+        "font-medium bg-white text-black border border-gray-300 rounded-full px-4 py-2 hover:bg-gray-100 transition"
+    }
 
     assigns =
       assign_new(assigns, :class, fn ->

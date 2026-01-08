@@ -8,7 +8,7 @@
       {assigns[:page_title]}
     </.live_title>
 
-    <link rel="icon" type="image/x-icon" href={~p"/images/logo1.svg"}  />
+    <link rel="icon" type="image/x-icon" href={~p"/images/logo1.svg"} />
 
     <link phx-track-static rel="stylesheet" href={~p"/assets/css/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/js/app.js"}>
@@ -34,91 +34,101 @@
     </script>
   </head>
   <body>
-<header class="navbar px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-200 flex items-center h-22">
-  <!-- Left: Brand -->
-  <div class="flex-1">
-    <a href="/" class="flex w-fit items-center gap-2">
-      <span class="text-2xl font-extrabold">Budgie</span>
-    </a>
-  </div>
-
-  <!-- Desktop Navigation -->
-  <div class="hidden sm:flex flex-none">
-    <ul class="flex items-center space-x-4 px-1">
-      <%= if @current_scope do %>
-        <li class="flex items-center space-x-4">
-          <.link href={~p"/home"} class="text-sm font-medium text-gray-700 hover:text-black">
-            Dashboard
-          </.link>
-
-          <.link href={~p"/users/settings"} class="text-sm font-medium text-gray-700 hover:text-black">
-            Settings
-          </.link>
-
-          <.link
-            href={~p"/users/log-out"}
-            method="delete"
-            class="font-medium bg-black text-white rounded-full px-6 py-2 hover:bg-gray-800 transition"
-          >
-            Log out
-          </.link>
-        </li>
-      <% else %>
-        <li>
-          <.link
-            href={~p"/users/log-in"}
-            class="font-medium bg-black text-white rounded-full px-6 py-2 hover:bg-gray-800"
-          >
-            Sign in →
-          </.link>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-
-  <!-- Mobile Hamburger -->
-  <details class="sm:hidden relative">
-    <summary class="list-none cursor-pointer">
-      <!-- Hamburger Icon -->
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </summary>
-
-    <!-- Fullscreen Mobile Menu -->
-    <div class="fixed inset-0 bg-white z-50 flex flex-col px-6 py-8">
-      <div class="flex justify-between items-center mb-10">
-        <span class="text-2xl font-extrabold">Budgie</span>
-
-        <!-- Close Button -->
-        <summary class="list-none cursor-pointer text-2xl">&times;</summary>
+    <header class="navbar px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-200 flex items-center h-22">
+      <!-- Left: Brand -->
+      <div class="flex-1">
+        <a href="/" class="flex w-fit items-center gap-2">
+          <span class="text-2xl font-extrabold">Budgie</span>
+        </a>
       </div>
+      
+<!-- Desktop Navigation -->
+      <div class="hidden sm:flex flex-none">
+        <ul class="flex items-center space-x-4 px-1">
+          <%= if @current_scope do %>
+            <li class="flex items-center space-x-4">
+              <.link href={~p"/home"} class="text-sm font-medium text-gray-700 hover:text-black">
+                Dashboard
+              </.link>
 
-      <nav class="flex flex-col space-y-6 text-lg">
-        <%= if @current_scope do %>
-          <.link href={~p"/home"} class="font-medium text-gray-900">
-            Dashboard
-          </.link>
+              <.link
+                href={~p"/users/settings"}
+                class="text-sm font-medium text-gray-700 hover:text-black"
+              >
+                Settings
+              </.link>
 
-          <.link href={~p"/users/settings"} class="font-medium text-gray-900">
-            Settings
-          </.link>
-
-          
-        <% else %>
-          <.link
-            href={~p"/users/log-in"}
-            class="font-medium bg-black text-white rounded-md px-4 py-3 text-center"
+              <.link
+                href={~p"/users/log-out"}
+                method="delete"
+                class="font-medium bg-black text-white rounded-full px-6 py-2 hover:bg-gray-800 transition"
+              >
+                Log out
+              </.link>
+            </li>
+          <% else %>
+            <li>
+              <.link
+                href={~p"/users/log-in"}
+                class="font-medium bg-black text-white rounded-full px-6 py-2 hover:bg-gray-800"
+              >
+                Sign in →
+              </.link>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      
+<!-- Mobile Hamburger -->
+      <details class="sm:hidden relative">
+        <summary class="list-none cursor-pointer">
+          <!-- Hamburger Icon -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-7 w-7"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            Sign in →
-          </.link>
-        <% end %>
-      </nav>
-    </div>
-  </details>
-</header>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </summary>
+        
+<!-- Fullscreen Mobile Menu -->
+        <div class="fixed inset-0 bg-white z-50 flex flex-col px-6 py-8">
+          <div class="flex justify-between items-center mb-10">
+            <span class="text-2xl font-extrabold">Budgie</span>
+            
+<!-- Close Button -->
+            <summary class="list-none cursor-pointer text-2xl">&times;</summary>
+          </div>
 
+          <nav class="flex flex-col space-y-6 text-lg">
+            <%= if @current_scope do %>
+              <.link href={~p"/home"} class="font-medium text-gray-900">
+                Dashboard
+              </.link>
+
+              <.link href={~p"/users/settings"} class="font-medium text-gray-900">
+                Settings
+              </.link>
+            <% else %>
+              <.link
+                href={~p"/users/log-in"}
+                class="font-medium bg-black text-white rounded-md px-4 py-3 text-center"
+              >
+                Sign in →
+              </.link>
+            <% end %>
+          </nav>
+        </div>
+      </details>
+    </header>
 
     {@inner_content}
   </body>

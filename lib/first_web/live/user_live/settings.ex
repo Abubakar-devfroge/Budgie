@@ -62,8 +62,6 @@ defmodule FirstWeb.UserLive.Settings do
           Save Password
         </.button>
       </.form>
-
-
     </Layouts.app>
     """
   end

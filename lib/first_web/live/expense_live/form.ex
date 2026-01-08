@@ -10,24 +10,24 @@ defmodule FirstWeb.ExpenseLive.Form do
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <.header>
         {@page_title}
-        <:subtitle>Use this form to track and manage your company’s transactions efficiently.</:subtitle>
+        <:subtitle>
+          Use this form to track and manage your company’s transactions efficiently.
+        </:subtitle>
       </.header>
 
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-
-      <.form for={@form} id="expense-form" phx-change="validate" phx-submit="save">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <.form for={@form} id="expense-form" phx-change="validate" phx-submit="save">
           <.input field={@form[:date]} type="date" label="Date" />
-        <.input field={@form[:total]} type="number" label="Price" step="any" />
-        <.input field={@form[:quantity]} type="number" label="Amount" step="any" />
-        <.input field={@form[:description]} type="text" label="Description" />
-          <.input
-      field={@form[:category]} type="text" label="Category"/>
+          <.input field={@form[:total]} type="number" label="Price" step="any" />
+          <.input field={@form[:quantity]} type="number" label="Amount" step="any" />
+          <.input field={@form[:description]} type="text" label="Description" />
+          <.input field={@form[:category]} type="text" label="Category" />
 
-        <footer>
-          <.button phx-disable-with="Saving..." variant="primary">Save Transaction</.button>
-          <.button navigate={return_path(@current_scope, @return_to, @expense)}>Cancel</.button>
-        </footer>
-      </.form>
+          <footer>
+            <.button phx-disable-with="Saving..." variant="primary">Save Transaction</.button>
+            <.button navigate={return_path(@current_scope, @return_to, @expense)}>Cancel</.button>
+          </footer>
+        </.form>
       </div>
     </Layouts.app>
     """
@@ -64,7 +64,9 @@ defmodule FirstWeb.ExpenseLive.Form do
 
   @impl true
   def handle_event("validate", %{"expense" => expense_params}, socket) do
-    changeset = Finance.change_expense(socket.assigns.current_scope, socket.assigns.expense, expense_params)
+    changeset =
+      Finance.change_expense(socket.assigns.current_scope, socket.assigns.expense, expense_params)
+
     {:noreply, assign(socket, form: to_form(changeset, action: :validate))}
   end
 
@@ -73,7 +75,11 @@ defmodule FirstWeb.ExpenseLive.Form do
   end
 
   defp save_expense(socket, :edit, expense_params) do
-    case Finance.update_expense(socket.assigns.current_scope, socket.assigns.expense, expense_params) do
+    case Finance.update_expense(
+           socket.assigns.current_scope,
+           socket.assigns.expense,
+           expense_params
+         ) do
       {:ok, expense} ->
         {:noreply,
          socket

@@ -29,7 +29,14 @@ defmodule First.FinanceTest do
     end
 
     test "create_expense/2 with valid data creates a expense" do
-      valid_attrs = %{date: ~D[2026-01-04], description: "some description", category: "some category", quantity: "120.5", total: "120.5"}
+      valid_attrs = %{
+        date: ~D[2026-01-04],
+        description: "some description",
+        category: "some category",
+        quantity: "120.5",
+        total: "120.5"
+      }
+
       scope = user_scope_fixture()
 
       assert {:ok, %Expense{} = expense} = Finance.create_expense(scope, valid_attrs)
@@ -37,7 +44,7 @@ defmodule First.FinanceTest do
       assert expense.description == "some description"
       assert expense.category == "some category"
       assert expense.quantity == Decimal.new("120.5")
-       assert expense.total == Decimal.new("120.5")
+      assert expense.total == Decimal.new("120.5")
       assert expense.user_id == scope.user.id
     end
 
@@ -49,7 +56,14 @@ defmodule First.FinanceTest do
     test "update_expense/3 with valid data updates the expense" do
       scope = user_scope_fixture()
       expense = expense_fixture(scope)
-      update_attrs = %{date: ~D[2026-01-05], description: "some updated description", category: "some updated category", quantity: "456.7" , total: "456.7"}
+
+      update_attrs = %{
+        date: ~D[2026-01-05],
+        description: "some updated description",
+        category: "some updated category",
+        quantity: "456.7",
+        total: "456.7"
+      }
 
       assert {:ok, %Expense{} = expense} = Finance.update_expense(scope, expense, update_attrs)
       assert expense.date == ~D[2026-01-05]

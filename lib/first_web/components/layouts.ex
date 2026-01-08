@@ -35,19 +35,15 @@ defmodule FirstWeb.Layouts do
 
   def app(assigns) do
     ~H"""
+    <main class="bg-white min-h-screen flex flex-col px-4 py-8 sm:px-6 sm:py-12 lg:px-12 lg:py-16">
+      <div class="w-full space-y-4 sm:space-y-6">
+        {render_slot(@inner_block)}
+      </div>
+    </main>
 
-          <main class="bg-white min-h-screen flex flex-col px-4 py-8 sm:px-6 sm:py-12 lg:px-12 lg:py-16">
-              <div class="w-full space-y-4 sm:space-y-6">
-          {render_slot(@inner_block)}
-        </div>
-      </main>
-
-        <footer class="p-4 text-center text-sm text-gray-500 space-y-2 bg-white">
-        &copy; 2026 Budgie. All rights reserved.
-        </footer>
-
-
-
+    <footer class="p-4 text-center text-sm text-gray-500 space-y-2 bg-white">
+      &copy; 2026 Budgie. All rights reserved.
+    </footer>
 
     <.flash_group flash={@flash} />
     """
@@ -103,41 +99,39 @@ defmodule FirstWeb.Layouts do
   """
   def theme_toggle(assigns) do
     ~H"""
-      <div class="relative flex w-40 rounded-full border-2 border-base-300 bg-base-300">
-        <!-- sliding indicator -->
-        <div
-          class="absolute top-0 left-0 h-full w-1/3 rounded-full bg-base-100 border border-base-200 brightness-200
-                transition-[left] in-data-[theme=light]:left-1/3 in-data-[theme=dark]:left-2/3"
-        ></div>
-
-        <!-- System -->
-        <button
-          class="flex flex-1 items-center justify-center p-1 cursor-pointer"
-          phx-click={JS.dispatch("phx:set-theme")}
-          data-phx-theme="system"
-        >
-          <.icon name="hero-computer-desktop-micro" class="size-4 opacity-75 hover:opacity-100" />
-        </button>
-
-        <!-- Light -->
-        <button
-          class="flex flex-1 items-center justify-center p-1 cursor-pointer"
-          phx-click={JS.dispatch("phx:set-theme")}
-          data-phx-theme="light"
-        >
-          <.icon name="hero-sun-micro" class="size-4 opacity-75 hover:opacity-100" />
-        </button>
-
-        <!-- Dark -->
-        <button
-          class="flex flex-1 items-center justify-center p-1 cursor-pointer"
-          phx-click={JS.dispatch("phx:set-theme")}
-          data-phx-theme="dark"
-        >
-          <.icon name="hero-moon-micro" class="size-4 opacity-75 hover:opacity-100" />
-        </button>
+    <div class="relative flex w-40 rounded-full border-2 border-base-300 bg-base-300">
+      <!-- sliding indicator -->
+      <div class="absolute top-0 left-0 h-full w-1/3 rounded-full bg-base-100 border border-base-200 brightness-200
+                transition-[left] in-data-[theme=light]:left-1/3 in-data-[theme=dark]:left-2/3">
       </div>
-
+      
+    <!-- System -->
+      <button
+        class="flex flex-1 items-center justify-center p-1 cursor-pointer"
+        phx-click={JS.dispatch("phx:set-theme")}
+        data-phx-theme="system"
+      >
+        <.icon name="hero-computer-desktop-micro" class="size-4 opacity-75 hover:opacity-100" />
+      </button>
+      
+    <!-- Light -->
+      <button
+        class="flex flex-1 items-center justify-center p-1 cursor-pointer"
+        phx-click={JS.dispatch("phx:set-theme")}
+        data-phx-theme="light"
+      >
+        <.icon name="hero-sun-micro" class="size-4 opacity-75 hover:opacity-100" />
+      </button>
+      
+    <!-- Dark -->
+      <button
+        class="flex flex-1 items-center justify-center p-1 cursor-pointer"
+        phx-click={JS.dispatch("phx:set-theme")}
+        data-phx-theme="dark"
+      >
+        <.icon name="hero-moon-micro" class="size-4 opacity-75 hover:opacity-100" />
+      </button>
+    </div>
     """
   end
 end
