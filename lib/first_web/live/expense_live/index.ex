@@ -37,7 +37,7 @@ defmodule FirstWeb.ExpenseLive.Index do
           <div class="sr-only">
             <.link navigate={~p"/expenses/#{expense}"}>Show</.link>
           </div>
-          <%!-- <.link navigate={~p"/expenses/#{expense}/edit"}>Edit</.link> --%>
+          <.link navigate={~p"/expenses/#{expense}/edit"}>Edit</.link>
         </:action>
         <:action :let={{id, expense}}>
           <.link
