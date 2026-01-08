@@ -29,10 +29,12 @@ defmodule FirstWeb.ExpenseLive.Index do
         rows={@streams.expenses}
         row_click={fn {_id, expense} -> JS.navigate(~p"/expenses/#{expense}") end}
       >
+       <:col :let={{_id, expense}} label="Date">{expense.date}</:col>
+        <:col :let={{_id, expense}} label="Price">{expense.price}</:col>
         <:col :let={{_id, expense}} label="Amount">{expense.amount}</:col>
         <:col :let={{_id, expense}} label="Description">{expense.description}</:col>
         <:col :let={{_id, expense}} label="Category">{expense.category}</:col>
-        <:col :let={{_id, expense}} label="Date">{expense.date}</:col>
+
         <:action :let={{_id, expense}}>
           <div class="sr-only">
             <.link navigate={~p"/expenses/#{expense}"}>Show</.link>

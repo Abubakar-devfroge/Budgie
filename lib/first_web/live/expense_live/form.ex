@@ -16,11 +16,13 @@ defmodule FirstWeb.ExpenseLive.Form do
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <.form for={@form} id="expense-form" phx-change="validate" phx-submit="save">
+          <.input field={@form[:date]} type="date" label="Date" />
+        <.input field={@form[:price]} type="number" label="Price" step="any" />
         <.input field={@form[:amount]} type="number" label="Amount" step="any" />
         <.input field={@form[:description]} type="text" label="Description" />
           <.input
       field={@form[:category]} type="text" label="Category"/>
-        <.input field={@form[:date]} type="date" label="Date" />
+
         <footer>
           <.button phx-disable-with="Saving..." variant="primary">Save Transaction</.button>
           <.button navigate={return_path(@current_scope, @return_to, @expense)}>Cancel</.button>
