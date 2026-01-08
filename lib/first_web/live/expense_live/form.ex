@@ -17,8 +17,8 @@ defmodule FirstWeb.ExpenseLive.Form do
 
       <.form for={@form} id="expense-form" phx-change="validate" phx-submit="save">
           <.input field={@form[:date]} type="date" label="Date" />
-        <.input field={@form[:price]} type="number" label="Price" step="any" />
-        <.input field={@form[:amount]} type="number" label="Amount" step="any" />
+        <.input field={@form[:total]} type="number" label="Price" step="any" />
+        <.input field={@form[:quantity]} type="number" label="Amount" step="any" />
         <.input field={@form[:description]} type="text" label="Description" />
           <.input
       field={@form[:category]} type="text" label="Category"/>

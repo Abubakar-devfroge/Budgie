@@ -21,22 +21,23 @@ defmodule FirstWeb.ExpenseLive.Index do
         </:actions>
       </.header>
 
+
       <.table
         id="expenses"
         rows={@streams.expenses}
         row_click={fn {_id, expense} -> JS.navigate(~p"/expenses/#{expense}") end}
       >
        <:col :let={{_id, expense}} label="Date">{expense.date}</:col>
-        <:col :let={{_id, expense}} label="Price">{expense.price}</:col>
-        <:col :let={{_id, expense}} label="Amount">{expense.amount}</:col>
+        <:col :let={{_id, expense}} label="Total">KES {expense.total}</:col>
+        <%!-- <:col :let={{_id, expense}} label="Quantity">{expense.quantity}</:col> --%>
         <:col :let={{_id, expense}} label="Description">{expense.description}</:col>
         <:col :let={{_id, expense}} label="Category">{expense.category}</:col>
 
-        <:action :let={{_id, expense}}>
+        <:action :let={{_id, expense}} >
           <div class="sr-only">
             <.link navigate={~p"/expenses/#{expense}"}>Show</.link>
           </div>
-          <.link navigate={~p"/expenses/#{expense}/edit"}>Edit</.link>
+          <%!-- <.link navigate={~p"/expenses/#{expense}/edit"}>Edit</.link> --%>
         </:action>
         <:action :let={{id, expense}}>
           <.link
@@ -47,6 +48,7 @@ defmodule FirstWeb.ExpenseLive.Index do
           </.link>
         </:action>
       </.table>
+
     </Layouts.app>
     """
   end

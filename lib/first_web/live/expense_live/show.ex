@@ -23,8 +23,8 @@ defmodule FirstWeb.ExpenseLive.Show do
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <.list >
          <:item title="Date">{@expense.date}</:item>
-        <:item title="Amount">{@expense.amount}</:item>
-        <:item title="Price">{@expense.price}</:item>
+        <:item title="Amount">{@expense.total}</:item>
+        <:item title="Price"> KES {@expense.quantity}</:item>
         <:item title="Description">{@expense.description}</:item>
         <:item title="Category">{@expense.category}</:item>
       </.list>

@@ -10,8 +10,8 @@ defmodule First.FinanceFixtures do
   def expense_fixture(scope, attrs \\ %{}) do
     attrs =
       Enum.into(attrs, %{
-        amount: "120.5",
-        price: "120.5",
+        total: "120.5",
+        quantity: "120.5",
         category: "some category",
         date: ~D[2026-01-04],
         description: "some description"

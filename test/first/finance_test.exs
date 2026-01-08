@@ -9,7 +9,7 @@ defmodule First.FinanceTest do
     import First.AccountsFixtures, only: [user_scope_fixture: 0]
     import First.FinanceFixtures
 
-    @invalid_attrs %{date: nil, description: nil, category: nil, amount: nil}
+    @invalid_attrs %{date: nil, description: nil, category: nil, quantity: nil}
 
     test "list_expenses/1 returns all scoped expenses" do
       scope = user_scope_fixture()
@@ -29,15 +29,15 @@ defmodule First.FinanceTest do
     end
 
     test "create_expense/2 with valid data creates a expense" do
-      valid_attrs = %{date: ~D[2026-01-04], description: "some description", category: "some category", amount: "120.5", price: "120.5"}
+      valid_attrs = %{date: ~D[2026-01-04], description: "some description", category: "some category", quantity: "120.5", total: "120.5"}
       scope = user_scope_fixture()
 
       assert {:ok, %Expense{} = expense} = Finance.create_expense(scope, valid_attrs)
       assert expense.date == ~D[2026-01-04]
       assert expense.description == "some description"
       assert expense.category == "some category"
-      assert expense.amount == Decimal.new("120.5")
-       assert expense.price == Decimal.new("120.5")
+      assert expense.quantity == Decimal.new("120.5")
+       assert expense.total == Decimal.new("120.5")
       assert expense.user_id == scope.user.id
     end
 
@@ -49,14 +49,14 @@ defmodule First.FinanceTest do
     test "update_expense/3 with valid data updates the expense" do
       scope = user_scope_fixture()
       expense = expense_fixture(scope)
-      update_attrs = %{date: ~D[2026-01-05], description: "some updated description", category: "some updated category", amount: "456.7" , price: "456.7"}
+      update_attrs = %{date: ~D[2026-01-05], description: "some updated description", category: "some updated category", quantity: "456.7" , total: "456.7"}
 
       assert {:ok, %Expense{} = expense} = Finance.update_expense(scope, expense, update_attrs)
       assert expense.date == ~D[2026-01-05]
       assert expense.description == "some updated description"
       assert expense.category == "some updated category"
-      assert expense.amount == Decimal.new("456.7")
-      assert expense.price == Decimal.new("456.7")
+      assert expense.quantity == Decimal.new("456.7")
+      assert expense.total == Decimal.new("456.7")
     end
 
     test "update_expense/3 with invalid scope raises" do

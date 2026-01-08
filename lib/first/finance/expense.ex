@@ -3,8 +3,8 @@ defmodule First.Finance.Expense do
   import Ecto.Changeset
 
   schema "expenses" do
-    field :amount, :decimal
-    field :price, :decimal
+    field :quantity, :decimal
+    field :total, :decimal
     field :description, :string
     field :category, :string
     field :date, :date
@@ -16,8 +16,8 @@ defmodule First.Finance.Expense do
   @doc false
   def changeset(expense, attrs, user_scope) do
     expense
-    |> cast(attrs, [ :date,:price, :amount, :description, :category,])
-    |> validate_required([:amount, :price, :description, :category, :date])
+    |> cast(attrs, [ :date,:total, :quantity, :description, :category,])
+    |> validate_required([:quantity, :total, :description, :category, :date])
     |> put_change(:user_id, user_scope.user.id)
   end
 end

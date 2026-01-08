@@ -37,7 +37,7 @@ defmodule FirstWeb.Layouts do
     ~H"""
 
           <main class="bg-white min-h-screen flex flex-col px-4 py-8 sm:px-6 sm:py-12 lg:px-12 lg:py-16">
-        <div class="mx-auto w-full max-w-md sm:max-w-2xl lg:max-w-4xl xl:max-w-6xl space-y-4 sm:space-y-6">
+              <div class="w-full space-y-4 sm:space-y-6">
           {render_slot(@inner_block)}
         </div>
       </main>
@@ -45,6 +45,7 @@ defmodule FirstWeb.Layouts do
         <footer class="p-4 text-center text-sm text-gray-500 space-y-2 bg-white">
         &copy; 2026 Budgie. All rights reserved.
         </footer>
+
 
 
 
