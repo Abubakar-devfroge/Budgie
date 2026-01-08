@@ -22,15 +22,16 @@ defmodule FirstWeb.UserLive.Confirmation do
           phx-trigger-action={@trigger_submit}
         >
           <input type="hidden" name={@form[:token].name} value={@form[:token].value} />
+
           <.button
             name={@form[:remember_me].name}
             value="true"
             phx-disable-with="Confirming..."
-            variant="primary"
+                        class="font-medium bg-black text-white m-4 rounded-md px-4 py-2 hover:bg-gray-800 transition flex-1 w-full text-center"
           >
             Confirm and stay logged in
           </.button>
-          <.button phx-disable-with="Confirming..." >
+          <.button phx-disable-with="Confirming..." class="font-medium bg-white text-black border border-gray-300 m-4 rounded-md px-4 py-2 hover:bg-gray-100 transition flex-1 w-full text-center">
             Confirm and log in only this time
           </.button>
         </.form>
@@ -71,7 +72,7 @@ defmodule FirstWeb.UserLive.Confirmation do
           <% end %>
         </.form>
 
-        <p :if={!@user.confirmed_at} class="alert alert-outline mt-8">
+        <p :if={!@user.confirmed_at} class="font-normal bg-white text-gray-900 text-sm border border-gray-300 m-4 rounded-md px-4 py-2 hover:bg-gray-100 transition flex-1 w-full text-center">
           Tip: If you prefer passwords, you can enable them in the user settings.
         </p>
       </div>
