@@ -11,6 +11,7 @@ defmodule First.FinanceFixtures do
     attrs =
       Enum.into(attrs, %{
         amount: "120.5",
+        price: "120.5",
         category: "some category",
         date: ~D[2026-01-04],
         description: "some description"
