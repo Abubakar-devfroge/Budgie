@@ -19,14 +19,7 @@ defmodule FirstWeb.ExpenseLive.Form do
         <.input field={@form[:amount]} type="number" label="Amount" step="any" />
         <.input field={@form[:description]} type="text" label="Description" />
           <.input
-      field={@form[:category]}
-      type="select"
-      label="Category"
-      options={[
-        {"Profit", "profit"},
-        {"Expense", "expense"}
-      ]}
-    />
+      field={@form[:category]} type="text" label="Category"/>
         <.input field={@form[:date]} type="date" label="Date" />
         <footer>
           <.button phx-disable-with="Saving..." variant="primary">Save Transaction</.button>

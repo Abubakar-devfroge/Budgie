@@ -22,7 +22,7 @@ defmodule FirstWeb.ExpenseLiveTest do
     test "lists all expenses", %{conn: conn, expense: expense} do
       {:ok, _index_live, html} = live(conn, ~p"/expenses")
 
-      assert html =~ "Listing Expenses"
+      assert html =~ "Listing Transactions"
       assert html =~ expense.description
     end
 
@@ -31,11 +31,11 @@ defmodule FirstWeb.ExpenseLiveTest do
 
       assert {:ok, form_live, _} =
                index_live
-               |> element("a", "New Expense")
+               |> element("a", "New Transaction")
                |> render_click()
                |> follow_redirect(conn, ~p"/expenses/new")
 
-      assert render(form_live) =~ "New Expense"
+      assert render(form_live) =~ "New Transaction"
 
       assert form_live
              |> form("#expense-form", expense: @invalid_attrs)
@@ -48,7 +48,7 @@ defmodule FirstWeb.ExpenseLiveTest do
                |> follow_redirect(conn, ~p"/expenses")
 
       html = render(index_live)
-      assert html =~ "Expense created successfully"
+      assert html =~ "Transaction created successfully"
       assert html =~ "some description"
     end
 
@@ -61,7 +61,7 @@ defmodule FirstWeb.ExpenseLiveTest do
                |> render_click()
                |> follow_redirect(conn, ~p"/expenses/#{expense}/edit")
 
-      assert render(form_live) =~ "Edit Expense"
+      assert render(form_live) =~ "Edit Transaction"
 
       assert form_live
              |> form("#expense-form", expense: @invalid_attrs)
@@ -74,11 +74,11 @@ defmodule FirstWeb.ExpenseLiveTest do
                |> follow_redirect(conn, ~p"/expenses")
 
       html = render(index_live)
-      assert html =~ "Expense updated successfully"
+      assert html =~ "Transaction updated successfully"
       assert html =~ "some updated description"
     end
 
-    test "deletes expense in listing", %{conn: conn, expense: expense} do
+    test "deletes transaction in listing", %{conn: conn, expense: expense} do
       {:ok, index_live, _html} = live(conn, ~p"/expenses")
 
       assert index_live |> element("#expenses-#{expense.id} a", "Delete") |> render_click()
@@ -92,7 +92,7 @@ defmodule FirstWeb.ExpenseLiveTest do
     test "displays expense", %{conn: conn, expense: expense} do
       {:ok, _show_live, html} = live(conn, ~p"/expenses/#{expense}")
 
-      assert html =~ "Show Expense"
+      assert html =~ "Show Transaction"
       assert html =~ expense.description
     end
 
@@ -105,7 +105,7 @@ defmodule FirstWeb.ExpenseLiveTest do
                |> render_click()
                |> follow_redirect(conn, ~p"/expenses/#{expense}/edit?return_to=show")
 
-      assert render(form_live) =~ "Edit Expense"
+      assert render(form_live) =~ "Edit Transaction"
 
       assert form_live
              |> form("#expense-form", expense: @invalid_attrs)
@@ -118,7 +118,7 @@ defmodule FirstWeb.ExpenseLiveTest do
                |> follow_redirect(conn, ~p"/expenses/#{expense}")
 
       html = render(show_live)
-      assert html =~ "Expense updated successfully"
+      assert html =~ "Transaction updated successfully"
       assert html =~ "some updated description"
     end
   end

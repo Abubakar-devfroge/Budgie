@@ -10,9 +10,9 @@ defmodule FirstWeb.ExpenseLive.Index do
 
     <Layouts.app flash={@flash} current_scope={@current_scope}>
 
-        <%!-- <li class="text-sm text-gray-600 font-medium">
+        <li class="text-sm text-gray-600 font-medium">
           {@current_scope.user.email}
-        </li> --%>
+        </li>
 
       <.header>
           <%!-- <p>Total Expenses: <%= Enum.count(@streams.expenses) %></p> --%>
