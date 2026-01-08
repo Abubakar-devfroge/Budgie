@@ -86,4 +86,20 @@ defmodule First.AccountsFixtures do
       set: [inserted_at: dt, authenticated_at: dt]
     )
   end
+
+  @doc """
+  Generate a company.
+  """
+  def company_fixture(scope, attrs \\ %{}) do
+    attrs =
+      Enum.into(attrs, %{
+        currency: "some currency",
+        logo: "some logo",
+        name: "some name",
+        onboarding_completed: true
+      })
+
+    {:ok, company} = First.Accounts.create_company(scope, attrs)
+    company
+  end
 end

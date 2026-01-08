@@ -11,7 +11,7 @@ defmodule FirstWeb.UserLive.Settings do
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <div class="text-center">
         <.header>
-          Account Settings
+          Account Management
           <:subtitle>Manage your account email address and password settings</:subtitle>
         </.header>
       </div>

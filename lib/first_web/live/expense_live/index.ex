@@ -10,12 +10,12 @@ defmodule FirstWeb.ExpenseLive.Index do
 
     <Layouts.app flash={@flash} current_scope={@current_scope}>
 
-        <li class="text-sm text-gray-600 font-medium">
+        <%!-- <li class="text-sm text-gray-600 font-medium">
           {@current_scope.user.email}
-        </li>
+        </li> --%>
 
       <.header>
-          <p>Total Expenses: <%= Enum.count(@streams.expenses) %></p>
+          <%!-- <p>Total Expenses: <%= Enum.count(@streams.expenses) %></p> --%>
         <:actions>
           <.button variant="primary" navigate={~p"/expenses/new"}>
             <.icon name="hero-plus" /> New Transaction
@@ -60,7 +60,7 @@ defmodule FirstWeb.ExpenseLive.Index do
 
     {:ok,
      socket
-     |> assign(:page_title, "Listing Expenses")
+     |> assign(:page_title, "Listing Transactions")
      |> stream(:expenses, list_expenses(socket.assigns.current_scope))}
   end
 

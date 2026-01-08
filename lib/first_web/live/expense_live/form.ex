@@ -10,7 +10,7 @@ defmodule FirstWeb.ExpenseLive.Form do
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <.header>
         {@page_title}
-        <:subtitle>Use this form to track and manage your company’s expense records efficiently.</:subtitle>
+        <:subtitle>Use this form to track and manage your company’s transactions efficiently.</:subtitle>
       </.header>
 
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,7 +53,7 @@ defmodule FirstWeb.ExpenseLive.Form do
     expense = Finance.get_expense!(socket.assigns.current_scope, id)
 
     socket
-    |> assign(:page_title, "Edit Expense")
+    |> assign(:page_title, "Edit Transaction")
     |> assign(:expense, expense)
     |> assign(:form, to_form(Finance.change_expense(socket.assigns.current_scope, expense)))
   end
@@ -62,7 +62,7 @@ defmodule FirstWeb.ExpenseLive.Form do
     expense = %Expense{user_id: socket.assigns.current_scope.user.id}
 
     socket
-    |> assign(:page_title, "New Expense")
+    |> assign(:page_title, "New Transaction")
     |> assign(:expense, expense)
     |> assign(:form, to_form(Finance.change_expense(socket.assigns.current_scope, expense)))
   end
@@ -82,7 +82,7 @@ defmodule FirstWeb.ExpenseLive.Form do
       {:ok, expense} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Expense updated successfully")
+         |> put_flash(:info, "Transaction updated successfully")
          |> push_navigate(
            to: return_path(socket.assigns.current_scope, socket.assigns.return_to, expense)
          )}
@@ -97,7 +97,7 @@ defmodule FirstWeb.ExpenseLive.Form do
       {:ok, expense} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Expense created successfully")
+         |> put_flash(:info, "Transaction created successfully")
          |> push_navigate(
            to: return_path(socket.assigns.current_scope, socket.assigns.return_to, expense)
          )}
