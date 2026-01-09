@@ -3,7 +3,8 @@ defmodule First.Repo.Migrations.CreateExpenses do
 
   def change do
     create table(:expenses) do
-      add :amount, :decimal
+      add :quantity, :decimal
+      add :total, :decimal
       add :description, :string
       add :category, :string
       add :date, :date

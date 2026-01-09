@@ -38,7 +38,7 @@
       <!-- Left: Brand -->
       <div class="flex-1">
         <a href="/" class="flex w-fit items-center gap-2">
-          <span class="text-2xl font-extrabold">Budgie</span>
+          <span class="text-3xl font-extrabold text-[#B20710]">Budgie</span>
         </a>
       </div>
       
@@ -61,7 +61,7 @@
               <.link
                 href={~p"/users/log-out"}
                 method="delete"
-                class="font-medium bg-black text-white rounded-full px-6 py-2 hover:bg-gray-800 transition"
+                class="font-medium  text-black rounded-md px-6 py-2 hover:bg-gray-100 transition"
               >
                 Log out
               </.link>
@@ -70,9 +70,9 @@
             <li>
               <.link
                 href={~p"/users/log-in"}
-                class="font-medium bg-black text-white rounded-full px-6 py-2 hover:bg-gray-800"
+                class="font-medium  text-black rounded-md px-6 py-2 hover:bg-gray-100 transition"
               >
-                Sign in →
+                Sign in
               </.link>
             </li>
           <% end %>

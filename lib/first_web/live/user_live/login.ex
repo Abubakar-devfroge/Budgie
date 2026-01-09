@@ -25,7 +25,7 @@ defmodule FirstWeb.UserLive.Login do
           </.header>
         </div>
 
-        <div :if={local_mail_adapter?()} class="alert alert-info">
+        <%!-- <div :if={local_mail_adapter?()} class="alert alert-info">
           <.icon name="hero-information-circle" class="size-6 shrink-0" />
           <div>
             <p>You are running the local mail adapter.</p>
@@ -33,7 +33,7 @@ defmodule FirstWeb.UserLive.Login do
               To see sent emails, visit <.link href="/dev/mailbox" class="underline">the mailbox page</.link>.
             </p>
           </div>
-        </div>
+        </div> --%>
 
         <%!-- <.form
           :let={f}
@@ -83,11 +83,11 @@ defmodule FirstWeb.UserLive.Login do
 
           <div class="flex flex-col gap-4 w-full">
             <.button
-              class="font-medium bg-black text-white rounded-full px-6 py-2 hover:bg-gray-800 transition w-full sm:w-auto flex-1 text-center"
+              class="font-medium bg-[#E50914] text-white rounded-md px-6 py-2 text-xl hover:bg-[#B20710] transition w-full sm:w-auto flex-1 text-center"
               name={@form[:remember_me].name}
               value="true"
             >
-              Log in <span aria-hidden="true">→</span>
+              Log in
             </.button>
 
             <%!-- <.button
@@ -135,7 +135,7 @@ defmodule FirstWeb.UserLive.Login do
      |> push_navigate(to: ~p"/users/log-in")}
   end
 
-  defp local_mail_adapter? do
-    Application.get_env(:first, First.Mailer)[:adapter] == Swoosh.Adapters.Local
-  end
+  # defp local_mail_adapter? do
+  #   Application.get_env(:first, First.Mailer)[:adapter] == Swoosh.Adapters.Local
+  # end
 end

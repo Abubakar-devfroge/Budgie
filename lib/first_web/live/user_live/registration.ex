@@ -34,7 +34,7 @@ defmodule FirstWeb.UserLive.Registration do
 
           <.button
             phx-disable-with="Creating account..."
-            class="px-6 py-2 rounded-full bg-gray-900 text-white w-full"
+            class="px-6 py-2 rounded-md bg-[#E50914] text-white w-full text-xl hover:bg-[#B20710] transition"
           >
             Create an account
           </.button>
