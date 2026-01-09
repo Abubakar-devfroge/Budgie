@@ -35,7 +35,7 @@ defmodule FirstWeb.Layouts do
 
   def app(assigns) do
     ~H"""
-    <main class="bg-white min-h-screen flex flex-col px-4 py-8 sm:px-6 sm:py-12 lg:px-12 lg:py-16">
+    <main class="bg-white min-h-screen flex flex-col px-4 py-6 sm:px-6 sm:py-12 lg:px-12 lg:py-16">
       <div class="w-full space-y-4 sm:space-y-6">
         {render_slot(@inner_block)}
       </div>
