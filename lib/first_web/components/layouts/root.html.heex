@@ -89,9 +89,9 @@
       </div>
       
 <!-- Mobile Hamburger -->
-      <details class="sm:hidden relative">
-        <summary class="list-none cursor-pointer">
-          <!-- Hamburger Icon -->
+      <div class="sm:hidden relative">
+        <!-- Hamburger Icon -->
+        <button id="menu-button" class="text-gray-900 focus:outline-none">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-7 w-7"
@@ -106,17 +106,28 @@
               d="M4 6h16M4 12h16M4 18h16"
             />
           </svg>
-        </summary>
+        </button>
         
 <!-- Fullscreen Mobile Menu -->
-        <div class="fixed inset-0 bg-white z-50 flex flex-col px-6 py-8">
+        <div
+          id="mobile-menu"
+          class="fixed inset-0 bg-white z-50 flex flex-col px-6 py-8 transform scale-y-0 origin-top opacity-0 transition-all duration-300 ease-in-out"
+        >
+          <!-- Header -->
           <div class="flex justify-between items-center mb-10">
-            <span class="text-2xl font-extrabold">Budgie</span>
+            <span class="text-2xl font-extrabold text-[#B20710]">Budgie</span>
             
 <!-- Close Button -->
-            <summary class="list-none cursor-pointer text-2xl">&times;</summary>
+            <button
+              class="text-6xl cursor-pointer h-7 w-7"
+              aria-label="Close"
+              id="menu-close"
+            >
+              &times;
+            </button>
           </div>
-
+          
+<!-- Navigation links -->
           <nav class="flex flex-col space-y-6 text-lg">
             <%= if @current_scope do %>
               <.link href={~p"/home"} class="font-medium text-gray-900">
@@ -126,19 +137,42 @@
               <.link href={~p"/users/settings"} class="font-medium text-gray-900">
                 Settings
               </.link>
-            <% else %>
-              <.link
-                href={~p"/users/log-in"}
-                class="font-medium bg-black text-white rounded-md px-4 py-3 text-center"
-              >
-                Sign in →
-              </.link>
             <% end %>
           </nav>
+          
+<!-- Sign-in button pinned at bottom -->
+          <div class="mt-auto">
+            <%= unless @current_scope do %>
+              <.link
+                href={~p"/users/log-in"}
+                class="font-medium bg-black text-white rounded-md px-6 py-2 text-center w-full block"
+              >
+                Sign in
+              </.link>
+            <% end %>
+          </div>
         </div>
-      </details>
+      </div>
     </header>
 
     {@inner_content}
   </body>
+
+  <script>
+    const menuButton = document.getElementById('menu-button')
+    const menuClose = document.getElementById('menu-close')
+    const mobileMenu = document.getElementById('mobile-menu')
+
+    // Open menu
+    menuButton.addEventListener('click', () => {
+      mobileMenu.classList.remove('scale-y-0', 'opacity-0')
+      mobileMenu.classList.add('scale-y-100', 'opacity-100')
+    })
+
+    // Close menu
+    menuClose.addEventListener('click', () => {
+      mobileMenu.classList.add('scale-y-0', 'opacity-0')
+      mobileMenu.classList.remove('scale-y-100', 'opacity-100')
+    })
+  </script>
 </html>
