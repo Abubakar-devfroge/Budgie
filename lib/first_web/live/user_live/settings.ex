@@ -53,7 +53,6 @@ defmodule FirstWeb.UserLive.Settings do
           required
         />
 
-
         <.input
           field={@password_form[:password_confirmation]}
           type="password"
@@ -64,7 +63,6 @@ defmodule FirstWeb.UserLive.Settings do
           Save Password
         </.button>
       </.form>
-
     </Layouts.app>
     """
   end
