@@ -17,7 +17,7 @@ defmodule FirstWeb.ExpenseLive.Index do
 
       <%= if Enum.empty?(@expenses_list) do %>
         <div class="flex flex-col items-center justify-center py-20 text-center text-gray-500">
-          <img src={~p"/images/db.svg"} alt="Empty database" class="h-32 w-32 mb-4 mx-auto" />
+          <img src={~p"/images/table_error.svg"} alt="Empty database" class="h-32 w-32 mb-4 mx-auto" />
 
           <p class="text-sm font-semibold">Your ledger is empty. Start by adding a transaction.</p>
         </div>
