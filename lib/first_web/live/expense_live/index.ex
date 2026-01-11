@@ -8,7 +8,6 @@ defmodule FirstWeb.ExpenseLive.Index do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <.header>
-        <%!-- <p>Total Expenses: <%= Enum.count(@streams.expenses) %></p> --%>
         <:actions>
           <.button variant="primary" navigate={~p"/expenses/new"}>
             <.icon name="hero-plus" /> New Transaction
@@ -16,32 +15,39 @@ defmodule FirstWeb.ExpenseLive.Index do
         </:actions>
       </.header>
 
-      <.table
-        id="expenses"
-        rows={@streams.expenses}
-        row_click={fn {_id, expense} -> JS.navigate(~p"/expenses/#{expense}") end}
-      >
-        <:col :let={{_id, expense}} label="Date">{expense.date}</:col>
-        <:col :let={{_id, expense}} label="Total">KES {expense.total}</:col>
-        <%!-- <:col :let={{_id, expense}} label="Quantity">{expense.quantity}</:col> --%>
-        <:col :let={{_id, expense}} label="Description">{expense.description}</:col>
-        <:col :let={{_id, expense}} label="Category">{expense.category}</:col>
+      <%= if Enum.empty?(@expenses_list) do %>
+        <div class="flex flex-col items-center justify-center py-20 text-center text-gray-500">
+          <img src={~p"/images/db.svg"} alt="Empty database" class="h-32 w-32 mb-4 mx-auto" />
 
-        <:action :let={{_id, expense}}>
-          <div class="sr-only">
-            <.link navigate={~p"/expenses/#{expense}"}>Show</.link>
-          </div>
-          <.link navigate={~p"/expenses/#{expense}/edit"}>Edit</.link>
-        </:action>
-        <:action :let={{id, expense}}>
-          <.link
-            phx-click={JS.push("delete", value: %{id: expense.id}) |> hide("##{id}")}
-            data-confirm="Are you sure?"
-          >
-            Delete
-          </.link>
-        </:action>
-      </.table>
+          <p class="text-sm font-semibold">Your ledger is empty. Start by adding a transaction.</p>
+        </div>
+      <% else %>
+        <.table
+          id="expenses"
+          rows={@streams.expenses}
+          row_click={fn {_id, expense} -> JS.navigate(~p"/expenses/#{expense}") end}
+        >
+          <:col :let={{_id, expense}} label="Date">{expense.date}</:col>
+          <:col :let={{_id, expense}} label="Total">KES {expense.total}</:col>
+          <:col :let={{_id, expense}} label="Description">{expense.description}</:col>
+          <:col :let={{_id, expense}} label="Category">{expense.category}</:col>
+
+          <:action :let={{_id, expense}}>
+            <div class="sr-only">
+              <.link navigate={~p"/expenses/#{expense}"}>Show</.link>
+            </div>
+            <.link navigate={~p"/expenses/#{expense}/edit"}>Edit</.link>
+          </:action>
+          <:action :let={{id, expense}}>
+            <.link
+              phx-click={JS.push("delete", value: %{id: expense.id}) |> hide("##{id}")}
+              data-confirm="Are you sure?"
+            >
+              Delete
+            </.link>
+          </:action>
+        </.table>
+      <% end %>
     </Layouts.app>
     """
   end
@@ -52,10 +58,13 @@ defmodule FirstWeb.ExpenseLive.Index do
       Finance.subscribe_expenses(socket.assigns.current_scope)
     end
 
+    expenses = list_expenses(socket.assigns.current_scope)
+
     {:ok,
      socket
      |> assign(:page_title, "Listing Transactions")
-     |> stream(:expenses, list_expenses(socket.assigns.current_scope))}
+     |> assign(:expenses_list, expenses)
+     |> stream(:expenses, expenses)}
   end
 
   @impl true
@@ -63,14 +72,23 @@ defmodule FirstWeb.ExpenseLive.Index do
     expense = Finance.get_expense!(socket.assigns.current_scope, id)
     {:ok, _} = Finance.delete_expense(socket.assigns.current_scope, expense)
 
-    {:noreply, stream_delete(socket, :expenses, expense)}
+    new_expenses_list = Enum.reject(socket.assigns.expenses_list, fn e -> e.id == expense.id end)
+
+    {:noreply,
+     socket
+     |> assign(:expenses_list, new_expenses_list)
+     |> stream_delete(:expenses, expense)}
   end
 
   @impl true
   def handle_info({type, %First.Finance.Expense{}}, socket)
       when type in [:created, :updated, :deleted] do
+    expenses = list_expenses(socket.assigns.current_scope)
+
     {:noreply,
-     stream(socket, :expenses, list_expenses(socket.assigns.current_scope), reset: true)}
+     socket
+     |> assign(:expenses_list, expenses)
+     |> stream(:expenses, expenses, reset: true)}
   end
 
   defp list_expenses(current_scope) do

@@ -1,10 +1,21 @@
 /* See the Tailwind configuration guide for advanced usage
    https://tailwindcss.com/docs/configuration */
+   /* assets/css/app.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+
 
 @import "tailwindcss" source(none);
 @source "../css";
 @source "../js";
 @source "../../lib/first_web";
+
+/* Optional: set a default font for body */
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+
 
 /* A Tailwind plugin that makes "hero-#{ICON}" classes available.
    The heroicons installation itself is managed by your mix.exs */
