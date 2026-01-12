@@ -8,7 +8,7 @@
       {assigns[:page_title]}
     </.live_title>
 
-    <link rel="icon" type="image/x-icon" href={~p"/images/logo1.svg"} />
+    <link rel="icon" type="image/x-icon" href={~p"/images/logo.svg"} />
 
     <link phx-track-static rel="stylesheet" href={~p"/assets/css/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/js/app.js"}>
@@ -38,7 +38,7 @@
       <%!-- logo --%>
       <div class="flex-1">
         <a href="/" class="flex w-fit items-center gap-2">
-          <span class="text-3xl font-extrabold text-[#B20710]">Budgie</span> 
+          <img src={~p"/images/logo.svg"} alt="Logo" class="h-20 w-auto" />
         </a>
       </div>
 
@@ -113,7 +113,9 @@
           class="fixed inset-0 bg-white z-50 flex flex-col px-6 py-8 transform scale-y-0 origin-top opacity-0 transition-all duration-300 ease-in-out"
         >
           <div class="flex justify-between items-center mb-10">
-            <span class="text-2xl font-extrabold text-[#B20710]">Budgie</span>
+            <a href="/" class="flex w-fit items-center gap-2">
+              <img src={~p"/images/logo.svg"} alt="Logo" class="h-20 w-auto" />
+            </a>
 
             <button
               class="text-6xl cursor-pointer h-7 w-7 text-gray-900"

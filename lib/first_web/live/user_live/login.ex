@@ -83,7 +83,7 @@ defmodule FirstWeb.UserLive.Login do
 
           <div class="flex flex-col gap-4 w-full">
             <.button
-              class="font-medium bg-[#E50914] text-white rounded-md px-6 py-2 text-xl hover:bg-[#B20710] transition w-full sm:w-auto flex-1 text-center"
+              class="font-medium bg-black text-white rounded-md px-6 py-2 text-xl hover:bg-gray-900 transition w-full sm:w-auto flex-1 text-center"
               name={@form[:remember_me].name}
               value="true"
             >
