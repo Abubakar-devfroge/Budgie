@@ -2,18 +2,28 @@ defmodule FirstWeb.ExpenseLive.Index do
   use FirstWeb, :live_view
 
   alias First.Finance
+  alias FirstWeb.ExpenseComponents
 
   @impl true
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <.header>
+        <h3 class="  text-xl font-bold text-gray-900">Home</h3>
         <:actions>
           <.button variant="primary" navigate={~p"/expenses/new"}>
             <.icon name="hero-plus" /> New Transaction
           </.button>
         </:actions>
       </.header>
+
+      <ExpenseComponents.dashboard_cards current_scope={@current_scope} />
+
+      <div class="flex-shrink mb-4">
+        <h2 class="uppercase text-sm font-medium text-gray-600 tracking-wide">
+          Quick Access
+        </h2>
+      </div>
 
       <%= if Enum.empty?(@expenses_list) do %>
         <div class="flex flex-col items-center justify-center py-20 text-center text-gray-500">

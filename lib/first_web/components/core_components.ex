@@ -376,10 +376,10 @@ defmodule FirstWeb.CoreComponents do
       end
 
     ~H"""
-    <div class="overflow-x-auto rounded-none border border-base-content/5 bg-white">
-      <table class="table ">
+    <div class="overflow-x-auto rounded-none  bg-white">
+      <table class="table  table-zebra  ">
         <thead>
-          <tr class="text-gray-900 font-bold  bg-base-100">
+          <tr class="text-gray-600 font-semibold ">
             <th :for={col <- @col}>{col[:label]}</th>
             <th :if={@action != []}>
               <span class="sr-only">{gettext("Actions")}</span>
@@ -395,7 +395,7 @@ defmodule FirstWeb.CoreComponents do
             >
               {render_slot(col, @row_item.(row))}
             </td>
-            <td :if={@action != []} class="w-0 font-semibold">
+            <td :if={@action != []} class="w-0 font-medium text-gray-600">
               <div class="flex gap-4">
                 <%= for action <- @action do %>
                   {render_slot(action, @row_item.(row))}
