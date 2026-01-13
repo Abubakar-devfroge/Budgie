@@ -85,14 +85,14 @@ defmodule FirstWeb.Navigation do
         </nav>
 
         <%= unless @current_scope do %>
-          <div class="mt-auto">
+          <nav class="flex flex-col space-y-6 text-lg">
             <.link
               navigate={~p"/users/log-in"}
               class="bg-black text-white rounded-md px-6 py-2 text-center"
             >
               Sign in
             </.link>
-          </div>
+          </nav>
         <% end %>
       </div>
     </header>

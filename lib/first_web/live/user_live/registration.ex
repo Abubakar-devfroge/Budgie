@@ -22,12 +22,7 @@ defmodule FirstWeb.UserLive.Registration do
           </.header>
         </div>
 
-
-
-
         <.form for={@form} id="registration_form" phx-submit="save" phx-change="validate">
-
-
           <.input
             field={@form[:email]}
             type="text"
@@ -45,7 +40,6 @@ defmodule FirstWeb.UserLive.Registration do
             required
             phx-mounted={JS.focus()}
           />
-
 
           <.button
             phx-disable-with="Creating account..."
