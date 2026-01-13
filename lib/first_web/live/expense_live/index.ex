@@ -31,7 +31,7 @@ defmodule FirstWeb.ExpenseLive.Index do
           <:col :let={{_id, expense}} label="Total">KES {expense.total}</:col>
           <:col :let={{_id, expense}} label="Description">{expense.description}</:col>
           <:col :let={{_id, expense}} label="Type">
-            <span class="inline-flex items-center rounded-full bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
+            <span class="inline-flex items-center rounded-full bg-red-700 px-3 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red-600/10">
               {expense.category}
             </span>
           </:col>

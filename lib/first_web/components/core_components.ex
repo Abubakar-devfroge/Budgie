@@ -376,27 +376,37 @@ defmodule FirstWeb.CoreComponents do
       end
 
     ~H"""
-    <div class="overflow-x-auto rounded-none  bg-white">
-      <table class="table  table-zebra  ">
-        <thead>
-          <tr class="text-gray-600 font-semibold ">
-            <th :for={col <- @col}>{col[:label]}</th>
-            <th :if={@action != []}>
+    <div class="overflow-x-auto bg-white border border-gray-200 shadow-sm rounded-md">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr class="text-gray-700 font-semibold uppercase text-sm tracking-wider">
+            <th :for={col <- @col} class="px-6 py-3 text-left">
+              {col[:label]}
+            </th>
+            <th :if={@action != []} class="px-6 py-3 w-24 text-right">
               <span class="sr-only">{gettext("Actions")}</span>
             </th>
           </tr>
         </thead>
-        <tbody id={@id} phx-update={is_struct(@rows, Phoenix.LiveView.LiveStream) && "stream"}>
-          <tr :for={row <- @rows} id={@row_id && @row_id.(row)}>
+        <tbody
+          id={@id}
+          phx-update={is_struct(@rows, Phoenix.LiveView.LiveStream) && "stream"}
+          class="bg-white divide-y divide-gray-200"
+        >
+          <tr
+            :for={row <- @rows}
+            id={@row_id && @row_id.(row)}
+            class="hover:bg-gray-50 transition-colors duration-150"
+          >
             <td
               :for={col <- @col}
               phx-click={@row_click && @row_click.(row)}
-              class={@row_click && "hover:cursor-pointer"}
+              class={"px-6 py-4 " <> (@row_click && "cursor-pointer")}
             >
               {render_slot(col, @row_item.(row))}
             </td>
-            <td :if={@action != []} class="w-0 font-medium text-gray-600">
-              <div class="flex gap-4">
+            <td :if={@action != []} class="px-6 py-4 w-0 font-medium text-gray-600">
+              <div class="flex gap-3 justify-end">
                 <%= for action <- @action do %>
                   {render_slot(action, @row_item.(row))}
                 <% end %>

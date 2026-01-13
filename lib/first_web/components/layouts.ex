@@ -42,7 +42,7 @@ defmodule FirstWeb.Layouts do
     </main>
 
     <footer class="p-4 text-center text-sm text-gray-500 space-y-2 bg-white">
-      &copy; 2026 Budgie. All rights reserved.
+      &copy; 2026 AAM'S CHEESE. All rights reserved.
     </footer>
 
     <.flash_group flash={@flash} />
