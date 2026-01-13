@@ -10,6 +10,7 @@ Real time expense and income tracking
 Kra intergration to file returns with agentic ai 
 
 # Features
+Invoice genration-  real time
 Income and Expense tracker
 Report generation --You can also export
 Easily share your income and report details with colleagues or on platforms like Slack, Twitter, and more.

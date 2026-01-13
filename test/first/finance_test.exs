@@ -110,4 +110,96 @@ defmodule First.FinanceTest do
       assert %Ecto.Changeset{} = Finance.change_expense(scope, expense)
     end
   end
+
+  describe "invoices" do
+    alias First.Finance.Invoice
+
+    import First.AccountsFixtures, only: [user_scope_fixture: 0]
+    import First.FinanceFixtures
+
+    @invalid_attrs %{status: nil, amount: nil, invoice_number: nil, issued_at: nil}
+
+    test "list_invoices/1 returns all scoped invoices" do
+      scope = user_scope_fixture()
+      other_scope = user_scope_fixture()
+      invoice = invoice_fixture(scope)
+      other_invoice = invoice_fixture(other_scope)
+      assert Finance.list_invoices(scope) == [invoice]
+      assert Finance.list_invoices(other_scope) == [other_invoice]
+    end
+
+    test "get_invoice!/2 returns the invoice with given id" do
+      scope = user_scope_fixture()
+      invoice = invoice_fixture(scope)
+      other_scope = user_scope_fixture()
+      assert Finance.get_invoice!(scope, invoice.id) == invoice
+      assert_raise Ecto.NoResultsError, fn -> Finance.get_invoice!(other_scope, invoice.id) end
+    end
+
+    test "create_invoice/2 with valid data creates a invoice" do
+      valid_attrs = %{status: "some status", amount: "120.5", invoice_number: "some invoice_number", issued_at: ~U[2026-01-12 20:04:00Z]}
+      scope = user_scope_fixture()
+
+      assert {:ok, %Invoice{} = invoice} = Finance.create_invoice(scope, valid_attrs)
+      assert invoice.status == "some status"
+      assert invoice.amount == Decimal.new("120.5")
+      assert invoice.invoice_number == "some invoice_number"
+      assert invoice.issued_at == ~U[2026-01-12 20:04:00Z]
+      assert invoice.user_id == scope.user.id
+    end
+
+    test "create_invoice/2 with invalid data returns error changeset" do
+      scope = user_scope_fixture()
+      assert {:error, %Ecto.Changeset{}} = Finance.create_invoice(scope, @invalid_attrs)
+    end
+
+    test "update_invoice/3 with valid data updates the invoice" do
+      scope = user_scope_fixture()
+      invoice = invoice_fixture(scope)
+      update_attrs = %{status: "some updated status", amount: "456.7", invoice_number: "some updated invoice_number", issued_at: ~U[2026-01-13 20:04:00Z]}
+
+      assert {:ok, %Invoice{} = invoice} = Finance.update_invoice(scope, invoice, update_attrs)
+      assert invoice.status == "some updated status"
+      assert invoice.amount == Decimal.new("456.7")
+      assert invoice.invoice_number == "some updated invoice_number"
+      assert invoice.issued_at == ~U[2026-01-13 20:04:00Z]
+    end
+
+    test "update_invoice/3 with invalid scope raises" do
+      scope = user_scope_fixture()
+      other_scope = user_scope_fixture()
+      invoice = invoice_fixture(scope)
+
+      assert_raise MatchError, fn ->
+        Finance.update_invoice(other_scope, invoice, %{})
+      end
+    end
+
+    test "update_invoice/3 with invalid data returns error changeset" do
+      scope = user_scope_fixture()
+      invoice = invoice_fixture(scope)
+      assert {:error, %Ecto.Changeset{}} = Finance.update_invoice(scope, invoice, @invalid_attrs)
+      assert invoice == Finance.get_invoice!(scope, invoice.id)
+    end
+
+    test "delete_invoice/2 deletes the invoice" do
+      scope = user_scope_fixture()
+      invoice = invoice_fixture(scope)
+      assert {:ok, %Invoice{}} = Finance.delete_invoice(scope, invoice)
+      assert_raise Ecto.NoResultsError, fn -> Finance.get_invoice!(scope, invoice.id) end
+    end
+
+    test "delete_invoice/2 with invalid scope raises" do
+      scope = user_scope_fixture()
+      other_scope = user_scope_fixture()
+      invoice = invoice_fixture(scope)
+      assert_raise MatchError, fn -> Finance.delete_invoice(other_scope, invoice) end
+    end
+
+    test "change_invoice/2 returns a invoice changeset" do
+      scope = user_scope_fixture()
+      invoice = invoice_fixture(scope)
+      assert %Ecto.Changeset{} = Finance.change_invoice(scope, invoice)
+    end
+  end
 end

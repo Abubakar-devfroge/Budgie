@@ -13,13 +13,13 @@ defmodule FirstWeb.Navigation do
           <img src={~p"/images/logo.svg"} class="h-20 w-auto" />
         </.link>
       </div>
-      
+
     <!-- Desktop nav -->
       <div class="hidden sm:flex">
         <ul class="flex items-center space-x-4">
           <%= if @current_scope do %>
             <.nav_link to={~p"/home"}>Home</.nav_link>
-            <.nav_link to={~p"/users/settings"}>Invoices</.nav_link>
+            <.nav_link to={~p"/invoices"}>Invoices</.nav_link>
             <.nav_link to={~p"/users/settings"}>Settings</.nav_link>
 
             <.link
@@ -34,7 +34,7 @@ defmodule FirstWeb.Navigation do
           <% end %>
         </ul>
       </div>
-      
+
     <!-- Mobile menu button -->
       <button
         class="sm:hidden"
@@ -52,7 +52,7 @@ defmodule FirstWeb.Navigation do
       >
         <.icon name="hero-bars-3" class="h-7 w-7" />
       </button>
-      
+
     <!-- Mobile menu -->
       <div
         id="mobile-menu"
