@@ -9,7 +9,7 @@ defmodule FirstWeb.ExpenseLive.Show do
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <.header>
         Transaction {@expense.id}
-        <:subtitle>This is a transaction record from your database.</:subtitle>
+        <%!-- <:subtitle>This is a transaction record from your database.</:subtitle> --%>
         <:actions>
           <.button navigate={~p"/expenses"}>
             <.icon name="hero-arrow-left" />

@@ -10,9 +10,9 @@ defmodule FirstWeb.ExpenseLive.Form do
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <.header>
         {@page_title}
-        <:subtitle>
+        <%!-- <:subtitle>
           Use this form to track and manage your company’s transactions efficiently.
-        </:subtitle>
+        </:subtitle> --%>
       </.header>
 
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">

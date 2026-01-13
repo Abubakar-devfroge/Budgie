@@ -2,10 +2,12 @@ import Config
 
 # Configure your database
 config :first, First.Repo,
-  database: Path.expand("../first_dev.db", __DIR__),
-  pool_size: 5,
-  stacktrace: true,
-  show_sensitive_data_on_connection_error: true
+  username: "code",
+  password: "Abuyezma44",
+  database: "code_db",
+  hostname: "localhost",
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
