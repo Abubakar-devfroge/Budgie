@@ -109,5 +109,6 @@ defmodule FirstWeb.ExpenseLive.Form do
   end
 
   defp return_path(_scope, "index", _expense), do: ~p"/expenses"
+
   defp return_path(_scope, "show", expense), do: ~p"/expenses/#{expense}"
 end

@@ -17,7 +17,7 @@ defmodule FirstWeb.UserLive.RegistrationTest do
         conn
         |> log_in_user(user_fixture())
         |> live(~p"/users/register")
-        |> follow_redirect(conn, ~p"/expenses")
+        |> follow_redirect(conn, ~p"/home")
 
       assert {:ok, _conn} = result
     end

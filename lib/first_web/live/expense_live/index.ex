@@ -2,28 +2,18 @@ defmodule FirstWeb.ExpenseLive.Index do
   use FirstWeb, :live_view
 
   alias First.Finance
-  alias FirstWeb.ExpenseComponents
 
   @impl true
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <.header>
-        <h3 class="  text-xl font-bold text-gray-900">Home</h3>
         <:actions>
           <.button variant="primary" navigate={~p"/expenses/new"}>
             <.icon name="hero-plus" /> New Transaction
           </.button>
         </:actions>
       </.header>
-
-      <ExpenseComponents.dashboard_cards current_scope={@current_scope} />
-
-      <div class="flex-shrink mb-4">
-        <h2 class="uppercase text-sm font-medium text-gray-600 tracking-wide">
-          Quick Access
-        </h2>
-      </div>
 
       <%= if Enum.empty?(@expenses_list) do %>
         <div class="flex flex-col items-center justify-center py-20 text-center text-gray-500">
@@ -40,21 +30,55 @@ defmodule FirstWeb.ExpenseLive.Index do
           <:col :let={{_id, expense}} label="Date">{expense.date}</:col>
           <:col :let={{_id, expense}} label="Total">KES {expense.total}</:col>
           <:col :let={{_id, expense}} label="Description">{expense.description}</:col>
-          <:col :let={{_id, expense}} label="Category">{expense.category}</:col>
+          <:col :let={{_id, expense}} label="Type">
+            <span class="inline-flex items-center rounded-full bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
+              {expense.category}
+            </span>
+          </:col>
 
-          <:action :let={{_id, expense}}>
-            <div class="sr-only">
-              <.link navigate={~p"/expenses/#{expense}"}>Show</.link>
-            </div>
-            <.link navigate={~p"/expenses/#{expense}/edit"}>Edit</.link>
-          </:action>
           <:action :let={{id, expense}}>
-            <.link
-              phx-click={JS.push("delete", value: %{id: expense.id}) |> hide("##{id}")}
-              data-confirm="Are you sure?"
-            >
-              Delete
-            </.link>
+            <el-dropdown class="inline-block">
+              <button
+                type="button"
+                class="inline-flex items-center gap-x-1.5 r px-3 py-2 text-sm font-semibold text-gray-900 "
+              >
+                ...
+              </button>
+
+              <el-menu
+                anchor="bottom end"
+                popover
+                class="w-44 origin-top-right rounded-md bg-white shadow-lg outline outline-1 outline-black/5"
+              >
+                <div class="py-1">
+                  <!-- Show -->
+                  <.link
+                    navigate={~p"/expenses/#{expense}"}
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Show
+                  </.link>
+                  
+    <!-- Edit -->
+                  <.link
+                    navigate={~p"/expenses/#{expense}/edit"}
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Edit
+                  </.link>
+                  
+    <!-- Delete (LOGIC UNCHANGED) -->
+                  <button
+                    type="button"
+                    phx-click={JS.push("delete", value: %{id: expense.id}) |> hide("##{id}")}
+                    data-confirm="Are you sure?"
+                    class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </el-menu>
+            </el-dropdown>
           </:action>
         </.table>
       <% end %>
