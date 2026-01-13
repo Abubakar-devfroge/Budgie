@@ -376,7 +376,7 @@ defmodule FirstWeb.CoreComponents do
       end
 
     ~H"""
-    <div class="overflow-x-auto bg-white border border-gray-200 shadow-sm rounded-md">
+    <div class="overflow-x-auto bg-white border border-gray-200 shadow-sm rounded-none">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
           <tr class="text-gray-700 font-semibold uppercase text-sm tracking-wider">
@@ -405,7 +405,7 @@ defmodule FirstWeb.CoreComponents do
             >
               {render_slot(col, @row_item.(row))}
             </td>
-            <td :if={@action != []} class="px-6 py-4 w-0 font-medium text-gray-600">
+            <td :if={@action != []} class="px-4 py-3 w-0 font-medium text-gray-600">
               <div class="flex gap-3 justify-end">
                 <%= for action <- @action do %>
                   {render_slot(action, @row_item.(row))}
