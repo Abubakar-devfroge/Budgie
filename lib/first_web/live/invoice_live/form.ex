@@ -16,7 +16,7 @@ defmodule FirstWeb.InvoiceLive.Form do
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <.form for={@form} id="invoice-form" phx-change="validate" phx-submit="save">
           <!-- Display invoice number as read-only since it's auto-generated -->
-          <.input field={@form[:invoice_number]} type="text" label="Invoice number" readonly />
+          <%!-- <.input field={@form[:invoice_number]} type="text" label="Invoice number" readonly /> --%>
 
           <.input field={@form[:amount]} type="number" label="Amount" step="any" />
 
