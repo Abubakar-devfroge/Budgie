@@ -149,7 +149,7 @@ defmodule First.FinanceTest do
       assert {:ok, %Invoice{} = invoice} = Finance.create_invoice(scope, valid_attrs)
       assert invoice.status == "some status"
       assert invoice.amount == Decimal.new("120.5")
-     assert invoice.invoice_number =~ ~r/^[A-Z0-9]+$/
+      assert invoice.invoice_number =~ ~r/^[A-Z0-9]+$/
       assert invoice.issued_at == ~U[2026-01-12 20:04:00Z]
       assert invoice.user_id == scope.user.id
     end
@@ -166,14 +166,14 @@ defmodule First.FinanceTest do
       update_attrs = %{
         status: "some updated status",
         amount: "456.7",
-          invoice_number: "INV12345",
+        invoice_number: "INV12345",
         issued_at: ~U[2026-01-13 20:04:00Z]
       }
 
       assert {:ok, %Invoice{} = invoice} = Finance.update_invoice(scope, invoice, update_attrs)
       assert invoice.status == "some updated status"
       assert invoice.amount == Decimal.new("456.7")
-       assert invoice.invoice_number =~ ~r/^[A-Z0-9]+$/
+      assert invoice.invoice_number =~ ~r/^[A-Z0-9]+$/
       assert invoice.issued_at == ~U[2026-01-13 20:04:00Z]
     end
 

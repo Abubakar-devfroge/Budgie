@@ -78,6 +78,7 @@ defmodule FirstWeb.InvoiceLiveTest do
 
       # Invalid status test
       invalid_attrs = Map.put(@invalid_attrs, :status, "invalid")
+
       assert form_live
              |> form("#invoice-form", invoice: invalid_attrs)
              |> render_change() =~ "is invalid"

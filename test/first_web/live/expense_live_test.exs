@@ -89,8 +89,6 @@ defmodule FirstWeb.ExpenseLiveTest do
       assert html =~ "Transaction updated successfully"
       assert html =~ "some updated description"
     end
-
-
   end
 
   describe "Show" do
