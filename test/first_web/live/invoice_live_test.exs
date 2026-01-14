@@ -5,24 +5,25 @@ defmodule FirstWeb.InvoiceLiveTest do
   import First.FinanceFixtures
 
   @create_attrs %{
-    status: "some status",
+    status: "not paid",
     amount: "120.5",
-    invoice_number: "some invoice_number",
+    invoice_number: "INV12345",
     issued_at: "2026-01-12T20:04:00Z"
   }
+
   @update_attrs %{
-    status: "some updated status",
+    status: "paid",
     amount: "456.7",
-    invoice_number: "some updated invoice_number",
+    invoice_number: "INV12345",
     issued_at: "2026-01-13T20:04:00Z"
   }
+
   @invalid_attrs %{status: nil, amount: nil, invoice_number: nil, issued_at: nil}
 
   setup :register_and_log_in_user
 
   defp create_invoice(%{scope: scope}) do
     invoice = invoice_fixture(scope)
-
     %{invoice: invoice}
   end
 
@@ -47,10 +48,12 @@ defmodule FirstWeb.InvoiceLiveTest do
 
       assert render(form_live) =~ "New Invoice"
 
+      # Invalid attributes
       assert form_live
              |> form("#invoice-form", invoice: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+             |> render_change() =~ "can't be blank"
 
+      # Valid creation
       assert {:ok, index_live, _html} =
                form_live
                |> form("#invoice-form", invoice: @create_attrs)
@@ -59,7 +62,7 @@ defmodule FirstWeb.InvoiceLiveTest do
 
       html = render(index_live)
       assert html =~ "Invoice created successfully"
-      assert html =~ "some invoice_number"
+      assert html =~ @create_attrs.invoice_number
     end
 
     test "updates invoice in listing", %{conn: conn, invoice: invoice} do
@@ -73,10 +76,13 @@ defmodule FirstWeb.InvoiceLiveTest do
 
       assert render(form_live) =~ "Edit Invoice"
 
+      # Invalid status test
+      invalid_attrs = Map.put(@invalid_attrs, :status, "invalid")
       assert form_live
-             |> form("#invoice-form", invoice: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+             |> form("#invoice-form", invoice: invalid_attrs)
+             |> render_change() =~ "is invalid"
 
+      # Valid update
       assert {:ok, index_live, _html} =
                form_live
                |> form("#invoice-form", invoice: @update_attrs)
@@ -85,13 +91,16 @@ defmodule FirstWeb.InvoiceLiveTest do
 
       html = render(index_live)
       assert html =~ "Invoice updated successfully"
-      assert html =~ "some updated invoice_number"
+      assert html =~ @update_attrs.invoice_number
     end
 
     test "deletes invoice in listing", %{conn: conn, invoice: invoice} do
       {:ok, index_live, _html} = live(conn, ~p"/invoices")
 
-      assert index_live |> element("#invoices-#{invoice.id} a", "Delete") |> render_click()
+      assert index_live
+             |> element("#invoices-#{invoice.id} a", "Delete")
+             |> render_click()
+
       refute has_element?(index_live, "#invoices-#{invoice.id}")
     end
   end
@@ -109,7 +118,7 @@ defmodule FirstWeb.InvoiceLiveTest do
     test "updates invoice and returns to show", %{conn: conn, invoice: invoice} do
       {:ok, show_live, _html} = live(conn, ~p"/invoices/#{invoice}")
 
-      assert {:ok, form_live, _} =
+      assert {:ok, form_live, _html} =
                show_live
                |> element("a", "Edit")
                |> render_click()
@@ -117,10 +126,12 @@ defmodule FirstWeb.InvoiceLiveTest do
 
       assert render(form_live) =~ "Edit Invoice"
 
+      # Invalid attributes
       assert form_live
              |> form("#invoice-form", invoice: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+             |> render_change() =~ "can't be blank"
 
+      # Valid update
       assert {:ok, show_live, _html} =
                form_live
                |> form("#invoice-form", invoice: @update_attrs)
@@ -129,7 +140,7 @@ defmodule FirstWeb.InvoiceLiveTest do
 
       html = render(show_live)
       assert html =~ "Invoice updated successfully"
-      assert html =~ "some updated invoice_number"
+      assert html =~ @update_attrs.invoice_number
     end
   end
 end

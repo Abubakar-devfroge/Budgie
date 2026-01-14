@@ -137,7 +137,7 @@ defmodule FirstWeb.UserLive.SettingsTest do
         })
 
       assert result =~ "Save Password"
-      assert result =~ "should be at least 6 character(s)"
+      assert result =~ "should be at least 12 character(s)"
       assert result =~ "does not match password"
     end
 
@@ -155,7 +155,7 @@ defmodule FirstWeb.UserLive.SettingsTest do
         |> render_submit()
 
       assert result =~ "Save Password"
-      assert result =~ "should be at least 6 character(s)"
+      assert result =~ "should be at least 12 character(s)"
       assert result =~ "does not match password"
     end
   end
