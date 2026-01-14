@@ -33,7 +33,9 @@ defmodule FirstWeb.InvoiceLive.Index do
           <:col :let={{_id, invoice}} label="Invoice number">{invoice.invoice_number}</:col>
           <:col :let={{_id, invoice}} label="Amount">{invoice.amount}</:col>
           <:col :let={{_id, invoice}} label="Status">{invoice.status}</:col>
-          <:col :let={{_id, invoice}} label="Issued at">{invoice.issued_at}</:col>
+                <:col :let={{_id, invoice}} label="Issued at">
+          {Calendar.strftime(invoice.issued_at, "%b %-d")}
+        </:col>
           <:action :let={{_id, invoice}}>
             <div class="sr-only">
               <.link navigate={~p"/invoices/#{invoice}"}>Show</.link>

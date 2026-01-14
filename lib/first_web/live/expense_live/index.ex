@@ -16,7 +16,7 @@ defmodule FirstWeb.ExpenseLive.Index do
       </.header>
 
       <%= if Enum.empty?(@expenses_list) do %>
-        <div class="flex flex-col items-center justify-center py-20 text-center text-gray-500">
+              <div class="flex flex-col items-center justify-center py-20 text-center text-gray-500">
           <img src={~p"/images/table_error.svg"} alt="Empty database" class="h-32 w-32 mb-4 mx-auto" />
 
           <p class="text-sm font-semibold">Your ledger is empty. Start by adding a transaction.</p>
@@ -27,13 +27,16 @@ defmodule FirstWeb.ExpenseLive.Index do
           rows={@streams.expenses}
           row_click={fn {_id, expense} -> JS.navigate(~p"/expenses/#{expense}") end}
         >
-          <:col :let={{_id, expense}} label="Date">{expense.date}</:col>
+                  <:col :let={{_id, expense}} label="Date">
+          {Calendar.strftime(expense.date, "%b %-d")}
+        </:col>
+
           <:col :let={{_id, expense}} label="Total">KES {expense.total}</:col>
           <:col :let={{_id, expense}} label="Description">{expense.description}</:col>
           <:col :let={{_id, expense}} label="Type">
-            <span class="inline-flex items-center rounded-full bg-red-700 px-3 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red-600/10">
+            <%!-- <span class="inline-flex items-center rounded-full bg-red-700 px-3 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red-600/10"> --%>
               {expense.category}
-            </span>
+            <%!-- </span> --%>
           </:col>
 
           <:action :let={{id, expense}}>
@@ -58,7 +61,7 @@ defmodule FirstWeb.ExpenseLive.Index do
                   >
                     Show
                   </.link>
-                  
+
     <!-- Edit -->
                   <.link
                     navigate={~p"/expenses/#{expense}/edit"}
@@ -66,7 +69,7 @@ defmodule FirstWeb.ExpenseLive.Index do
                   >
                     Edit
                   </.link>
-                  
+
     <!-- Delete (LOGIC UNCHANGED) -->
                   <button
                     type="button"
