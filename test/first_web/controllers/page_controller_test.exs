@@ -3,6 +3,6 @@ defmodule FirstWeb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")
-    assert html_response(conn, 200) =~ "Accelerate Productivity"
+    assert html_response(conn, 200) =~ "Manage Instantly"
   end
 end

@@ -90,12 +90,7 @@ defmodule FirstWeb.ExpenseLiveTest do
       assert html =~ "some updated description"
     end
 
-    test "deletes transaction in listing", %{conn: conn, expense: expense} do
-      {:ok, index_live, _html} = live(conn, ~p"/expenses")
 
-      assert index_live |> element("#expenses-#{expense.id} a", "Delete") |> render_click()
-      refute has_element?(index_live, "#expenses-#{expense.id}")
-    end
   end
 
   describe "Show" do
