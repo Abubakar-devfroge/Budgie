@@ -30,9 +30,10 @@ defmodule FirstWeb.InvoiceLive.Index do
           rows={@streams.invoices}
           row_click={fn {_id, invoice} -> JS.navigate(~p"/invoices/#{invoice}") end}
         >
-          <:col :let={{_id, invoice}} label="Invoice number">{invoice.invoice_number}</:col>
-          <:col :let={{_id, invoice}} label="Amount">KES {invoice.amount}.00</:col>
+          <:col :let={{_id, invoice}} label="Number">{invoice.invoice_number}</:col>
           <:col :let={{_id, invoice}} label="Status">{invoice.status}</:col>
+          <:col :let={{_id, invoice}} label="Amount">KES {invoice.amount}.00</:col>
+          <:col :let={{_id, invoice}} label="Client">{invoice.client}</:col>
           <:col :let={{_id, invoice}} label="Issued at">
             {Calendar.strftime(invoice.issued_at, "%b %-d")}
           </:col>

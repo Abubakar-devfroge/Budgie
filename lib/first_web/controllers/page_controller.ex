@@ -13,7 +13,10 @@ defmodule FirstWeb.PageController do
     # Fetch total invoices
     total_invoices = Finance.total_invoices(current_scope)
 
+    # fetch total expenses
+    total_expenses = Finance.total_expenses(current_scope)
+
     # Pass total to template
-    render(conn, :dash, total_invoices: total_invoices)
+    render(conn, :dash, total_invoices: total_invoices, total_expenses: total_expenses)
   end
 end

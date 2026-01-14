@@ -291,4 +291,13 @@ defmodule First.Finance do
         select: sum(i.amount)
     ) || 0
   end
+
+
+   def total_expenses(scope) do
+    Repo.one(
+      from e in Expense,
+        where: e.user_id == ^scope.user.id,
+        select: sum(e.total)
+    ) || 0
+  end
 end

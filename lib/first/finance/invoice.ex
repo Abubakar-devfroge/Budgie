@@ -8,6 +8,7 @@ defmodule First.Finance.Invoice do
 
   schema "invoices" do
     field :invoice_number, :string
+    field :client , :string
     field :amount, :decimal
     field :status, :string, default: "not paid"
     field :issued_at, :utc_datetime
@@ -26,8 +27,8 @@ defmodule First.Finance.Invoice do
       end
 
     invoice
-    |> cast(attrs, [:amount, :status, :issued_at])
-    |> validate_required([:amount, :status, :issued_at])
+    |> cast(attrs, [:client, :amount, :status, :issued_at])
+    |> validate_required([:client, :amount, :status, :issued_at])
     # automatically set user_id from scope if available
     |> put_change(:user_id, user_id)
     |> put_invoice_number()
