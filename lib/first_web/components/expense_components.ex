@@ -1,4 +1,7 @@
 defmodule FirstWeb.ExpenseComponents do
+  @moduledoc """
+  UI components used to render and interact with expenses in the web interface.
+  """
   use Phoenix.Component
 
   attr :current_scope, :map, required: true

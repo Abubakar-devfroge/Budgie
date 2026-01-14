@@ -137,7 +137,13 @@ defmodule First.FinanceTest do
     end
 
     test "create_invoice/2 with valid data creates a invoice" do
-      valid_attrs = %{status: "some status", amount: "120.5", invoice_number: "some invoice_number", issued_at: ~U[2026-01-12 20:04:00Z]}
+      valid_attrs = %{
+        status: "some status",
+        amount: "120.5",
+        invoice_number: "some invoice_number",
+        issued_at: ~U[2026-01-12 20:04:00Z]
+      }
+
       scope = user_scope_fixture()
 
       assert {:ok, %Invoice{} = invoice} = Finance.create_invoice(scope, valid_attrs)
@@ -156,7 +162,13 @@ defmodule First.FinanceTest do
     test "update_invoice/3 with valid data updates the invoice" do
       scope = user_scope_fixture()
       invoice = invoice_fixture(scope)
-      update_attrs = %{status: "some updated status", amount: "456.7", invoice_number: "some updated invoice_number", issued_at: ~U[2026-01-13 20:04:00Z]}
+
+      update_attrs = %{
+        status: "some updated status",
+        amount: "456.7",
+        invoice_number: "some updated invoice_number",
+        issued_at: ~U[2026-01-13 20:04:00Z]
+      }
 
       assert {:ok, %Invoice{} = invoice} = Finance.update_invoice(scope, invoice, update_attrs)
       assert invoice.status == "some updated status"

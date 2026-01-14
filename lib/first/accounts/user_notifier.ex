@@ -1,4 +1,8 @@
 defmodule First.Accounts.UserNotifier do
+  @moduledoc """
+  Handles user notifications.
+  """
+
   import Swoosh.Email
 
   alias First.Mailer

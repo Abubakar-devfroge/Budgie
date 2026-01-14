@@ -213,16 +213,16 @@ defmodule First.Finance do
       {:error, %Ecto.Changeset{}}
 
   """
-def create_invoice(%Scope{} = scope, attrs) do
-  with {:ok, invoice = %Invoice{}} <-
-         %Invoice{}
-         |> Invoice.changeset(attrs, scope)  # <-- pass scope here
-         |> Repo.insert() do
-    broadcast_invoice(scope, {:created, invoice})
-    {:ok, invoice}
+  def create_invoice(%Scope{} = scope, attrs) do
+    with {:ok, invoice = %Invoice{}} <-
+           %Invoice{}
+           # <-- pass scope here
+           |> Invoice.changeset(attrs, scope)
+           |> Repo.insert() do
+      broadcast_invoice(scope, {:created, invoice})
+      {:ok, invoice}
+    end
   end
-end
-
 
   @doc """
   Updates a invoice.
@@ -279,9 +279,8 @@ end
       %Ecto.Changeset{data: %Invoice{}}
 
   """
-def change_invoice(%Scope{} = scope, %Invoice{} = invoice, attrs \\ %{}) do
-  # true = invoice.user_id == scope.user.id  <-- REMOVE THIS
-  Invoice.changeset(invoice, attrs, scope)
-end
-
+  def change_invoice(%Scope{} = scope, %Invoice{} = invoice, attrs \\ %{}) do
+    # true = invoice.user_id == scope.user.id  <-- REMOVE THIS
+    Invoice.changeset(invoice, attrs, scope)
+  end
 end

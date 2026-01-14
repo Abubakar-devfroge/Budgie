@@ -1,4 +1,7 @@
 defmodule First.Accounts.UserToken do
+  @moduledoc """
+  Handles user token.
+  """
   use Ecto.Schema
   import Ecto.Query
   alias First.Accounts.UserToken

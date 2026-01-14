@@ -19,7 +19,7 @@ defmodule FirstWeb.InvoiceLive.Form do
 
         <.input field={@form[:amount]} type="number" label="Amount" step="any" />
 
-       <.input field={@form[:status]} type="select" label="Status" options={["not paid", "paid"]} />
+        <.input field={@form[:status]} type="select" label="Status" options={["not paid", "paid"]} />
 
         <.input field={@form[:issued_at]} type="datetime-local" label="Issued at" />
 
@@ -55,7 +55,8 @@ defmodule FirstWeb.InvoiceLive.Form do
 
   # NEW
   defp apply_action(socket, :new, _params) do
-    invoice = %Invoice{}  # remove any user_id reference
+    # remove any user_id reference
+    invoice = %Invoice{}
 
     socket
     |> assign(:page_title, "New Invoice")
@@ -65,7 +66,9 @@ defmodule FirstWeb.InvoiceLive.Form do
 
   @impl true
   def handle_event("validate", %{"invoice" => invoice_params}, socket) do
-    changeset = Finance.change_invoice(socket.assigns.current_scope, socket.assigns.invoice, invoice_params)
+    changeset =
+      Finance.change_invoice(socket.assigns.current_scope, socket.assigns.invoice, invoice_params)
+
     {:noreply, assign(socket, form: to_form(changeset, action: :validate))}
   end
 
@@ -75,12 +78,18 @@ defmodule FirstWeb.InvoiceLive.Form do
   end
 
   defp save_invoice(socket, :edit, invoice_params) do
-    case Finance.update_invoice(socket.assigns.current_scope, socket.assigns.invoice, invoice_params) do
+    case Finance.update_invoice(
+           socket.assigns.current_scope,
+           socket.assigns.invoice,
+           invoice_params
+         ) do
       {:ok, invoice} ->
         {:noreply,
          socket
          |> put_flash(:info, "Invoice updated successfully")
-         |> push_navigate(to: return_path(socket.assigns.current_scope, socket.assigns.return_to, invoice))}
+         |> push_navigate(
+           to: return_path(socket.assigns.current_scope, socket.assigns.return_to, invoice)
+         )}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
@@ -93,7 +102,9 @@ defmodule FirstWeb.InvoiceLive.Form do
         {:noreply,
          socket
          |> put_flash(:info, "Invoice created successfully")
-         |> push_navigate(to: return_path(socket.assigns.current_scope, socket.assigns.return_to, invoice))}
+         |> push_navigate(
+           to: return_path(socket.assigns.current_scope, socket.assigns.return_to, invoice)
+         )}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}

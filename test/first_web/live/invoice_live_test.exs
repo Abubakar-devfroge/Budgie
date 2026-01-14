@@ -4,8 +4,18 @@ defmodule FirstWeb.InvoiceLiveTest do
   import Phoenix.LiveViewTest
   import First.FinanceFixtures
 
-  @create_attrs %{status: "some status", amount: "120.5", invoice_number: "some invoice_number", issued_at: "2026-01-12T20:04:00Z"}
-  @update_attrs %{status: "some updated status", amount: "456.7", invoice_number: "some updated invoice_number", issued_at: "2026-01-13T20:04:00Z"}
+  @create_attrs %{
+    status: "some status",
+    amount: "120.5",
+    invoice_number: "some invoice_number",
+    issued_at: "2026-01-12T20:04:00Z"
+  }
+  @update_attrs %{
+    status: "some updated status",
+    amount: "456.7",
+    invoice_number: "some updated invoice_number",
+    issued_at: "2026-01-13T20:04:00Z"
+  }
   @invalid_attrs %{status: nil, amount: nil, invoice_number: nil, issued_at: nil}
 
   setup :register_and_log_in_user

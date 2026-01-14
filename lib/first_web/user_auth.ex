@@ -1,4 +1,10 @@
 defmodule FirstWeb.UserAuth do
+  @moduledoc """
+  Provides authentication and session management helpers for the web layer.
+
+  Includes plugs and helpers used by controllers and LiveViews to
+  log users in, log users out, and fetch the current authenticated user.
+  """
   use FirstWeb, :verified_routes
 
   import Plug.Conn

@@ -1,4 +1,7 @@
 defmodule FirstWeb.Navigation do
+  @moduledoc """
+  Reusable UI components for application navigation.
+  """
   use FirstWeb, :html
 
   attr :current_scope, :map, default: nil
@@ -13,7 +16,7 @@ defmodule FirstWeb.Navigation do
           <img src={~p"/images/logo.svg"} class="h-20 w-auto" />
         </.link>
       </div>
-
+      
     <!-- Desktop nav -->
       <div class="hidden sm:flex">
         <ul class="flex items-center space-x-4">
@@ -34,7 +37,7 @@ defmodule FirstWeb.Navigation do
           <% end %>
         </ul>
       </div>
-
+      
     <!-- Mobile menu button -->
       <button
         class="sm:hidden"
@@ -52,7 +55,7 @@ defmodule FirstWeb.Navigation do
       >
         <.icon name="hero-bars-3" class="h-7 w-7" />
       </button>
-
+      
     <!-- Mobile menu -->
       <div
         id="mobile-menu"

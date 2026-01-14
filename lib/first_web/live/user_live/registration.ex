@@ -23,7 +23,6 @@ defmodule FirstWeb.UserLive.Registration do
         </div>
 
         <.form for={@form} id="registration_form" phx-submit="save" phx-change="validate">
-
           <.input
             field={@form[:email]}
             type="email"

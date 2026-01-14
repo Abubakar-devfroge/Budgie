@@ -62,11 +62,10 @@ defmodule FirstWeb.Router do
       live "/expenses/:id", ExpenseLive.Show, :show
       live "/expenses/:id/edit", ExpenseLive.Form, :edit
 
-
-    live "/invoices", InvoiceLive.Index, :index
-    live "/invoices/new", InvoiceLive.Form, :new
-    live "/invoices/:id", InvoiceLive.Show, :show
-    live "/invoices/:id/edit", InvoiceLive.Form, :edit
+      live "/invoices", InvoiceLive.Index, :index
+      live "/invoices/new", InvoiceLive.Form, :new
+      live "/invoices/:id", InvoiceLive.Show, :show
+      live "/invoices/:id/edit", InvoiceLive.Form, :edit
     end
 
     post "/users/update-password", UserSessionController, :update_password

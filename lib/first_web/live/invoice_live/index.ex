@@ -67,7 +67,8 @@ defmodule FirstWeb.InvoiceLive.Index do
   @impl true
   def handle_info({type, %First.Finance.Invoice{}}, socket)
       when type in [:created, :updated, :deleted] do
-    {:noreply, stream(socket, :invoices, list_invoices(socket.assigns.current_scope), reset: true)}
+    {:noreply,
+     stream(socket, :invoices, list_invoices(socket.assigns.current_scope), reset: true)}
   end
 
   defp list_invoices(current_scope) do

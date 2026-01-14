@@ -1,4 +1,8 @@
 defmodule First.Accounts.User do
+  @moduledoc """
+  Ecto schema and changesets for users.
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
   alias Bcrypt

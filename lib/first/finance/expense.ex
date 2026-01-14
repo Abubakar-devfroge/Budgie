@@ -1,4 +1,7 @@
 defmodule First.Finance.Expense do
+  @moduledoc """
+  Defines the Expense schema and encapsulates business rules related to expenses.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 
