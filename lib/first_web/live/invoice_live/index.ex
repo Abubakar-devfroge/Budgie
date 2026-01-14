@@ -31,7 +31,7 @@ defmodule FirstWeb.InvoiceLive.Index do
           row_click={fn {_id, invoice} -> JS.navigate(~p"/invoices/#{invoice}") end}
         >
           <:col :let={{_id, invoice}} label="Invoice number">{invoice.invoice_number}</:col>
-          <:col :let={{_id, invoice}} label="Amount">{invoice.amount}</:col>
+          <:col :let={{_id, invoice}} label="Amount">KES {invoice.amount}.00</:col>
           <:col :let={{_id, invoice}} label="Status">{invoice.status}</:col>
           <:col :let={{_id, invoice}} label="Issued at">
             {Calendar.strftime(invoice.issued_at, "%b %-d")}

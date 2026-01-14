@@ -283,4 +283,12 @@ defmodule First.Finance do
     # true = invoice.user_id == scope.user.id  <-- REMOVE THIS
     Invoice.changeset(invoice, attrs, scope)
   end
+
+  def total_invoices(scope) do
+    Repo.one(
+      from i in Invoice,
+        where: i.user_id == ^scope.user.id,
+        select: sum(i.amount)
+    ) || 0
+  end
 end

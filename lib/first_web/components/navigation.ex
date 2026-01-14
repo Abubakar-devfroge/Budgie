@@ -23,15 +23,40 @@ defmodule FirstWeb.Navigation do
           <%= if @current_scope do %>
             <.nav_link to={~p"/home"}>Home</.nav_link>
             <.nav_link to={~p"/invoices"}>Invoices</.nav_link>
-            <.nav_link to={~p"/users/settings"}>Settings</.nav_link>
 
-            <.link
-              href={~p"/users/log-out"}
-              method="delete"
-              class="font-medium px-6 py-2 rounded-md hover:bg-gray-100"
-            >
-              Log out
-            </.link>
+            <el-dropdown class="inline-block">
+              <button
+                type="button"
+                class="inline-flex items-center gap-x-1.5 r px-3 py-2 text-sm font-semibold text-gray-900"
+              >
+                ...
+              </button>
+
+              <el-menu
+                anchor="bottom end"
+                popover
+                class="w-44 origin-top-right rounded-md bg-white shadow-lg outline outline-1 outline-black/5"
+              >
+                <div class="py-2">
+                  <!-- Settings -->
+                  <.nav_link
+                    to={~p"/users/settings"}
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Settings
+                  </.nav_link>
+                  
+    <!-- Log out -->
+                  <.link
+                    href={~p"/users/log-out"}
+                    method="delete"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Log out
+                  </.link>
+                </div>
+              </el-menu>
+            </el-dropdown>
           <% else %>
             <.nav_link to={~p"/users/log-in"}>Sign in</.nav_link>
           <% end %>
