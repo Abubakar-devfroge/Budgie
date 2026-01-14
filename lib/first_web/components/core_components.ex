@@ -405,7 +405,7 @@ defmodule FirstWeb.CoreComponents do
             >
               {render_slot(col, @row_item.(row))}
             </td>
-            <td :if={@action != []} class="px-2 py-1 w-0 font-medium text-gray-600">
+            <td :if={@action != []} class="px-6 py-2 w-0 font-medium text-gray-600">
               <div class="flex gap-3 justify-end">
                 <%= for action <- @action do %>
                   {render_slot(action, @row_item.(row))}
