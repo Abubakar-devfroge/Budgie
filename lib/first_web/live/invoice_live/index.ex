@@ -16,30 +16,40 @@ defmodule FirstWeb.InvoiceLive.Index do
         </:actions>
       </.header>
 
-      <.table
-        id="invoices"
-        rows={@streams.invoices}
-        row_click={fn {_id, invoice} -> JS.navigate(~p"/invoices/#{invoice}") end}
-      >
-        <:col :let={{_id, invoice}} label="Invoice number">{invoice.invoice_number}</:col>
-        <:col :let={{_id, invoice}} label="Amount">{invoice.amount}</:col>
-        <:col :let={{_id, invoice}} label="Status">{invoice.status}</:col>
-        <:col :let={{_id, invoice}} label="Issued at">{invoice.issued_at}</:col>
-        <:action :let={{_id, invoice}}>
-          <div class="sr-only">
-            <.link navigate={~p"/invoices/#{invoice}"}>Show</.link>
-          </div>
-          <.link navigate={~p"/invoices/#{invoice}/edit"}>Edit</.link>
-        </:action>
-        <:action :let={{id, invoice}}>
-          <.link
-            phx-click={JS.push("delete", value: %{id: invoice.id}) |> hide("##{id}")}
-            data-confirm="Are you sure?"
-          >
-            Delete
-          </.link>
-        </:action>
-      </.table>
+      <%= if Enum.empty?(@invoices_list) do %>
+        <div class="flex flex-col items-center justify-center py-20 text-center text-gray-500">
+          <img src={~p"/images/table_error.svg"} alt="Empty database" class="h-32 w-32 mb-4 mx-auto" />
+
+          <p class="text-sm font-semibold">
+            You haven’t issued any invoices yet. Create one to get started.
+          </p>
+        </div>
+      <% else %>
+        <.table
+          id="invoices"
+          rows={@streams.invoices}
+          row_click={fn {_id, invoice} -> JS.navigate(~p"/invoices/#{invoice}") end}
+        >
+          <:col :let={{_id, invoice}} label="Invoice number">{invoice.invoice_number}</:col>
+          <:col :let={{_id, invoice}} label="Amount">{invoice.amount}</:col>
+          <:col :let={{_id, invoice}} label="Status">{invoice.status}</:col>
+          <:col :let={{_id, invoice}} label="Issued at">{invoice.issued_at}</:col>
+          <:action :let={{_id, invoice}}>
+            <div class="sr-only">
+              <.link navigate={~p"/invoices/#{invoice}"}>Show</.link>
+            </div>
+            <.link navigate={~p"/invoices/#{invoice}/edit"}>Edit</.link>
+          </:action>
+          <:action :let={{id, invoice}}>
+            <.link
+              phx-click={JS.push("delete", value: %{id: invoice.id}) |> hide("##{id}")}
+              data-confirm="Are you sure?"
+            >
+              Delete
+            </.link>
+          </:action>
+        </.table>
+      <% end %>
     </Layouts.app>
     """
   end
@@ -50,10 +60,13 @@ defmodule FirstWeb.InvoiceLive.Index do
       Finance.subscribe_invoices(socket.assigns.current_scope)
     end
 
+    invoices = list_invoices(socket.assigns.current_scope)
+
     {:ok,
      socket
      |> assign(:page_title, "Listing Invoices")
-     |> stream(:invoices, list_invoices(socket.assigns.current_scope))}
+     |> assign(:invoices_list, invoices)
+     |> stream(:invoices, invoices)}
   end
 
   @impl true
