@@ -20,12 +20,14 @@ defmodule FirstWeb.InvoiceLive.Show do
         </:actions>
       </.header>
 
-      <.list>
-        <:item title="Invoice number">{@invoice.invoice_number}</:item>
-        <:item title="Amount">{@invoice.amount}</:item>
-        <:item title="Status">{@invoice.status}</:item>
-        <:item title="Issued at">{@invoice.issued_at}</:item>
-      </.list>
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <.list>
+          <:item title="Invoice number">{@invoice.invoice_number}</:item>
+          <:item title="Amount">{@invoice.amount}</:item>
+          <:item title="Status">{@invoice.status}</:item>
+          <:item title="Issued at">{@invoice.issued_at}</:item>
+        </.list>
+      </div>
     </Layouts.app>
     """
   end
