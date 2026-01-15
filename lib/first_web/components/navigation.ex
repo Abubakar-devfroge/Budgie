@@ -29,7 +29,7 @@ defmodule FirstWeb.Navigation do
                 type="button"
                 class="inline-flex items-center gap-x-1.5 r px-3 py-2 text-sm font-semibold text-gray-900"
               >
-                ...
+                <img src={~p"/images/sett.svg"} class="h-6 w-auto font-medium" />
               </button>
 
               <el-menu
