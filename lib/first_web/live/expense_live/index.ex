@@ -54,14 +54,12 @@ defmodule FirstWeb.ExpenseLive.Index do
                 class="w-44 origin-top-right rounded-md bg-white shadow-lg outline outline-1 outline-black/5"
               >
                 <div class="py-1">
-
                   <.link
                     navigate={~p"/expenses/#{expense}"}
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Show
                   </.link>
-
 
                   <.link
                     navigate={~p"/expenses/#{expense}/edit"}

@@ -292,8 +292,7 @@ defmodule First.Finance do
     ) || 0
   end
 
-
-   def total_expenses(scope) do
+  def total_expenses(scope) do
     Repo.one(
       from e in Expense,
         where: e.user_id == ^scope.user.id,

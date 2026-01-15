@@ -8,7 +8,7 @@ defmodule First.Finance.Invoice do
 
   schema "invoices" do
     field :invoice_number, :string
-    field :client , :string
+    field :client, :string
     field :amount, :decimal
     field :status, :string, default: "not paid"
     field :issued_at, :utc_datetime

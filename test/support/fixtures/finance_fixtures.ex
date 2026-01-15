@@ -24,34 +24,29 @@ defmodule First.FinanceFixtures do
   @doc """
   Generate a invoice.
   """
-def invoice_fixture(scope, attrs \\ %{}) do
-  client = client_fixture(scope)
+  def invoice_fixture(scope, attrs \\ %{}) do
+    client = client_fixture(scope)
 
-  attrs =
-    Enum.into(attrs, %{
-      amount: Decimal.new("120.5"),
-      invoice_number: "INV12345",
-      issued_at: ~U[2026-01-12 20:04:00Z],
-      status: "some status",
-      client_id: client.id
-    })
+    attrs =
+      Enum.into(attrs, %{
+        amount: Decimal.new("120.5"),
+        invoice_number: "INV12345",
+        issued_at: ~U[2026-01-12 20:04:00Z],
+        status: "some status",
+        client_id: client.id
+      })
 
-  {:ok, invoice} = First.Invoice.create_invoice(scope, attrs)
-  invoice
-end
-
-
-
-
+    {:ok, invoice} = First.Finance.create_invoice(scope, attrs)
+    invoice
+  end
 
   def client_fixture(scope, attrs \\ %{}) do
-  attrs =
-    Enum.into(attrs, %{
-      name: "Test Client"
-    })
+    attrs =
+      Enum.into(attrs, %{
+        name: "Test Client"
+      })
 
-  {:ok, client} = First.Invoice.create_client(scope, attrs)
-  client
-end
-
+    {:ok, client} = First.Finance.create_client(scope, attrs)
+    client
+  end
 end
