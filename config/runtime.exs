@@ -36,7 +36,8 @@ if config_env() == :prod do
   config :first, First.Repo,
     url: database_url,
     pool_size: pool_size,
-    ssl: true  # recommended for Fly.io Postgres
+    # recommended for Fly.io Postgres
+    ssl: true
 
   # The secret key base is used to sign/encrypt cookies and other secrets.
   secret_key_base =
@@ -50,16 +51,21 @@ if config_env() == :prod do
 
   config :first, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
-config :first, FirstWeb.Endpoint,
-  url: [host: host, port: 443, scheme: "https"],
-  http: [
-    ip: {0, 0, 0, 0, 0, 0, 0, 0},
-    port: 4000
-  ],
-  server: true,
-  secret_key_base: secret_key_base,
-  socket_options: maybe_ipv6
+  maybe_ipv6 =
+    case System.get_env("PHX_IPV6") do
+      "true" -> [:inet6]
+      _ -> []
+    end
 
+  config :first, FirstWeb.Endpoint,
+    url: [host: host, port: 443, scheme: "https"],
+    http: [
+      ip: {0, 0, 0, 0, 0, 0, 0, 0},
+      port: 4000
+    ],
+    server: true,
+    secret_key_base: secret_key_base,
+    socket_options: maybe_ipv6
 
   # ## SSL Support
   #
