@@ -1,0 +1,77 @@
+ <Layouts.app flash={@flash} current_scope={@current_scope}>
+      <.header>
+        <:actions>
+          <.button variant="primary" navigate={~p"/expenses/new"}>
+            <.icon name="hero-plus" /> New Transaction
+          </.button>
+        </:actions>
+      </.header>
+
+      <%= if Enum.empty?(@expenses_list) do %>
+        <div class="flex flex-col items-center justify-center py-20 text-center text-gray-500">
+          <img src={~p"/images/table_error.svg"} alt="Empty database" class="h-32 w-32 mb-4 mx-auto" />
+
+          <p class="text-sm font-semibold">Your ledger is empty. Start by adding a transaction.</p>
+        </div>
+      <% else %>
+        <.table
+          id="expenses"
+          rows={@streams.expenses}
+          row_click={fn {_id, expense} -> JS.navigate(~p"/expenses/#{expense}") end}
+        >
+          <:col :let={{_id, expense}} label="Date">
+            {Calendar.strftime(expense.date, "%b %-d")}
+          </:col>
+
+          <:col :let={{_id, expense}} label="Total">KES {expense.total}.00</:col>
+          <:col :let={{_id, expense}} label="Description">{expense.description}</:col>
+          <:col :let={{_id, expense}} label="Type">
+            <%!-- <span class="inline-flex items-center rounded-full bg-red-700 px-3 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red-600/10"> --%>
+            {expense.category}
+            <%!-- </span> --%>
+          </:col>
+
+          <:action :let={{id, expense}}>
+            <el-dropdown class="inline-block">
+              <button
+                type="button"
+                class="inline-flex items-center gap-x-1.5 r px-3 py-2 text-sm font-semibold text-gray-900 "
+              >
+                ...
+              </button>
+
+              <el-menu
+                anchor="bottom end"
+                popover
+                class="w-44 origin-top-right rounded-md bg-white shadow-lg outline outline-1 outline-black/5"
+              >
+                <div class="py-1">
+                  <.link
+                    navigate={~p"/expenses/#{expense}"}
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Show
+                  </.link>
+
+                  <.link
+                    navigate={~p"/expenses/#{expense}/edit"}
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Edit
+                  </.link>
+
+                  <button
+                    type="button"
+                    phx-click={JS.push("delete", value: %{id: expense.id}) |> hide("##{id}")}
+                    data-confirm="Are you sure?"
+                    class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </el-menu>
+            </el-dropdown>
+          </:action>
+        </.table>
+      <% end %>
+    </Layouts.app>
