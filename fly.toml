@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for first-green-paper-5318 on 2026-01-26T11:25:48+03:00
+# fly.toml app configuration file generated for budgie-smx-sg on 2026-01-26T11:43:47Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'first-green-paper-5318'
-primary_region = 'lhr'
+app = 'budgie-smx-sg'
+primary_region = 'iad'
 kill_signal = 'SIGTERM'
 
 [build]
@@ -13,7 +13,7 @@ kill_signal = 'SIGTERM'
   release_command = '/app/bin/migrate'
 
 [env]
-  PHX_HOST = 'first-green-paper-5318.fly.dev'
+  PHX_HOST = 'budgie-smx-sg.fly.dev'
   PORT = '8080'
 
 [http_service]
