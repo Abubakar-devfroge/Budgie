@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for first-green-paper-5318 on 2026-01-26T11:25:48+03:00
+# fly.toml app configuration file generated for first-dark-sea-8115 on 2026-01-27T06:58:56+03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'first-green-paper-5318'
+app = 'first-dark-sea-8115'
 primary_region = 'lhr'
 kill_signal = 'SIGTERM'
 
@@ -13,7 +13,7 @@ kill_signal = 'SIGTERM'
   release_command = '/app/bin/migrate'
 
 [env]
-  PHX_HOST = 'first-green-paper-5318.fly.dev'
+  PHX_HOST = 'first-dark-sea-8115.fly.dev'
   PORT = '8080'
 
 [http_service]
@@ -31,6 +31,5 @@ kill_signal = 'SIGTERM'
 
 [[vm]]
   memory = '1gb'
-  cpu_kind = 'shared'
   cpus = 1
   memory_mb = 1024
