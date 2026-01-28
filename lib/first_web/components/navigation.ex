@@ -35,7 +35,7 @@ defmodule FirstWeb.Navigation do
               <el-menu
                 anchor="bottom end"
                 popover
-                class="w-44 origin-top-right rounded-md bg-white shadow-lg outline outline-1 outline-black/5"
+                class="w-44 origin-top-right rounded-md bg-white shadow-lg outline-1 outline-black/5"
               >
                 <div class="py-2">
                   <!-- Settings -->
