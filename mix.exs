@@ -77,26 +77,25 @@ defmodule First.MixProject do
   #     $ mix setup
   #
   # See the documentation for `Mix` for more info on aliases.
-defp aliases do
-  [
-    setup: ["deps.get", "ecto.setup", "assets.setup", "assets.build"],
-    "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-    "ecto.reset": ["ecto.drop", "ecto.setup"],
-    test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-    # We removed tailwind.install from here
-    "assets.setup": ["esbuild.install --if-missing"],
-    # We use npx to call the tailwind you installed in the assets folder
-"assets.build": [
-  "esbuild first",
-  "cmd ./assets/node_modules/.bin/tailwindcss -i assets/css/app.css -o priv/static/assets/app.css"
-],
-  "assets.deploy": [
-    "esbuild first --minify",
-    "cmd ./assets/node_modules/.bin/tailwindcss -i assets/css/app.css -o priv/static/assets/app.css --minify --load-path assets/node_modules",
-    "phx.digest"
-  ],
-    precommit: ["compile --warnings-as-errors", "deps.unlock --unused", "format", "test"]
-  ]
-end
-
+  defp aliases do
+    [
+      setup: ["deps.get", "ecto.setup", "assets.setup", "assets.build"],
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      # We removed tailwind.install from here
+      "assets.setup": ["esbuild.install --if-missing"],
+      # We use npx to call the tailwind you installed in the assets folder
+      "assets.build": [
+        "esbuild first",
+        "cmd ./assets/node_modules/.bin/tailwindcss -i assets/css/app.css -o priv/static/assets/app.css"
+      ],
+      "assets.deploy": [
+        "esbuild first --minify",
+        "cmd ./assets/node_modules/.bin/tailwindcss -i assets/css/app.css -o priv/static/assets/app.css --minify --load-path assets/node_modules",
+        "phx.digest"
+      ],
+      precommit: ["compile --warnings-as-errors", "deps.unlock --unused", "format", "test"]
+    ]
+  end
 end

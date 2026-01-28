@@ -3,8 +3,6 @@ defmodule FirstWeb.ExpenseLive.Index do
 
   alias First.Finance
 
-
-
   @impl true
   def mount(_params, _session, socket) do
     if connected?(socket) do

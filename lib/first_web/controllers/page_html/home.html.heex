@@ -21,14 +21,14 @@
             <%= if @current_scope do %>
               <.link
                 href={~p"/home"}
-                class="inline-block rounded-md bg-black  text-lg px-6 py-2 font-medium text-white hover:bg-gray-900 transition"
+                class="inline-block rounded-full bg-black  text-lg px-6 py-2 font-medium text-white hover:bg-gray-900 transition"
               >
                 Go to Dashboard
               </.link>
             <% else %>
               <.link
                 href={~p"/users/log-in"}
-                class="inline-block rounded-md bg-black  text-lg px-6 py-2 font-medium text-white hover:bg-gray-900 transition"
+                class="inline-block rounded-full bg-black  text-lg px-6 py-2 font-medium text-white hover:bg-gray-900 transition"
               >
                 Go to Dashboard
               </.link>
