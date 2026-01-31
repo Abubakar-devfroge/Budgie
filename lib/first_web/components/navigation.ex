@@ -73,6 +73,7 @@ defmodule FirstWeb.Navigation do
     <!-- Mobile menu button -->
       <button
         class="sm:hidden"
+          aria-label="Open menu"
         phx-click={
           JS.toggle(
             to: "#mobile-menu",
@@ -86,6 +87,7 @@ defmodule FirstWeb.Navigation do
         }
       >
         <.icon name="hero-bars-3" class="h-7 w-7" />
+          <span class="hero-bars-3 h-7 w-7" aria-hidden="true"></span>
       </button>
 
     <!-- Mobile menu -->
@@ -99,8 +101,10 @@ defmodule FirstWeb.Navigation do
           <button
             phx-click={JS.toggle(to: "#mobile-menu")}
             class="text-4xl"
+            aria-label="Close menu"
           >
             &times;
+              <span class="hero-bars-3 h-7 w-7" aria-hidden="true"></span>
           </button>
         </div>
 
