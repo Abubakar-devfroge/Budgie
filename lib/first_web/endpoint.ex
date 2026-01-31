@@ -23,7 +23,8 @@ defmodule FirstWeb.Endpoint do
   plug Plug.Static,
     at: "/",
     from: :first,
-    gzip: not code_reloading?,
+    gzip: true,
+    brotli: true,
     only: FirstWeb.static_paths(),
     raise_on_missing_only: code_reloading?
 
