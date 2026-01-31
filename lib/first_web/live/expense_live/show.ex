@@ -15,7 +15,7 @@ defmodule FirstWeb.ExpenseLive.Show do
             <.icon name="hero-arrow-left" />
           </.button>
           <.button variant="primary" navigate={~p"/expenses/#{@expense}/edit?return_to=show"}>
-            <.icon name="hero-pencil-square" /> Edit Transaction
+            <.icon name="hero-pencil-square" /> Edit Expense
           </.button>
         </:actions>
       </.header>

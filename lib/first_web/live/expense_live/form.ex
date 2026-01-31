@@ -24,7 +24,7 @@ defmodule FirstWeb.ExpenseLive.Form do
           <.input field={@form[:category]} type="text" label="Category" />
 
           <footer>
-            <.button phx-disable-with="Saving..." variant="primary">Save Transaction</.button>
+            <.button phx-disable-with="Saving..." variant="primary">Save Expense</.button>
             <.button navigate={return_path(@current_scope, @return_to, @expense)}>Cancel</.button>
           </footer>
         </.form>
@@ -48,7 +48,7 @@ defmodule FirstWeb.ExpenseLive.Form do
     expense = Finance.get_expense!(socket.assigns.current_scope, id)
 
     socket
-    |> assign(:page_title, "Edit Transaction")
+    |> assign(:page_title, "Edit Expense")
     |> assign(:expense, expense)
     |> assign(:form, to_form(Finance.change_expense(socket.assigns.current_scope, expense)))
   end
@@ -57,7 +57,7 @@ defmodule FirstWeb.ExpenseLive.Form do
     expense = %Expense{user_id: socket.assigns.current_scope.user.id}
 
     socket
-    |> assign(:page_title, "New Transaction")
+    |> assign(:page_title, "New Expense")
     |> assign(:expense, expense)
     |> assign(:form, to_form(Finance.change_expense(socket.assigns.current_scope, expense)))
   end

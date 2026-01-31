@@ -16,6 +16,9 @@ kill_signal = 'SIGTERM'
   PHX_HOST = 'first-dark-sea-8115.fly.dev'
   PORT = '8080'
 
+[processes]
+  app = "/app/bin/server"
+
 [http_service]
   internal_port = 8080
   force_https = true
@@ -34,3 +37,5 @@ kill_signal = 'SIGTERM'
   cpu_kind = 'shared'
   cpus = 1
   memory_mb = 1024
+
+

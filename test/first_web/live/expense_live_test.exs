@@ -43,11 +43,11 @@ defmodule FirstWeb.ExpenseLiveTest do
 
       assert {:ok, form_live, _} =
                index_live
-               |> element("a", "New Transaction")
+               |> element("a", "New Expense")
                |> render_click()
                |> follow_redirect(conn, ~p"/expenses/new")
 
-      assert render(form_live) =~ "New Transaction"
+      assert render(form_live) =~ "New Expense"
 
       assert form_live
              |> form("#expense-form", expense: @invalid_attrs)
@@ -73,7 +73,7 @@ defmodule FirstWeb.ExpenseLiveTest do
                |> render_click()
                |> follow_redirect(conn, ~p"/expenses/#{expense}/edit")
 
-      assert render(form_live) =~ "Edit Transaction"
+      assert render(form_live) =~ "Edit Expense"
 
       assert form_live
              |> form("#expense-form", expense: @invalid_attrs)
@@ -110,7 +110,7 @@ defmodule FirstWeb.ExpenseLiveTest do
                |> render_click()
                |> follow_redirect(conn, ~p"/expenses/#{expense}/edit?return_to=show")
 
-      assert render(form_live) =~ "Edit Transaction"
+      assert render(form_live) =~ "Edit Expense"
 
       assert form_live
              |> form("#expense-form", expense: @invalid_attrs)

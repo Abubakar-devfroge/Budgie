@@ -13,10 +13,11 @@ defmodule FirstWeb.Navigation do
       <!-- Logo -->
       <div class="flex-1">
         <.link navigate={~p"/"} class="flex items-center gap-2">
-          <img src={~p"/images/logo.svg"} class="h-20 w-auto" />
+          <img src={~p"/images/logo.svg"} class="h-20 w-auto" alt="logo" width="80" height="80" />
+            <span class="sr-only">Home</span>
         </.link>
       </div>
-      
+
     <!-- Desktop nav -->
       <div class="hidden sm:flex">
         <ul class="flex items-center space-x-4">
@@ -29,7 +30,13 @@ defmodule FirstWeb.Navigation do
                 type="button"
                 class="inline-flex items-center gap-x-1.5 r px-3 py-2 text-sm font-semibold text-gray-900"
               >
-                <img src={~p"/images/sett.svg"} class="h-6 w-auto font-medium" />
+                <img
+                  src={~p"/images/sett.svg"}
+                  class="h-6 w-auto font-medium"
+                  alt="settings icon"
+                  width="80"
+                  height="80"
+                />
               </button>
 
               <el-menu
@@ -45,7 +52,7 @@ defmodule FirstWeb.Navigation do
                   >
                     Settings
                   </.nav_link>
-                  
+
     <!-- Log out -->
                   <.link
                     href={~p"/users/log-out"}
@@ -62,7 +69,7 @@ defmodule FirstWeb.Navigation do
           <% end %>
         </ul>
       </div>
-      
+
     <!-- Mobile menu button -->
       <button
         class="sm:hidden"
@@ -80,14 +87,14 @@ defmodule FirstWeb.Navigation do
       >
         <.icon name="hero-bars-3" class="h-7 w-7" />
       </button>
-      
+
     <!-- Mobile menu -->
       <div
         id="mobile-menu"
         class="fixed inset-0 bg-white z-50 flex flex-col px-6 py-8 scale-y-0 opacity-0 origin-top"
       >
         <div class="flex justify-between items-center mb-10">
-          <img src={~p"/images/logo.svg"} class="h-20 w-auto" />
+          <img src={~p"/images/logo.svg"} class="h-20 w-auto" alt="logo" width="80" height="80"/>
 
           <button
             phx-click={JS.toggle(to: "#mobile-menu")}
