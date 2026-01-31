@@ -33,13 +33,11 @@ if config_env() == :prod do
       environment variable SECRET_KEY_BASE is missing.
       """
 
- host = System.get_env("PHX_HOST") || "first-dark-sea-8115.fly.dev"
+  host = System.get_env("PHX_HOST") || "first-dark-sea-8115.fly.dev"
 
   config :first, FirstWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
     secret_key_base: secret_key_base
 
-
-config :first, First.Mailer,
-  api_key: System.get_env("RESEND_API_KEY")
+  config :first, First.Mailer, api_key: System.get_env("RESEND_API_KEY")
 end
