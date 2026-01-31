@@ -86,8 +86,7 @@ defmodule FirstWeb.Navigation do
           )
         }
       >
-        <.icon name="hero-bars-3" class="h-7 w-7" />
-          <span class="hero-bars-3 h-7 w-7" aria-hidden="true"></span>
+        <.icon name="hero-bars-3" class="h-7 w-7" aria-hidden="true"/>
       </button>
 
     <!-- Mobile menu -->
@@ -104,7 +103,6 @@ defmodule FirstWeb.Navigation do
             aria-label="Close menu"
           >
             &times;
-              <span class="hero-bars-3 h-7 w-7" aria-hidden="true"></span>
           </button>
         </div>
 
