@@ -138,6 +138,7 @@ defmodule First.FinanceTest do
 
     test "create_invoice/2 with valid data creates a invoice" do
       valid_attrs = %{
+        client: "Test client",
         status: "some status",
         amount: "120.5",
         invoice_number: "INV12345",

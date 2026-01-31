@@ -19,7 +19,13 @@ defmodule FirstWeb.InvoiceLive.Form do
 
           <.input field={@form[:amount]} type="number" label="Amount" step="any" />
 
-          <.input field={@form[:status]} type="select" label="Status" options={["not paid", "paid"]} />
+          <.input
+            field={@form[:status]}
+            type="select"
+            label="Status"
+            prompt="Select status"
+            options={["not paid", "paid"]}
+          />
 
           <.input field={@form[:issued_at]} type="datetime-local" label="Issued at" />
 

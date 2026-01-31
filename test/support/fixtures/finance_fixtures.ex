@@ -27,6 +27,7 @@ defmodule First.FinanceFixtures do
   def invoice_fixture(scope, attrs \\ %{}) do
     attrs =
       Enum.into(attrs, %{
+        client: "Test client",
         amount: Decimal.new("120.5"),
         invoice_number: "INV12345",
         issued_at: ~U[2026-01-12 20:04:00Z],
