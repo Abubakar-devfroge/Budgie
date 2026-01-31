@@ -1,9 +1,9 @@
 import Config
 
 # Enable Phoenix server always in prod
-if config_env() == :prod do
-  config :first, FirstWeb.Endpoint, server: true
-end
+# if config_env() == :prod do
+#   config :first, FirstWeb.Endpoint, server: true
+# end
 
 # Use the Fly PORT env if available
 config :first, FirstWeb.Endpoint,
