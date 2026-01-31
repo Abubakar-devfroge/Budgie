@@ -38,4 +38,8 @@ if config_env() == :prod do
   config :first, FirstWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
     secret_key_base: secret_key_base
+
+
+config :first, First.Mailer,
+  api_key: System.get_env("RESEND_API_KEY")
 end

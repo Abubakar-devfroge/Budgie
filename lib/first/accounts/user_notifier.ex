@@ -9,18 +9,19 @@ defmodule First.Accounts.UserNotifier do
   alias First.Accounts.User
 
   # Delivers the email using the application mailer.
-  defp deliver(recipient, subject, body) do
-    email =
-      new()
-      |> to(recipient)
-      |> from({"First", "contact@example.com"})
-      |> subject(subject)
-      |> text_body(body)
+defp deliver(recipient, subject, body) do
+  email =
+    new()
+    |> to(recipient)
+    # Change this line below:
+    |> from("onboarding@resend.dev")
+    |> subject(subject)
+    |> text_body(body)
 
-    with {:ok, _metadata} <- Mailer.deliver(email) do
-      {:ok, email}
-    end
+  with {:ok, _metadata} <- Mailer.deliver(email) do
+    {:ok, email}
   end
+end
 
   @doc """
   Deliver instructions to update a user email.

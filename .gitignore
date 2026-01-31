@@ -39,3 +39,7 @@ npm-debug.log
 *.db
 *.db-*
 
+
+# Ignore .env files that may contain credentials.
+.env
+

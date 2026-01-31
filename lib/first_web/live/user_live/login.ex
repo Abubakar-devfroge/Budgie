@@ -3,8 +3,6 @@ defmodule FirstWeb.UserLive.Login do
 
   alias First.Accounts
 
-
-
   @impl true
   def mount(_params, _session, socket) do
     email =
