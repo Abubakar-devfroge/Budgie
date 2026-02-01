@@ -20,8 +20,8 @@ defmodule First.Finance.Expense do
   def changeset(expense, attrs, user_scope) do
     expense
     |> cast(attrs, [:date, :total, :quantity, :description, :category])
-    |> validate_length(:description, max: 100)
-|> validate_length(:category, max: 100)
+    |> validate_length(:description, max: 30)
+|> validate_length(:category, max: 30)
     |> validate_required([:quantity, :total, :description, :category, :date])
     |> put_change(:user_id, user_scope.user.id)
   end
