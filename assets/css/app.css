@@ -13,6 +13,8 @@
 /* Optional: set a default font for body */
 body {
   font-family: 'Inter', sans-serif;
+  font-display: swap;
+
 }
 
 /* Local vendor plugins - JS files use @plugin */

@@ -13,7 +13,7 @@ defmodule FirstWeb.Navigation do
       <!-- Logo -->
       <div class="flex-1">
         <.link navigate={~p"/"} class="flex items-center gap-2">
-          <img src={~p"/images/logo.svg"} class="h-20 w-auto" alt="logo" width="80" height="80" />
+          <img src={~p"/images/logo.svg"} class="h-20 w-auto" alt="logo" width="80" height="80" fetchPriority="high"/>
             <span class="sr-only">Home</span>
         </.link>
       </div>
@@ -36,6 +36,7 @@ defmodule FirstWeb.Navigation do
                   alt="settings icon"
                   width="80"
                   height="80"
+                  fetchPriority="high"
                 />
               </button>
 
@@ -95,7 +96,7 @@ defmodule FirstWeb.Navigation do
         class="fixed inset-0 bg-white z-50 flex flex-col px-6 py-8 scale-y-0 opacity-0 origin-top"
       >
         <div class="flex justify-between items-center mb-10">
-          <img src={~p"/images/logo.svg"} class="h-20 w-auto" alt="logo" width="80" height="80"/>
+          <img src={~p"/images/logo.svg"} class="h-20 w-auto" alt="logo" width="80" height="80" fetchPriority="high"/>
 
           <button
             phx-click={JS.toggle(to: "#mobile-menu")}
