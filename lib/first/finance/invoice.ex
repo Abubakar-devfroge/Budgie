@@ -29,7 +29,7 @@ defmodule First.Finance.Invoice do
     invoice
     |> cast(attrs, [:client, :amount, :status, :issued_at])
     |> validate_required([:client, :amount, :status, :issued_at])
-    |> validate_length(:client, max: 30)
+    |> validate_length(:client, max: 20)
     |> put_change(:user_id, user_id)
     |> put_invoice_number()
   end
