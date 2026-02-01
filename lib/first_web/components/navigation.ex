@@ -13,11 +13,18 @@ defmodule FirstWeb.Navigation do
       <!-- Logo -->
       <div class="flex-1">
         <.link navigate={~p"/"} class="flex items-center gap-2">
-          <img src={~p"/images/logo.svg"} class="h-20 w-auto" alt="logo" width="80" height="80" fetchPriority="high"/>
-            <span class="sr-only">Home</span>
+          <img
+            src={~p"/images/logo.svg"}
+            class="h-20 w-auto"
+            alt="logo"
+            width="80"
+            height="80"
+            fetchPriority="high"
+          />
+          <span class="sr-only">Home</span>
         </.link>
       </div>
-
+      
     <!-- Desktop nav -->
       <div class="hidden sm:flex">
         <ul class="flex items-center space-x-4">
@@ -53,7 +60,7 @@ defmodule FirstWeb.Navigation do
                   >
                     Settings
                   </.nav_link>
-
+                  
     <!-- Log out -->
                   <.link
                     href={~p"/users/log-out"}
@@ -70,11 +77,11 @@ defmodule FirstWeb.Navigation do
           <% end %>
         </ul>
       </div>
-
+      
     <!-- Mobile menu button -->
       <button
         class="sm:hidden"
-          aria-label="Open menu"
+        aria-label="Open menu"
         phx-click={
           JS.toggle(
             to: "#mobile-menu",
@@ -87,16 +94,23 @@ defmodule FirstWeb.Navigation do
           )
         }
       >
-        <.icon name="hero-bars-3" class="h-7 w-7" aria-hidden="true"/>
+        <.icon name="hero-bars-3" class="h-7 w-7" aria-hidden="true" />
       </button>
-
+      
     <!-- Mobile menu -->
       <div
         id="mobile-menu"
         class="fixed inset-0 bg-white z-50 flex flex-col px-6 py-8 scale-y-0 opacity-0 origin-top"
       >
         <div class="flex justify-between items-center mb-10">
-          <img src={~p"/images/logo.svg"} class="h-20 w-auto" alt="logo" width="80" height="80" fetchPriority="high"/>
+          <img
+            src={~p"/images/logo.svg"}
+            class="h-20 w-auto"
+            alt="logo"
+            width="80"
+            height="80"
+            fetchPriority="high"
+          />
 
           <button
             phx-click={JS.toggle(to: "#mobile-menu")}
