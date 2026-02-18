@@ -16,8 +16,14 @@ defmodule FirstWeb.ExpenseLive.Form do
       </.header>
 
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <.form for={@form} id="expense-form" phx-change="validate" phx-submit="save">
-          <.input field={@form[:date]} type="date" label="Date" />
+        <.form
+          for={@form}
+          id="expense-form"
+          phx-change="validate"
+          phx-submit="save"
+          phx-hook="LocalTimeMeta"
+        >
+          <input type="hidden" name="expense[tz_offset_minutes]" />
           <.input field={@form[:total]} type="number" label="Total Price" step="any" />
           <.input field={@form[:quantity]} type="number" label="Quantity" step="any" />
           <.input field={@form[:description]} type="text" label="Description" />
@@ -64,6 +70,8 @@ defmodule FirstWeb.ExpenseLive.Form do
 
   @impl true
   def handle_event("validate", %{"expense" => expense_params}, socket) do
+    expense_params = maybe_put_date(expense_params)
+
     changeset =
       Finance.change_expense(socket.assigns.current_scope, socket.assigns.expense, expense_params)
 
@@ -71,7 +79,29 @@ defmodule FirstWeb.ExpenseLive.Form do
   end
 
   def handle_event("save", %{"expense" => expense_params}, socket) do
+    expense_params = maybe_put_date(expense_params)
     save_expense(socket, socket.assigns.live_action, expense_params)
+  end
+
+  defp maybe_put_date(params) do
+    case Map.get(params, "date") do
+      nil -> Map.put(params, "date", local_today_iso8601(params))
+      "" -> Map.put(params, "date", local_today_iso8601(params))
+      _ -> params
+    end
+  end
+
+  defp local_today_iso8601(params) do
+    offset_minutes =
+      case Integer.parse(Map.get(params, "tz_offset_minutes", "0")) do
+        {value, _} -> value
+        :error -> 0
+      end
+
+    DateTime.utc_now()
+    |> DateTime.add(-offset_minutes * 60, :second)
+    |> DateTime.to_date()
+    |> Date.to_iso8601()
   end
 
   defp save_expense(socket, :edit, expense_params) do

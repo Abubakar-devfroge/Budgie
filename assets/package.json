@@ -1,7 +1,9 @@
 {
   "dependencies": {
     "@tailwindcss/cli": "^4.1.18",
-    "daisyui": "^5.5.14"
+    "@tailwindplus/elements": "^1.0.22",
+    "daisyui": "^5.5.14",
+    "tw-elements": "^2.0.0"
   },
   "name": "assets",
   "version": "1.0.0",

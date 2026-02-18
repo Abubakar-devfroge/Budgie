@@ -1,48 +1,159 @@
 <Layouts.app flash={@flash} current_scope={@current_scope}>
-  <.header>
-    Listing Invoices
-    <:actions>
-      <.button variant="primary" navigate={~p"/invoices/new"}>
-        <.icon name="hero-plus" /> New Invoice
-      </.button>
-    </:actions>
-  </.header>
+  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <h1 class="text-xl font-semibold text-gray-900">Listing Invoices</h1>
+        <p class="mt-1 text-sm text-gray-500">Manage and track all your invoices</p>
 
-  <%= if Enum.empty?(@invoices_list) do %>
-    <div class="flex flex-col items-center justify-center py-20 text-center text-gray-500">
-      <img src={~p"/images/table_error.webp"} alt="Empty database" class="h-32 w-32 mb-4 mx-auto" />
-
-      <p class="text-sm font-semibold">
-        You haven’t issued any invoices yet. Create one to get started.
-      </p>
-    </div>
-  <% else %>
-    <.table
-      id="invoices"
-      rows={@streams.invoices}
-      row_click={fn {_id, invoice} -> JS.navigate(~p"/invoices/#{invoice}") end}
-    >
-      <:col :let={{_id, invoice}} label="Number">{invoice.invoice_number}</:col>
-      <:col :let={{_id, invoice}} label="Status">{invoice.status}</:col>
-      <:col :let={{_id, invoice}} label="Amount">KES {invoice.amount}.00</:col>
-      <:col :let={{_id, invoice}} label="Client">{invoice.client}</:col>
-      <:col :let={{_id, invoice}} label="Issued at">
-        {Calendar.strftime(invoice.issued_at, "%b %-d")}
-      </:col>
-      <:action :let={{_id, invoice}}>
-        <div class="sr-only">
-          <.link navigate={~p"/invoices/#{invoice}"}>Show</.link>
-        </div>
-        <.link navigate={~p"/invoices/#{invoice}/edit"}>Edit</.link>
-      </:action>
-      <:action :let={{id, invoice}}>
         <.link
-          phx-click={JS.push("delete", value: %{id: invoice.id}) |> hide("##{id}")}
-          data-confirm="Are you sure?"
+          id="new-invoice-btn"
+          navigate={~p"/invoices/new"}
+          class="inline-flex items-center justify-center rounded-md mt-2 bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-amber-700"
         >
-          Delete
+          New Invoice
         </.link>
-      </:action>
-    </.table>
-  <% end %>
+      </div>
+    </div>
+
+    <%= if @invoices_count == 0 do %>
+      <div class="flex flex-col items-center justify-center py-20 text-center text-gray-500">
+        <img
+          src={~p"/images/table_error.webp"}
+          alt="Empty database"
+          width="80"
+          height="80"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
+          class="h-20 w-auto mb-4 mx-auto"
+        />
+
+        <p class="text-sm font-semibold">
+          No invoices yet. Start by creating your first invoice.
+        </p>
+      </div>
+    <% else %>
+      <div class="border border-gray-200 bg-white rounded-md">
+        <div class="border-b border-gray-200 bg-gray-50 px-4 py-3 sm:px-6">
+          <div class="space-y-3">
+            <form id="invoice-search-form" phx-change="search" class="w-full">
+              <.input
+                name="search[q]"
+                value={@search_query}
+                type="search"
+                placeholder="Search invoice no, client, status, amount, or date"
+                phx-debounce="250"
+                class="w-full rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 placeholder:text-gray-400"
+              />
+            </form>
+          </div>
+        </div>
+
+        <%= if @filtered_invoices_count == 0 do %>
+          <div class="flex flex-col items-center justify-center px-4 py-14 text-center text-gray-500 sm:px-6">
+            <img
+              src={~p"/images/table_error.webp"}
+              alt="Record not found"
+              width="80"
+              height="80"
+              loading="lazy"
+              decoding="async"
+              fetchpriority="low"
+              class="mb-3 h-16 w-auto"
+            />
+            <p class="text-sm font-semibold text-gray-700">Record not found</p>
+            <p class="mt-1 text-sm text-gray-500">
+              Try another invoice number, client, or status.
+            </p>
+          </div>
+        <% else %>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 text-sm">
+              <thead class="bg-gray-50 text-gray-700">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide sm:px-6">
+                    Invoice No
+                  </th>
+                  <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide sm:px-6">
+                    Client
+                  </th>
+                  <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide sm:px-6">
+                    Status
+                  </th>
+                  <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide sm:px-6">
+                    Amount
+                  </th>
+                  <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide sm:px-6">
+                    Issued At
+                  </th>
+                  <th class="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide sm:px-6">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                id="invoices"
+                phx-update="stream"
+                class="divide-y divide-gray-200 bg-white text-gray-900"
+              >
+                <tr
+                  :for={{id, invoice} <- @streams.invoices}
+                  id={id}
+                  class="cursor-pointer hover:bg-gray-50 transition-colors"
+                >
+                  <td
+                    phx-click={JS.navigate(~p"/invoices/#{invoice}")}
+                    class="px-4 py-3 font-medium sm:px-6"
+                  >
+                    {invoice.invoice_number}
+                  </td>
+                  <td
+                    phx-click={JS.navigate(~p"/invoices/#{invoice}")}
+                    class="px-4 py-3 whitespace-nowrap sm:px-6"
+                  >
+                    {invoice.client}
+                  </td>
+                  <td
+                    phx-click={JS.navigate(~p"/invoices/#{invoice}")}
+                    class="px-4 py-3 whitespace-nowrap sm:px-6"
+                  >
+                    {invoice.status}
+                  </td>
+                  <td
+                    phx-click={JS.navigate(~p"/invoices/#{invoice}")}
+                    class="px-4 py-3 whitespace-nowrap sm:px-6"
+                  >
+                    KES {invoice.amount}
+                  </td>
+                  <td
+                    phx-click={JS.navigate(~p"/invoices/#{invoice}")}
+                    class="px-4 py-3 whitespace-nowrap sm:px-6"
+                  >
+                    {Calendar.strftime(invoice.issued_at, "%b %-d")}
+                  </td>
+                  <td class="px-4 py-3 whitespace-nowrap text-right sm:px-6">
+                    <div class="flex items-center justify-end gap-3">
+                      <.link
+                        navigate={~p"/invoices/#{invoice}/edit"}
+                        class="font-medium text-gray-700 transition hover:text-gray-900"
+                      >
+                        Edit
+                      </.link>
+                      <.link
+                        phx-click={JS.push("delete", value: %{id: invoice.id}) |> hide("##{id}")}
+                        data-confirm="Are you sure?"
+                        class="font-medium text-red-600 transition hover:text-red-700"
+                      >
+                        Delete
+                      </.link>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </Layouts.app>

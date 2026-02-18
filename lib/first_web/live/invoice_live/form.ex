@@ -14,7 +14,13 @@ defmodule FirstWeb.InvoiceLive.Form do
       </.header>
 
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <.form for={@form} id="invoice-form" phx-change="validate" phx-submit="save">
+        <.form
+          for={@form}
+          id="invoice-form"
+          phx-change="validate"
+          phx-submit="save"
+          phx-hook="LocalTimeMeta"
+        >
           <.input field={@form[:client]} type="text" label="Client" />
 
           <.input field={@form[:amount]} type="number" label="Amount" step="any" />
@@ -27,7 +33,8 @@ defmodule FirstWeb.InvoiceLive.Form do
             options={["not paid", "paid"]}
           />
 
-          <.input field={@form[:issued_at]} type="datetime-local" label="Issued at" />
+          <input type="hidden" name="invoice[client_now]" />
+          <input type="hidden" name="invoice[tz_offset_minutes]" />
 
           <footer>
             <.button phx-disable-with="Saving..." variant="primary">Save Invoice</.button>
@@ -73,6 +80,8 @@ defmodule FirstWeb.InvoiceLive.Form do
 
   @impl true
   def handle_event("validate", %{"invoice" => invoice_params}, socket) do
+    invoice_params = maybe_put_issued_at(invoice_params)
+
     changeset =
       Finance.change_invoice(socket.assigns.current_scope, socket.assigns.invoice, invoice_params)
 
@@ -81,7 +90,34 @@ defmodule FirstWeb.InvoiceLive.Form do
 
   @impl true
   def handle_event("save", %{"invoice" => invoice_params}, socket) do
+    invoice_params = maybe_put_issued_at(invoice_params)
     save_invoice(socket, socket.assigns.live_action, invoice_params)
+  end
+
+  defp maybe_put_issued_at(params) do
+    case Map.get(params, "issued_at") do
+      nil -> Map.put(params, "issued_at", current_utc_iso8601(params))
+      "" -> Map.put(params, "issued_at", current_utc_iso8601(params))
+      _ -> params
+    end
+  end
+
+  defp current_utc_iso8601(params) do
+    case Map.get(params, "client_now") do
+      now when is_binary(now) and now != "" ->
+        case DateTime.from_iso8601(now) do
+          {:ok, datetime, _offset} ->
+            datetime
+            |> DateTime.truncate(:second)
+            |> DateTime.to_iso8601()
+
+          _ ->
+            DateTime.utc_now() |> DateTime.truncate(:second) |> DateTime.to_iso8601()
+        end
+
+      _ ->
+        DateTime.utc_now() |> DateTime.truncate(:second) |> DateTime.to_iso8601()
+    end
   end
 
   defp save_invoice(socket, :edit, invoice_params) do

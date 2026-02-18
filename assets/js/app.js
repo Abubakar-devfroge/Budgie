@@ -19,15 +19,53 @@
 
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
 import "phoenix_html"
+import "@tailwindplus/elements"
 // Establish Phoenix Socket and LiveView configuration.
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
+const Hooks = {}
+
+Hooks.LocalTimeMeta = {
+  mounted() {
+    this.syncTimeMeta = () => {
+      const now = new Date()
+      const clientNowInput = this.el.querySelector('input[name$="[client_now]"]')
+      const tzOffsetInput = this.el.querySelector('input[name$="[tz_offset_minutes]"]')
+
+      if (clientNowInput) {
+        clientNowInput.value = now.toISOString()
+      }
+
+      if (tzOffsetInput) {
+        tzOffsetInput.value = String(now.getTimezoneOffset())
+      }
+    }
+
+    this.submitHandler = () => this.syncTimeMeta()
+    this.syncTimeMeta()
+    this.el.addEventListener("submit", this.submitHandler)
+  },
+
+  updated() {
+    if (this.syncTimeMeta) {
+      this.syncTimeMeta()
+    }
+  },
+
+  destroyed() {
+    if (this.submitHandler) {
+      this.el.removeEventListener("submit", this.submitHandler)
+    }
+  }
+}
+
 const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 const liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
-  params: { _csrf_token: csrfToken }
+  params: { _csrf_token: csrfToken },
+  hooks: Hooks
 })
 
 

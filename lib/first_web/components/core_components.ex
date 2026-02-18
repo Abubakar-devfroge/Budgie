@@ -66,7 +66,7 @@ defmodule FirstWeb.CoreComponents do
       ]}>
         <.icon
           :if={@kind == :info}
-          name="hero-information-circle"
+          name="hero-check-circle"
           class="size-5 shrink-0 rounded-md text-black"
         />
         <.icon
@@ -107,7 +107,7 @@ defmodule FirstWeb.CoreComponents do
   def button(%{rest: rest} = assigns) do
     variants = %{
       "primary" =>
-        "font-medium text-lg bg-black text-white rounded-md px-4 py-3 hover:bg-gray-800 transition",
+        "font-medium text-lg bg-black text-white rounded-md px-4 py-3 hover:bg-amber-800 transition",
       nil =>
         "font-medium text-lg bg-white text-black border border-gray-300 rounded-md px-4 py-3 hover:bg-gray-100 transition"
     }

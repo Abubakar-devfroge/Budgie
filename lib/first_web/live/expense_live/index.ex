@@ -9,13 +9,19 @@ defmodule FirstWeb.ExpenseLive.Index do
       Finance.subscribe_expenses(socket.assigns.current_scope)
     end
 
-    expenses = list_expenses(socket.assigns.current_scope)
-
     {:ok,
      socket
      |> assign(:page_title, "Listing Transactions")
-     |> assign(:expenses_list, expenses)
-     |> stream(:expenses, expenses)}
+     |> assign(:search_query, "")
+     |> refresh_expenses()}
+  end
+
+  @impl true
+  def handle_event("search", %{"search" => %{"q" => query}}, socket) do
+    {:noreply,
+     socket
+     |> assign(:search_query, query)
+     |> refresh_expenses()}
   end
 
   @impl true
@@ -23,26 +29,58 @@ defmodule FirstWeb.ExpenseLive.Index do
     expense = Finance.get_expense!(socket.assigns.current_scope, id)
     {:ok, _} = Finance.delete_expense(socket.assigns.current_scope, expense)
 
-    new_expenses_list = Enum.reject(socket.assigns.expenses_list, fn e -> e.id == expense.id end)
-
-    {:noreply,
-     socket
-     |> assign(:expenses_list, new_expenses_list)
-     |> stream_delete(:expenses, expense)}
+    {:noreply, refresh_expenses(socket)}
   end
 
   @impl true
   def handle_info({type, %First.Finance.Expense{}}, socket)
       when type in [:created, :updated, :deleted] do
-    expenses = list_expenses(socket.assigns.current_scope)
-
-    {:noreply,
-     socket
-     |> assign(:expenses_list, expenses)
-     |> stream(:expenses, expenses, reset: true)}
+    {:noreply, refresh_expenses(socket)}
   end
 
   defp list_expenses(current_scope) do
     Finance.list_expenses(current_scope)
   end
+
+  defp refresh_expenses(socket) do
+    expenses = list_expenses(socket.assigns.current_scope)
+    filtered_expenses = filter_expenses(expenses, socket.assigns.search_query)
+
+    socket
+    |> assign(:expenses_list, expenses)
+    |> assign(:expenses_count, length(expenses))
+    |> assign(:filtered_expenses_count, length(filtered_expenses))
+    |> stream(:expenses, filtered_expenses, reset: true)
+  end
+
+  defp filter_expenses(expenses, query) do
+    normalized_query = normalize(query)
+
+    if normalized_query == "" do
+      expenses
+    else
+      Enum.filter(expenses, fn expense ->
+        expense
+        |> expense_search_fields()
+        |> Enum.any?(fn field ->
+          field
+          |> normalize()
+          |> String.contains?(normalized_query)
+        end)
+      end)
+    end
+  end
+
+  defp expense_search_fields(expense) do
+    [
+      if(expense.date, do: Date.to_iso8601(expense.date), else: ""),
+      expense.description,
+      expense.category,
+      to_string(expense.quantity),
+      to_string(expense.total)
+    ]
+  end
+
+  defp normalize(nil), do: ""
+  defp normalize(value), do: value |> to_string() |> String.downcase() |> String.trim()
 end
