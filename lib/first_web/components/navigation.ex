@@ -250,7 +250,7 @@ defmodule FirstWeb.Navigation do
                 <.icon name="hero-home" class="size-5 text-blue-100" /> Dashboard
               </.link>
               <.link
-                navigate={~p"/parcel_bookings"}
+                navigate={~p"/expenses"}
                 class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-white hover:bg-white/10"
               >
                 <.icon name="hero-archive-box" class="size-5 text-blue-100" /> Parcels

@@ -1,100 +1,126 @@
 <Layouts.app flash={@flash} current_scope={@current_scope}>
-  <.header>
-    <h3 class="  text-xl font-bold text-gray-900">Home</h3>
-    <:actions>
-      <.button variant="primary" navigate={~p"/expenses/new"}>
-        <.icon name="hero-plus" /> New Transaction
-      </.button>
-    </:actions>
-  </.header>
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-3">
-      <div class="bg-white rounded-lg border border-gray-200 p-6 ">
-        <h3 class="  mb-2 text-gray-600">Card One</h3>
-        <p class="text-gray-900 font-bold text-lg">
-          Welcome {@current_scope.user.email}
-        </p>
+  <section class="mx-auto max-w-7xl space-y-5 px-4 py-5 sm:px-6 lg:px-8 rounded-md">
+    <div class="border border-gray-200 bg-white">
+      <div class="border-b border-gray-200 px-4 py-2.5 sm:px-6">
+        <h1 class="text-lg font-semibold text-gray-900">Dashboard</h1>
+        <p class="mt-0.5 text-sm text-gray-500">Welcome, {@current_scope.user.email}</p>
       </div>
 
-      <div class="bg-white rounded-lg border border-gray-200 p-6 ">
-        <h3 class="mb-2 text-gray-600">Total invoices</h3>
-        <p class="text-gray-900 font-bold text-lg">
-          KES {@total_invoices}.00
-        </p>
-      </div>
-
-      <div class="bg-white rounded-lg border border-gray-200 p-6 ">
-        <h3 class="  mb-2 text-gray-600">Total Expenses</h3>
-        <p class="text-gray-900 font-bold text-lg">
-          KES {@total_expenses}.00
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="lg:m-8 md:m-6  pt-6">
-    <div class="flex flex-col max-h-[70vh]">
-      <div class="shrink mb-4">
-        <h2 class="uppercase text-sm font-medium text-gray-600 tracking-wide">
-          Quick Access
-        </h2>
-      </div>
-      
-<!-- Service listing -->
-      <div class="grow overflow-y-auto pr-1">
-        <div class="space-y-3">
-          
-<!-- Service item -->
-          <.link navigate={~p"/expenses"} class="block">
-            <div class="flex justify-between items-center border border-gray-300 rounded-full px-4 py-1 bg-white hover:bg-gray-50 transition">
-              <span class="text-xl font-medium text-gray-600">
-                Expenses
-              </span>
-
-              <span class="text-2xl font-medium text-gray-600 ">
-                →
-              </span>
-            </div>
+      <div class="border-t border-gray-200 px-4 py-2.5 sm:px-6">
+        <div class="flex flex-wrap items-center gap-3">
+          <.link
+            id="create-invoice-cta"
+            navigate={~p"/invoices/new"}
+            class="inline-flex items-center justify-center rounded-md bg-gray-900 px-3.5 py-1.5 text-sm font-semibold text-white transition hover:bg-gray-800"
+          >
+            Create Invoice
           </.link>
 
-          <.link navigate={~p"/expenses"} class="block">
-            <div class="flex justify-between items-center border border-gray-300 rounded-full px-4 py-1 bg-white hover:bg-gray-50 transition">
-              <span class="text-xl font-medium text-gray-600">
-                Reports
-              </span>
-
-              <span class="text-2xl font-medium text-gray-600 ">
-                →
-              </span>
-            </div>
-          </.link>
-
-          <.link navigate={~p"/invoices"} class="block">
-            <div class="flex justify-between items-center border border-gray-300 rounded-full px-4 py-1 bg-white hover:bg-gray-50 transition">
-              <span class="text-xl font-medium text-gray-600">
-                Invoices
-              </span>
-
-              <span class="text-2xl font-medium text-gray-600 ">
-                →
-              </span>
-            </div>
-          </.link>
-
-          <.link navigate={~p"/expenses"} class="block">
-            <div class="flex justify-between items-center border border-gray-300 rounded-full px-4 py-1 bg-white hover:bg-gray-50 transition">
-              <span class="text-xl font-medium text-gray-600">
-                Clients
-              </span>
-
-              <span class="text-2xl font-medium text-gray-600 ">
-                →
-              </span>
-            </div>
+          <.link
+            id="new-expense-cta"
+            navigate={~p"/expenses/new"}
+            class="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-3.5 py-1.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-50"
+          >
+            New Expense
           </.link>
         </div>
       </div>
     </div>
-  </div>
+
+    <div class="grid grid-cols-1 gap-5 lg:grid-cols-12">
+      <section class="border border-gray-200 bg-white lg:col-span-4">
+        <div class="border-b border-gray-200 px-4 py-2.5 sm:px-6">
+          <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-600">Financial Summary</h2>
+        </div>
+
+        <table class="min-w-full divide-y divide-gray-200 text-sm">
+          <tbody class="divide-y divide-gray-200 bg-white text-gray-900">
+            <tr>
+              <th class="w-1/2 bg-gray-50 px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 sm:px-6">
+                Total Invoices
+              </th>
+              <td class="px-4 py-2.5 font-semibold sm:px-6">KES {@total_invoices}</td>
+            </tr>
+            <tr>
+              <th class="bg-gray-50 px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 sm:px-6">
+                Total Expenses
+              </th>
+              <td class="px-4 py-2.5 font-semibold sm:px-6">KES {@total_expenses}</td>
+            </tr>
+            <tr>
+              <th class="bg-gray-50 px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 sm:px-6">
+                Net Position
+              </th>
+              <td class="px-4 py-2.5 font-semibold sm:px-6">KES {@net_position}</td>
+            </tr>
+            <tr>
+              <th class="bg-gray-50 px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 sm:px-6">
+                Cashflow Status
+              </th>
+              <td class="px-4 py-2.5 sm:px-6">
+                <%= if @cashflow_positive? do %>
+                  Stable
+                <% else %>
+                  Attention Needed
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="border border-gray-200 bg-white lg:col-span-8">
+        <div class="border-b border-gray-200 bg-gray-50 px-4 py-2.5 sm:px-6">
+          <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-600">Business Operations</h2>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200 text-sm">
+            <thead class="bg-gray-50 text-gray-700">
+              <tr>
+                <th class="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 sm:px-6">
+                  Module
+                </th>
+                <th class="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-gray-600 sm:px-6">
+                  Purpose
+                </th>
+                <th class="px-4 py-2.5 text-right text-xs font-semibold uppercase tracking-wide text-gray-600 sm:px-6">
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white text-gray-900">
+              <tr>
+                <td class="px-4 py-2.5 font-medium sm:px-6">Invoices</td>
+                <td class="px-4 py-2.5 text-gray-700 sm:px-6">Create and track customer billing</td>
+                <td class="px-4 py-2.5 text-right sm:px-6">
+                  <.link navigate={~p"/invoices"} class="font-medium text-gray-700 transition hover:text-gray-900">
+                    Open
+                  </.link>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-4 py-2.5 font-medium sm:px-6">Expenses</td>
+                <td class="px-4 py-2.5 text-gray-700 sm:px-6">Capture and control business spending</td>
+                <td class="px-4 py-2.5 text-right sm:px-6">
+                  <.link navigate={~p"/expenses"} class="font-medium text-gray-700 transition hover:text-gray-900">
+                    Open
+                  </.link>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-4 py-2.5 font-medium sm:px-6">Profile</td>
+                <td class="px-4 py-2.5 text-gray-700 sm:px-6">Manage account and verification details</td>
+                <td class="px-4 py-2.5 text-right sm:px-6">
+                  <.link navigate={~p"/profile"} class="font-medium text-gray-700 transition hover:text-gray-900">
+                    Open
+                  </.link>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
 </Layouts.app>

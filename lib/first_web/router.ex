@@ -56,6 +56,7 @@ defmodule FirstWeb.Router do
 
       live "/users/settings", UserLive.Settings, :edit
       live "/users/settings/confirm-email/:token", UserLive.Settings, :confirm_email
+      live "/profile", ProfileLive, :index
 
       live "/expenses", ExpenseLive.Index, :index
       live "/expenses/new", ExpenseLive.Form, :new
