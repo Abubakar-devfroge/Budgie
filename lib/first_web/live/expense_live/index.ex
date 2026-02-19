@@ -11,6 +11,7 @@ defmodule FirstWeb.ExpenseLive.Index do
 
     {:ok,
      socket
+     |> stream_configure(:expenses, dom_id: &"expenses-#{&1.uuid}")
      |> assign(:page_title, "Listing Transactions")
      |> assign(:search_query, "")
      |> refresh_expenses()}
@@ -25,8 +26,8 @@ defmodule FirstWeb.ExpenseLive.Index do
   end
 
   @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    expense = Finance.get_expense!(socket.assigns.current_scope, id)
+  def handle_event("delete", %{"uuid" => uuid}, socket) do
+    expense = Finance.get_expense!(socket.assigns.current_scope, uuid)
     {:ok, _} = Finance.delete_expense(socket.assigns.current_scope, expense)
 
     {:noreply, refresh_expenses(socket)}

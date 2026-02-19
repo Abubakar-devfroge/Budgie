@@ -8,7 +8,7 @@ defmodule FirstWeb.ExpenseLive.Show do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <.header>
-        Transaction {@expense.id}
+        Transaction Details
         <%!-- <:subtitle>This is a transaction record from your database.</:subtitle> --%>
         <:actions>
           <.button navigate={~p"/expenses"}>
@@ -34,7 +34,7 @@ defmodule FirstWeb.ExpenseLive.Show do
   end
 
   @impl true
-  def mount(%{"id" => id}, _session, socket) do
+  def mount(%{"uuid" => uuid}, _session, socket) do
     if connected?(socket) do
       Finance.subscribe_expenses(socket.assigns.current_scope)
     end
@@ -42,20 +42,20 @@ defmodule FirstWeb.ExpenseLive.Show do
     {:ok,
      socket
      |> assign(:page_title, "Show Transaction")
-     |> assign(:expense, Finance.get_expense!(socket.assigns.current_scope, id))}
+     |> assign(:expense, Finance.get_expense!(socket.assigns.current_scope, uuid))}
   end
 
   @impl true
   def handle_info(
-        {:updated, %First.Finance.Expense{id: id} = expense},
-        %{assigns: %{expense: %{id: id}}} = socket
+        {:updated, %First.Finance.Expense{uuid: uuid} = expense},
+        %{assigns: %{expense: %{uuid: uuid}}} = socket
       ) do
     {:noreply, assign(socket, :expense, expense)}
   end
 
   def handle_info(
-        {:deleted, %First.Finance.Expense{id: id}},
-        %{assigns: %{expense: %{id: id}}} = socket
+        {:deleted, %First.Finance.Expense{uuid: uuid}},
+        %{assigns: %{expense: %{uuid: uuid}}} = socket
       ) do
     {:noreply,
      socket

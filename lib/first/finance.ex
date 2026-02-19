@@ -51,15 +51,15 @@ defmodule First.Finance do
 
   ## Examples
 
-      iex> get_expense!(scope, 123)
+      iex> get_expense!(scope, "64f804f1-8417-4cf1-b447-43f1e6520c45")
       %Expense{}
 
-      iex> get_expense!(scope, 456)
+      iex> get_expense!(scope, "missing-uuid")
       ** (Ecto.NoResultsError)
 
   """
-  def get_expense!(%Scope{} = scope, id) do
-    Repo.get_by!(Expense, id: id, user_id: scope.user.id)
+  def get_expense!(%Scope{} = scope, uuid) do
+    Repo.get_by!(Expense, uuid: uuid, user_id: scope.user.id)
   end
 
   @doc """
@@ -190,15 +190,15 @@ defmodule First.Finance do
 
   ## Examples
 
-      iex> get_invoice!(scope, 123)
+      iex> get_invoice!(scope, "64f804f1-8417-4cf1-b447-43f1e6520c45")
       %Invoice{}
 
-      iex> get_invoice!(scope, 456)
+      iex> get_invoice!(scope, "missing-uuid")
       ** (Ecto.NoResultsError)
 
   """
-  def get_invoice!(%Scope{} = scope, id) do
-    Repo.get_by!(Invoice, id: id, user_id: scope.user.id)
+  def get_invoice!(%Scope{} = scope, uuid) do
+    Repo.get_by!(Invoice, uuid: uuid, user_id: scope.user.id)
   end
 
   @doc """

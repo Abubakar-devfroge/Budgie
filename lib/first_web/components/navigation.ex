@@ -57,7 +57,7 @@ defmodule FirstWeb.Navigation do
                   <.icon
                     name="hero-plus-circle"
                     class="size-5 text-white group-hover:text-white"
-                  /> <span class="desktop-sidebar-label">New Invoice</span>
+                  /> <span class="desktop-sidebar-label">Invoices</span>
                 </.link>
 
                 <.link
@@ -72,6 +72,15 @@ defmodule FirstWeb.Navigation do
               </nav>
 
               <div class="mt-auto border-t border-white/20 pt-4">
+                <.link
+                  navigate={~p"/users/settings"}
+                  class="desktop-nav-link group flex items-center justify-start gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-white/10 hover:text-white"
+                >
+                  <.icon
+                    name="hero-cog-6-tooth"
+                    class="size-5 text-white group-hover:text-white"
+                  /> <span class="desktop-sidebar-label">Settings</span>
+                </.link>
                 <.link
                   href={~p"/users/log-out"}
                   method="delete"

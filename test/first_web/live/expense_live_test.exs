@@ -67,7 +67,7 @@ defmodule FirstWeb.ExpenseLiveTest do
 
       assert {:ok, form_live, _html} =
                index_live
-               |> element("#expenses-#{expense.id} a", "Edit")
+               |> element("#expenses-#{expense.uuid} a", "Edit")
                |> render_click()
                |> follow_redirect(conn, ~p"/expenses/#{expense}/edit")
 

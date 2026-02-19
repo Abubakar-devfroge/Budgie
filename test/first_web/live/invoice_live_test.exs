@@ -68,7 +68,7 @@ defmodule FirstWeb.InvoiceLiveTest do
 
       assert {:ok, form_live, _html} =
                index_live
-               |> element("#invoices-#{invoice.id} a", "Edit")
+               |> element("#invoices-#{invoice.uuid} a", "Edit")
                |> render_click()
                |> follow_redirect(conn, ~p"/invoices/#{invoice}/edit")
 
@@ -94,10 +94,10 @@ defmodule FirstWeb.InvoiceLiveTest do
       {:ok, index_live, _html} = live(conn, ~p"/invoices")
 
       assert index_live
-             |> element("#invoices-#{invoice.id} a", "Delete")
+             |> element("#invoices-#{invoice.uuid} a", "Delete")
              |> render_click()
 
-      refute has_element?(index_live, "#invoices-#{invoice.id}")
+      refute has_element?(index_live, "#invoices-#{invoice.uuid}")
     end
   end
 

@@ -3,10 +3,12 @@ defmodule First.Finance.Invoice do
   Defines the Invoice schema and encapsulates business rules related to invoicing.
   """
 
+  @derive {Phoenix.Param, key: :uuid}
   use Ecto.Schema
   import Ecto.Changeset
 
   schema "invoices" do
+    field :uuid, Ecto.UUID
     field :invoice_number, :string
     field :client, :string
     field :amount, :decimal
@@ -31,6 +33,8 @@ defmodule First.Finance.Invoice do
     |> validate_required([:client, :amount, :status, :issued_at])
     |> validate_length(:client, max: 20)
     |> put_change(:user_id, user_id)
+    |> put_uuid()
+    |> unique_constraint(:uuid)
     |> put_invoice_number()
   end
 
@@ -48,5 +52,13 @@ defmodule First.Finance.Invoice do
 
     Enum.map(1..7, fn _ -> Enum.random(chars) end)
     |> to_string()
+  end
+
+  defp put_uuid(changeset) do
+    if get_field(changeset, :uuid) do
+      changeset
+    else
+      put_change(changeset, :uuid, Ecto.UUID.generate())
+    end
   end
 end

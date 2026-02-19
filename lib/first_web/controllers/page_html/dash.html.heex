@@ -30,7 +30,9 @@
     <div class="grid grid-cols-1 gap-5 lg:grid-cols-12">
       <section class="border border-gray-200 bg-white lg:col-span-4">
         <div class="border-b border-gray-200 px-4 py-2.5 sm:px-6">
-          <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-600">Financial Summary</h2>
+          <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-600">
+            Financial Summary
+          </h2>
         </div>
 
         <table class="min-w-full divide-y divide-gray-200 text-sm">
@@ -71,7 +73,9 @@
 
       <section class="border border-gray-200 bg-white lg:col-span-8">
         <div class="border-b border-gray-200 bg-gray-50 px-4 py-2.5 sm:px-6">
-          <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-600">Business Operations</h2>
+          <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-600">
+            Business Operations
+          </h2>
         </div>
 
         <div class="overflow-x-auto">
@@ -92,27 +96,42 @@
             <tbody class="divide-y divide-gray-200 bg-white text-gray-900">
               <tr>
                 <td class="px-4 py-2.5 font-medium sm:px-6">Invoices</td>
-                <td class="px-4 py-2.5 text-gray-700 sm:px-6">Create and track customer billing</td>
+                <td class="px-4 py-2.5 text-gray-700 sm:px-6">
+                  Create and track customer billing
+                </td>
                 <td class="px-4 py-2.5 text-right sm:px-6">
-                  <.link navigate={~p"/invoices"} class="font-medium text-gray-700 transition hover:text-gray-900">
+                  <.link
+                    navigate={~p"/invoices"}
+                    class="font-medium text-gray-700 transition hover:text-gray-900"
+                  >
                     Open
                   </.link>
                 </td>
               </tr>
               <tr>
                 <td class="px-4 py-2.5 font-medium sm:px-6">Expenses</td>
-                <td class="px-4 py-2.5 text-gray-700 sm:px-6">Capture and control business spending</td>
+                <td class="px-4 py-2.5 text-gray-700 sm:px-6">
+                  Capture and control business spending
+                </td>
                 <td class="px-4 py-2.5 text-right sm:px-6">
-                  <.link navigate={~p"/expenses"} class="font-medium text-gray-700 transition hover:text-gray-900">
+                  <.link
+                    navigate={~p"/expenses"}
+                    class="font-medium text-gray-700 transition hover:text-gray-900"
+                  >
                     Open
                   </.link>
                 </td>
               </tr>
               <tr>
                 <td class="px-4 py-2.5 font-medium sm:px-6">Profile</td>
-                <td class="px-4 py-2.5 text-gray-700 sm:px-6">Manage account and verification details</td>
+                <td class="px-4 py-2.5 text-gray-700 sm:px-6">
+                  Manage account and verification details
+                </td>
                 <td class="px-4 py-2.5 text-right sm:px-6">
-                  <.link navigate={~p"/profile"} class="font-medium text-gray-700 transition hover:text-gray-900">
+                  <.link
+                    navigate={~p"/profile"}
+                    class="font-medium text-gray-700 transition hover:text-gray-900"
+                  >
                     Open
                   </.link>
                 </td>

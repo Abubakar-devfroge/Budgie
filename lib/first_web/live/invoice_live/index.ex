@@ -11,6 +11,7 @@ defmodule FirstWeb.InvoiceLive.Index do
 
     {:ok,
      socket
+     |> stream_configure(:invoices, dom_id: &"invoices-#{&1.uuid}")
      |> assign(:page_title, "Listing Invoices")
      |> assign(:search_query, "")
      |> refresh_invoices()}
@@ -25,8 +26,8 @@ defmodule FirstWeb.InvoiceLive.Index do
   end
 
   @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    invoice = Finance.get_invoice!(socket.assigns.current_scope, id)
+  def handle_event("delete", %{"uuid" => uuid}, socket) do
+    invoice = Finance.get_invoice!(socket.assigns.current_scope, uuid)
     {:ok, _} = Finance.delete_invoice(socket.assigns.current_scope, invoice)
 
     {:noreply, refresh_invoices(socket)}

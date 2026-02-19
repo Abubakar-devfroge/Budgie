@@ -20,12 +20,12 @@ defmodule First.FinanceTest do
       assert Finance.list_expenses(other_scope) == [other_expense]
     end
 
-    test "get_expense!/2 returns the expense with given id" do
+    test "get_expense!/2 returns the expense with given uuid" do
       scope = user_scope_fixture()
       expense = expense_fixture(scope)
       other_scope = user_scope_fixture()
-      assert Finance.get_expense!(scope, expense.id) == expense
-      assert_raise Ecto.NoResultsError, fn -> Finance.get_expense!(other_scope, expense.id) end
+      assert Finance.get_expense!(scope, expense.uuid) == expense
+      assert_raise Ecto.NoResultsError, fn -> Finance.get_expense!(other_scope, expense.uuid) end
     end
 
     test "create_expense/2 with valid data creates a expense" do
@@ -87,14 +87,14 @@ defmodule First.FinanceTest do
       scope = user_scope_fixture()
       expense = expense_fixture(scope)
       assert {:error, %Ecto.Changeset{}} = Finance.update_expense(scope, expense, @invalid_attrs)
-      assert expense == Finance.get_expense!(scope, expense.id)
+      assert expense == Finance.get_expense!(scope, expense.uuid)
     end
 
     test "delete_expense/2 deletes the expense" do
       scope = user_scope_fixture()
       expense = expense_fixture(scope)
       assert {:ok, %Expense{}} = Finance.delete_expense(scope, expense)
-      assert_raise Ecto.NoResultsError, fn -> Finance.get_expense!(scope, expense.id) end
+      assert_raise Ecto.NoResultsError, fn -> Finance.get_expense!(scope, expense.uuid) end
     end
 
     test "delete_expense/2 with invalid scope raises" do
@@ -128,12 +128,12 @@ defmodule First.FinanceTest do
       assert Finance.list_invoices(other_scope) == [other_invoice]
     end
 
-    test "get_invoice!/2 returns the invoice with given id" do
+    test "get_invoice!/2 returns the invoice with given uuid" do
       scope = user_scope_fixture()
       invoice = invoice_fixture(scope)
       other_scope = user_scope_fixture()
-      assert Finance.get_invoice!(scope, invoice.id) == invoice
-      assert_raise Ecto.NoResultsError, fn -> Finance.get_invoice!(other_scope, invoice.id) end
+      assert Finance.get_invoice!(scope, invoice.uuid) == invoice
+      assert_raise Ecto.NoResultsError, fn -> Finance.get_invoice!(other_scope, invoice.uuid) end
     end
 
     test "create_invoice/2 with valid data creates a invoice" do
@@ -192,14 +192,14 @@ defmodule First.FinanceTest do
       scope = user_scope_fixture()
       invoice = invoice_fixture(scope)
       assert {:error, %Ecto.Changeset{}} = Finance.update_invoice(scope, invoice, @invalid_attrs)
-      assert invoice == Finance.get_invoice!(scope, invoice.id)
+      assert invoice == Finance.get_invoice!(scope, invoice.uuid)
     end
 
     test "delete_invoice/2 deletes the invoice" do
       scope = user_scope_fixture()
       invoice = invoice_fixture(scope)
       assert {:ok, %Invoice{}} = Finance.delete_invoice(scope, invoice)
-      assert_raise Ecto.NoResultsError, fn -> Finance.get_invoice!(scope, invoice.id) end
+      assert_raise Ecto.NoResultsError, fn -> Finance.get_invoice!(scope, invoice.uuid) end
     end
 
     test "delete_invoice/2 with invalid scope raises" do

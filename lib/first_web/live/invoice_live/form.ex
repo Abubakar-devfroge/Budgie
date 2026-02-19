@@ -58,8 +58,8 @@ defmodule FirstWeb.InvoiceLive.Form do
   defp return_to(_), do: "index"
 
   # EDIT
-  defp apply_action(socket, :edit, %{"id" => id}) do
-    invoice = Finance.get_invoice!(socket.assigns.current_scope, id)
+  defp apply_action(socket, :edit, %{"uuid" => uuid}) do
+    invoice = Finance.get_invoice!(socket.assigns.current_scope, uuid)
 
     socket
     |> assign(:page_title, "Edit Invoice")

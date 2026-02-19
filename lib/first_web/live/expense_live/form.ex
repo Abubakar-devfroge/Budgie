@@ -50,8 +50,8 @@ defmodule FirstWeb.ExpenseLive.Form do
   defp return_to("show"), do: "show"
   defp return_to(_), do: "index"
 
-  defp apply_action(socket, :edit, %{"id" => id}) do
-    expense = Finance.get_expense!(socket.assigns.current_scope, id)
+  defp apply_action(socket, :edit, %{"uuid" => uuid}) do
+    expense = Finance.get_expense!(socket.assigns.current_scope, uuid)
 
     socket
     |> assign(:page_title, "Edit Expense")
