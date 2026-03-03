@@ -76,7 +76,6 @@ defmodule FirstWeb.ExpenseLive.Index do
     [
       if(expense.date, do: Date.to_iso8601(expense.date), else: ""),
       expense.description,
-      expense.category,
       to_string(expense.quantity),
       to_string(expense.total)
     ]

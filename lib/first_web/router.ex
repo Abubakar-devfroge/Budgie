@@ -67,6 +67,8 @@ defmodule FirstWeb.Router do
       live "/invoices/new", InvoiceLive.Form, :new
       live "/invoices/:uuid", InvoiceLive.Show, :show
       live "/invoices/:uuid/edit", InvoiceLive.Form, :edit
+      live "/reports", ReportsLive, :index
+      get "/reports/export", ReportExportController, :export
     end
 
     post "/users/update-password", UserSessionController, :update_password

@@ -27,7 +27,6 @@ defmodule FirstWeb.ExpenseLive.Form do
           <.input field={@form[:total]} type="number" label="Total Price" step="any" />
           <.input field={@form[:quantity]} type="number" label="Quantity" step="any" />
           <.input field={@form[:description]} type="text" label="Description" />
-          <.input field={@form[:category]} type="text" label="Category" />
 
           <footer>
             <.button phx-disable-with="Saving..." variant="primary">Save Expense</.button>

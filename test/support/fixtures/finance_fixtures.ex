@@ -12,7 +12,6 @@ defmodule First.FinanceFixtures do
       Enum.into(attrs, %{
         total: "120.5",
         quantity: "120.5",
-        category: "some category",
         date: ~D[2026-01-04],
         description: "some description"
       })

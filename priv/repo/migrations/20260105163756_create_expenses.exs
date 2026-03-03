@@ -6,7 +6,6 @@ defmodule First.Repo.Migrations.CreateExpenses do
       add :quantity, :decimal
       add :total, :decimal
       add :description, :string
-      add :category, :string
       add :date, :date
       add :user_id, references(:users, type: :id, on_delete: :delete_all)
 

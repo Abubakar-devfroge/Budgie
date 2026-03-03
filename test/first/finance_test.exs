@@ -9,7 +9,7 @@ defmodule First.FinanceTest do
     import First.AccountsFixtures, only: [user_scope_fixture: 0]
     import First.FinanceFixtures
 
-    @invalid_attrs %{date: nil, description: nil, category: nil, quantity: nil}
+    @invalid_attrs %{date: nil, description: nil, quantity: nil}
 
     test "list_expenses/1 returns all scoped expenses" do
       scope = user_scope_fixture()
@@ -32,7 +32,6 @@ defmodule First.FinanceTest do
       valid_attrs = %{
         date: ~D[2026-01-04],
         description: "some description",
-        category: "some category",
         quantity: "120.5",
         total: "120.5"
       }
@@ -42,7 +41,6 @@ defmodule First.FinanceTest do
       assert {:ok, %Expense{} = expense} = Finance.create_expense(scope, valid_attrs)
       assert expense.date == ~D[2026-01-04]
       assert expense.description == "some description"
-      assert expense.category == "some category"
       assert expense.quantity == Decimal.new("120.5")
       assert expense.total == Decimal.new("120.5")
       assert expense.user_id == scope.user.id
@@ -60,7 +58,6 @@ defmodule First.FinanceTest do
       update_attrs = %{
         date: ~D[2026-01-05],
         description: "some updated description",
-        category: "some updated category",
         quantity: "456.7",
         total: "456.7"
       }
@@ -68,7 +65,6 @@ defmodule First.FinanceTest do
       assert {:ok, %Expense{} = expense} = Finance.update_expense(scope, expense, update_attrs)
       assert expense.date == ~D[2026-01-05]
       assert expense.description == "some updated description"
-      assert expense.category == "some updated category"
       assert expense.quantity == Decimal.new("456.7")
       assert expense.total == Decimal.new("456.7")
     end

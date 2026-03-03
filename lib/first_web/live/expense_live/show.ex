@@ -8,7 +8,7 @@ defmodule FirstWeb.ExpenseLive.Show do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <.header>
-        Transaction Details
+        <%!-- Transaction Details --%>
         <%!-- <:subtitle>This is a transaction record from your database.</:subtitle> --%>
         <:actions>
           <.button navigate={~p"/expenses"}>
@@ -26,7 +26,6 @@ defmodule FirstWeb.ExpenseLive.Show do
           <:item title="Amount">{@expense.total}</:item>
           <:item title="Price">KES {@expense.quantity}</:item>
           <:item title="Description">{@expense.description}</:item>
-          <:item title="Category">{@expense.category}</:item>
         </.list>
       </div>
     </Layouts.app>

@@ -41,7 +41,7 @@
                 name="search[q]"
                 value={@search_query}
                 type="search"
-                placeholder="Search date, description, category, quantity, or total"
+                placeholder="Search date, description, quantity, or total"
                 phx-debounce="250"
                 class="w-full rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 placeholder:text-gray-400"
               />
@@ -75,9 +75,7 @@
                   <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide sm:px-6">
                     Description
                   </th>
-                  <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide sm:px-6">
-                    Category
-                  </th>
+                
                   <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide sm:px-6">
                     Quantity
                   </th>
@@ -111,12 +109,7 @@
                   >
                     {expense.description}
                   </td>
-                  <td
-                    phx-click={JS.navigate(~p"/expenses/#{expense}")}
-                    class="px-4 py-3 whitespace-nowrap sm:px-6"
-                  >
-                    {expense.category}
-                  </td>
+                 
                   <td
                     phx-click={JS.navigate(~p"/expenses/#{expense}")}
                     class="px-4 py-3 whitespace-nowrap sm:px-6"

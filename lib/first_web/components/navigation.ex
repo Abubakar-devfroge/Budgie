@@ -61,7 +61,7 @@ defmodule FirstWeb.Navigation do
                 </.link>
 
                 <.link
-                  navigate={~p"/users/settings"}
+                  navigate={~p"/reports"}
                   class="desktop-nav-link group flex items-center justify-start gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-white/10 hover:text-white"
                 >
                   <.icon

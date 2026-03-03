@@ -6,17 +6,15 @@ defmodule FirstWeb.ExpenseLiveTest do
 
   @create_attrs %{
     description: "some description",
-    category: "some category",
     quantity: "120.5",
     total: "120.5"
   }
   @update_attrs %{
     description: "some updated description",
-    category: "some updated category",
     quantity: "456.7",
     total: "456.7"
   }
-  @invalid_attrs %{description: nil, category: nil, quantity: nil, total: nil}
+  @invalid_attrs %{description: nil, quantity: nil, total: nil}
 
   setup :register_and_log_in_user
 

@@ -8,8 +8,7 @@ defmodule FirstWeb.InvoiceLive.Show do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <.header>
-        Invoice {@invoice.invoice_number}
-        <:subtitle>This is a invoice record from your database.</:subtitle>
+
         <:actions>
           <.button navigate={~p"/invoices"}>
             <.icon name="hero-arrow-left" />

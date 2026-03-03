@@ -11,7 +11,6 @@ defmodule First.Finance.Expense do
     field :quantity, :decimal
     field :total, :decimal
     field :description, :string
-    field :category, :string
     field :date, :date
     field :user_id, :id
 
@@ -21,10 +20,9 @@ defmodule First.Finance.Expense do
   @doc false
   def changeset(expense, attrs, user_scope) do
     expense
-    |> cast(attrs, [:date, :total, :quantity, :description, :category])
+    |> cast(attrs, [:date, :total, :quantity, :description])
     |> validate_length(:description, max: 30)
-    |> validate_length(:category, max: 30)
-    |> validate_required([:quantity, :total, :description, :category, :date])
+    |> validate_required([:quantity, :total, :description, :date])
     |> put_uuid()
     |> unique_constraint(:uuid)
     |> put_change(:user_id, user_scope.user.id)
