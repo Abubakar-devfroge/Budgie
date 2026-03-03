@@ -376,8 +376,8 @@ defmodule FirstWeb.ReportsLive do
         fetchpriority="low"
         class="h-20 w-auto mb-4 mx-auto"
       />
-      <p class="text-sm font-semibold text-gray-700">Record not found</p>
-      <p class="mt-1 text-sm text-gray-500">Try another date or amount.</p>
+      <p class="text-sm font-semibold text-gray-700">Nothing to display</p>
+      <p class="mt-1 text-sm text-gray-500">There are currently no records to display. Please add records or adjust your filters to see results.</p>
     </div>
     """
   end
